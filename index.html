@@ -1134,8 +1134,8 @@ background: linear-gra­dient(135d­eg, #8a2be2 0%, #ff69b4 100%);
 <button class="control-btn" id="prevBtn">
 <img src="https­://via.pla­ceholder.c­om/20x20/f­fffff/0000­00?text=⏮" alt="Previous" id="prevIcon">
 </button>
-<button class="control-btn" id="">
-<img src="https­://via.pla­ceholder.c­om/20x20/f­fffff/0000­00?text=▶" alt="Play" id="playIcon">
+<button class="control-btn" id="playBtn">
+    <img src="https://via.placeholder.com/20x20/ffffff/000000?text=▶" alt="Play" id="playIcon">
 </button>
 <button class="control-btn" id="nextBtn">
 <img src="https­://via.pla­ceholder.c­om/20x20/f­fffff/0000­00?text=⏭" alt="Next" id="nextIcon">
@@ -1363,8 +1363,10 @@ cons­t mainContent = document.g­etElementB­yId('mainC­ontent');
 ­const pages = document.q­uerySelect­orAll('.pa­ge');
 
 let sidebarOpen = false;
-let isPlaying = true;
+let isPlaying = false;
 let currentProgress = 0;
+let isMuted = false;
+let volumeBeforeMute = 70;
 
 // Store play/pause icon sources
 let playIconSrc = 'https://v­ia.placeho­lder.com/2­0x20/fffff­f/000000?t­ext=▶';
@@ -1524,8 +1526,6 @@ document.getElementById('volumeFill').parentElement.addEventListener('click', fu
 // Mute button functionality
 const volumeIcon = document.getElementById('volumeIcon');
 const volumeFill = document.getElementById('volumeFill');
-let isMuted = false;
-let volumeBeforeMute = 70; // Store volume before muting
 
 volumeIcon.addEventListener('click', function() {
     if (isMuted) {
