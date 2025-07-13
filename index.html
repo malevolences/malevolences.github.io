@@ -1286,7 +1286,7 @@
                         title: "bruises",
                         artist: "winterdoll, lavendr, hauntingclaire",
                         albumArt: "https://t2.genius.com/unsafe/344x344/https%3A%2F%2Fimages.genius.com%2F177e125c68d18edf121cda5c407fe727.500x500x1.png",
-                        audioSrc: "bruises.mp3",
+                        audioSrc: "/songs/bruises.mp3",
                         duration: "2:50"
                     }
                 ];
@@ -1350,8 +1350,8 @@
                 
                 const currentWidth = parseFloat(this.progressFill.style.width) || 0;
                 if (currentWidth < 100) {
-                    this.progressFill.style.width = (currentWidth + 0.5) + '%';
-                    setTimeout(() => this.simulateProgress(), 100);
+                   this.progressFill.style.width = (currentWidth + 0.1) + '%';
+                   setTimeout(() => this.simulateProgress(), 1000);
                 } else {
                     this.nextSong();
                 }
