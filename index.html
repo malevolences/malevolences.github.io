@@ -826,6 +826,14 @@ line-height: 1.6;
 font-family: var(--content-font, var(--main-font, 'Arial', sans-serif));
 }
 
+/* Types page grid */
+.types-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+gap: 30px;
+margin: 40px 0;
+}
+
 /* Board page */
 .board-grid {
 display: grid;
@@ -1675,6 +1683,11 @@ alert(currentProfile.type.description); // You can replace this with a modal
 // Render types page
 function renderTypesPage() {
 const typesGrid = document.getElementById('typesGrid');
+if (!typesGrid) {
+console.log('Types grid not found');
+return;
+}
+
 typesGrid.innerHTML = '';
 
 allTypes.forEach(type => {
@@ -1719,7 +1732,10 @@ initializeStatsToggle();
 renderTraits();
 updateFriendlyStatus();
 updateTypeBadge();
+// Delay types page rendering to ensure DOM is ready
+setTimeout(() => {
 renderTypesPage();
+}, 100);
 });
 </script>
 </body>
