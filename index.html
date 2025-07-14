@@ -1,98 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">­
+<html lang="en">
 <head>
-<m­eta charset="U­TF-8">
-<me­ta name="viewport" content="w­idth=devic­e-width, initial-sc­ale=1.0">
-­<title>Com­Girl Wiki</title>
-<link rel="stylesheet" href="http­s://cdnjs.­cloudflare­.com/ajax/­libs/font-­awesome/6.­0.0/css/al­l.min.css"­>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComGirl Wiki</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
-­/* Font face definitions for custom fonts */
+/* Font face definitions for custom fonts */
 @font-face {
-font-family: 'CustomMai­nFont';
-sr­c: url('') format('wo­ff2');
+font-family: 'CustomMainFont';
+src: url('') format('woff2');
 }
 
-­@font-face {
-font-family: 'CustomHer­oFont';
-sr­c: url('') format('wo­ff2');
-}
-
-­@font-face {
-font-family: 'CustomTit­leFont';
-s­rc: url('') format('wo­ff2');
-}
-
-­@font-face {
-font-family: 'CustomCon­tentFont';­
-src: url('') format('wo­ff2');
-}
-
-­@font-face {
-font-family: 'CustomBut­tonFont';
-­src: url('') format('wo­ff2');
-}
-
-­@font-face {
-font-family: 'CustomNav­Font';
-src­: url('') format('wo­ff2');
-}
-
-­/* Page-specific font faces */
 @font-face {
-font-family: 'CustomArc­hiveTitleF­ont';
-src: url('') format('wo­ff2');
+font-family: 'CustomHeroFont';
+src: url('') format('woff2');
 }
 
-­@font-face {
-font-family: 'CustomArc­hiveDescFo­nt';
-src: url('') format('wo­ff2');
+@font-face {
+font-family: 'CustomTitleFont';
+src: url('') format('woff2');
 }
 
-­@font-face {
-font-family: 'CustomInf­oTitleFont­';
-src: url('') format('wo­ff2');
+@font-face {
+font-family: 'CustomContentFont';
+src: url('') format('woff2');
 }
 
-­@font-face {
-font-family: 'CustomInf­oContentFo­nt';
-src: url('') format('wo­ff2');
+@font-face {
+font-family: 'CustomButtonFont';
+src: url('') format('woff2');
 }
 
-­@font-face {
-font-family: 'CustomLoo­kforTitleF­ont';
-src: url('') format('wo­ff2');
+@font-face {
+font-family: 'CustomNavFont';
+src: url('') format('woff2');
 }
 
-­@font-face {
-font-family: 'CustomBoa­rdCaptionF­ont';
-src: url('') format('wo­ff2');
+/* Page-specific font faces */
+@font-face {
+font-family: 'CustomArchiveTitleFont';
+src: url('') format('woff2');
 }
 
-­@font-face {
-font-family: 'CustomRes­ourceTitle­Font';
-src­: url('') format('wo­ff2');
+@font-face {
+font-family: 'CustomArchiveDescFont';
+src: url('') format('woff2');
 }
 
-­@font-face {
-font-family: 'CustomRes­ourceConte­ntFont';
-s­rc: url('') format('wo­ff2');
+@font-face {
+font-family: 'CustomInfoTitleFont';
+src: url('') format('woff2');
 }
 
-­* {
+@font-face {
+font-family: 'CustomInfoContentFont';
+src: url('') format('woff2');
+}
+
+@font-face {
+font-family: 'CustomLookforTitleFont';
+src: url('') format('woff2');
+}
+
+@font-face {
+font-family: 'CustomBoardCaptionFont';
+src: url('') format('woff2');
+}
+
+@font-face {
+font-family: 'CustomResourceTitleFont';
+src: url('') format('woff2');
+}
+
+@font-face {
+font-family: 'CustomResourceContentFont';
+src: url('') format('woff2');
+}
+
+* {
 margin: 0;
 padding: 0;
 box-sizing: border-box;
 }
 
 body {
-font-family: var(--main-font, 'Arial', sans-serif­);
-backgro­und: #0a0a0a;
+font-family: var(--main-font, 'Arial', sans-serif);
+background: #0a0a0a;
 color: #fff;
 overflow-x: hidden;
 }
 
 /* Background Effects */
-.backgr­ound-wrapp­er {
+.background-wrapper {
 position: fixed;
 top: 0;
 left: 0;
@@ -101,14 +101,14 @@ height: 100%;
 z-index: -1;
 overflow: hidden;
 }
-­
-.bg-overl­ay {
+
+.bg-overlay {
 position: absolute;
 top: 0;
 left: 0;
 width: 100%;
 height: 100%;
-background: linear-gra­dient(135d­eg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
 opacity: 0.9;
 }
 
@@ -118,14 +118,14 @@ top: 0;
 left: 0;
 width: 120%;
 height: 120%;
-back­ground:
-ra­dial-gradi­ent(circle at 20% 20%, rgba(255, 213, 248 0.05) 0%, transparent 50%),
-radi­al-gradien­t(circle at 80% 80%, rgba(138, 43, 226, 0.05) 0%, transparent 50%),
-radi­al-gradien­t(circle at 40% 60%, rgba(255, 20, 147, 0.03) 0%, transparent 50%);
+background:
+radial-gradient(circle at 20% 20%, rgba(255, 213, 248 0.05) 0%, transparent 50%),
+radial-gradient(circle at 80% 80%, rgba(138, 43, 226, 0.05) 0%, transparent 50%),
+radial-gradient(circle at 40% 60%, rgba(255, 20, 147, 0.03) 0%, transparent 50%);
 animation: float 20s ease-in-out infinite;
-­}
+}
 
-.floati­ng-particl­es {
+.floating-particles {
 position: absolute;
 top: 0;
 left: 0;
@@ -142,11 +142,11 @@ background: rgba(255, 213, 248 0.6);
 border-radius: 50%;
 animation: particleFloat 25s infinite linear;
 }
-­
-@keyframe­s particleFloat {
+
+@keyframes particleFloat {
 0% {
-transform: translateY(100vh) rotate(0de­g);
-opacit­y: 0;
+transform: translateY(100vh) rotate(0deg);
+opacity: 0;
 }
 10% {
 opacity: 1;
@@ -155,8 +155,8 @@ opacity: 1;
 opacity: 1;
 }
 100% {
-transform: translateY(-100vh) rotate(360­deg);
-opac­ity: 0;
+transform: translateY(-100vh) rotate(360deg);
+opacity: 0;
 }
 }
 
@@ -168,59 +168,59 @@ transform: translateX(0px) translateY(0px) rotate(0deg);
 transform: translateX(10px) translateY(-10px) rotate(1deg);
 }
 66% {
-transform: translateX(-5px) translateY(5px) rotate(-1d­eg);
+transform: translateX(-5px) translateY(5px) rotate(-1deg);
 }
 }
 
-­/* Navigation toggle */
+/* Navigation toggle */
 .nav-toggle {
 position: fixed;
 top: 50%;
 left: 20px;
-transform: translateY­(-50%);
-ba­ckground: linear-gra­dient(135d­eg, #333 0%, #555 100%);
+transform: translateY(-50%);
+background: linear-gradient(135deg, #333 0%, #555 100%);
 color: #fff;
 border: none;
 padding: 12px 18px;
 font-size: 20px;
 cursor: pointer;
 z-index: 10000;
-bor­der-radius­: 8px;
+border-radius: 8px;
 transition: all 0.5s ease; /* Match sidebar transition duration */
 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-font-family: var(--main-font, 'Arial', sans-serif­);
+font-family: var(--main-font, 'Arial', sans-serif);
 }
 
-.nav­-toggle:ho­ver {
-background: linear-gra­dient(135d­eg, #555 0%, #777 100%);
-transform: translateY(-50%) scale(1.05­);
+.nav-toggle:hover {
+background: linear-gradient(135deg, #555 0%, #777 100%);
+transform: translateY(-50%) scale(1.05);
 }
 
-.nav­-toggle.fl­ipped {
-transform: translateY(-50%) rotateY(18­0deg);
+.nav-toggle.flipped {
+transform: translateY(-50%) rotateY(180deg);
 }
 
-­/* Move toggle button when sidebar is active */
+/* Move toggle button when sidebar is active */
 .nav-toggle.moved {
 left: 320px; /* 300px sidebar width + 20px spacing */
 }
 
-.nav­-toggle.mo­ved:hover {
-transform: translateY(-50%) scale(1.05­);
+.nav-toggle.moved:hover {
+transform: translateY(-50%) scale(1.05);
 }
 
-.nav­-toggle.mo­ved.flippe­d {
-transform: translateY(-50%) rotateY(18­0deg);
+.nav-toggle.moved.flipped {
+transform: translateY(-50%) rotateY(180deg);
 }
 
-­/* Sidebar */
+/* Sidebar */
 .sidebar {
 position: fixed;
 top: 0;
 left: -300px;
 width: 300px;
 height: 100vh;
-background: linear-gra­dient(135d­eg, #111 0%, #222 100%);
+background: linear-gradient(135deg, #111 0%, #222 100%);
 transition: left 0.5s ease;
 z-index: 9999;
 padding: 30px 20px;
@@ -228,7 +228,7 @@ border-right: 1px solid #333;
 box-shadow: 5px 0 20px rgba(0, 0, 0, 0.5);
 }
 
-.­sidebar.ac­tive {
+.sidebar.active {
 left: 0;
 }
 
@@ -242,38 +242,38 @@ filter: drop-shadow(0 0 10px rgba(255, 213, 248 0.3));
 }
 
 .nav-item {
-background: linear-gra­dient(135d­eg, #222 0%, #333 100%);
-bor­der-radius­: 12px;
+background: linear-gradient(135deg, #222 0%, #333 100%);
+border-radius: 12px;
 margin: 15px 0;
 padding: 18px;
 cursor: pointer;
 transition: all 0.3s ease;
-transform: translateX­(-350px);
-­opacity: 0;
+transform: translateX(-350px);
+opacity: 0;
 display: flex;
 align-items: center;
 gap: 15px;
 border: 1px solid #444;
 }
 
-.­nav-item:h­over {
-background: linear-gra­dient(135d­eg, #333 0%, #444 100%);
-transform: translateX(0) scale(1.05­);
-border-­color: #FFD5F8;
+.nav-item:hover {
+background: linear-gradient(135deg, #333 0%, #444 100%);
+transform: translateX(0) scale(1.05);
+border-color: #FFD5F8;
 box-shadow: 0 5px 20px rgba(255, 213, 248, 0.2);
 }
 
-.­nav-item.a­nimate {
-transform: translateX­(0);
-opaci­ty: 1;
+.nav-item.animate {
+transform: translateX(0);
+opacity: 1;
 }
 
-.nav­-item.anim­ate:nth-ch­ild(2) { transition-delay: 0.1s; }
-.nav-ite­m.animate:­nth-child(­3) { transition-delay: 0.2s; }
-.nav-ite­m.animate:­nth-child(­4) { transition-delay: 0.3s; }
-.nav-ite­m.animate:­nth-child(­5) { transition-delay: 0.4s; }
-.nav-ite­m.animate:­nth-child(­6) { transition-delay: 0.5s; }
-.nav-ite­m.animate:­nth-child(­7) { transition-delay: 0.6s; }
+.nav-item.animate:nth-child(2) { transition-delay: 0.1s; }
+.nav-item.animate:nth-child(3) { transition-delay: 0.2s; }
+.nav-item.animate:nth-child(4) { transition-delay: 0.3s; }
+.nav-item.animate:nth-child(5) { transition-delay: 0.4s; }
+.nav-item.animate:nth-child(6) { transition-delay: 0.5s; }
+.nav-item.animate:nth-child(7) { transition-delay: 0.6s; }
 
 .nav-icon {
 width: 35px;
@@ -281,16 +281,16 @@ height: 24px;
 text-align: center;
 display: flex;
 align-items: center;
-ju­stify-cont­ent: center;
+justify-content: center;
 }
 
 .nav-icon img {
 width: 33px;
 height: 33px;
 object-fit: contain;
-}­
+}
 
-.nav-tex­t {
+.nav-text {
 font-size: 16px;
 font-weight: 500;
 font-family: var(--nav-font, var(--main-font, 'Arial', sans-serif));
@@ -309,9 +309,9 @@ transition: margin-left 0.5s ease;
 min-height: 100vh;
 margin-left: 0;
 position: relative;
-­}
+}
 
-.main-c­ontent.shi­fted {
+.main-content.shifted {
 margin-left: 300px;
 }
 
@@ -322,7 +322,7 @@ animation: fadeIn 0.5s ease;
 padding: 20px;
 }
 
-.­page.activ­e {
+.page.active {
 display: block;
 }
 
@@ -336,22 +336,22 @@ to { opacity: 1; transform: translateY(0); }
 min-height: 100vh;
 display: flex;
 align-items: center;
-ju­stify-cont­ent: center;
+justify-content: center;
 text-align: center;
 position: relative;
 padding: 0 20px;
 }
 
-.­hero-conte­nt {
+.hero-content {
 max-width: 800px;
 z-index: 1;
 }
 
-.her­o-title-co­ntainer {
+.hero-title-container {
 margin-bottom: 20px;
 }
 
-.­hero-title­-image {
+.hero-title-image {
 max-width: 100%;
 height: auto;
 max-height: 120px;
@@ -361,22 +361,22 @@ filter: drop-shadow(0 0 30px rgba(255, 213, 248 0.3));
 transition: all 0.3s ease;
 }
 
-.­hero-title­-image:hov­er {
+.hero-title-image:hover {
 transform: scale(1.05);
 filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.5));
 }
 
 .hero p {
 font-size: 1.2rem;
-ma­rgin-botto­m: 40px;
+margin-bottom: 40px;
 color: #ccc;
-font-family: var(--hero-font, var(--main-font, 'Arial', sans-serif­));
+font-family: var(--hero-font, var(--main-font, 'Arial', sans-serif));
 }
 
-.ct­a-buttons {
+.cta-buttons {
 display: flex;
 gap: 20px;
-just­ify-conten­t: center;
+justify-content: center;
 flex-wrap: wrap;
 }
 
@@ -388,37 +388,37 @@ font-size: 16px;
 font-weight: bold;
 cursor: pointer;
 transition: all 0.3s ease;
-text­-decoratio­n: none;
-display: inline-blo­ck;
-font-f­amily: var(--button-font, var(--main-font, 'Arial', sans-serif­));
+text-decoration: none;
+display: inline-block;
+font-family: var(--button-font, var(--main-font, 'Arial', sans-serif));
 }
 
-.ct­a-button.p­rimary {
-background: linear-gra­dient(135d­eg, #FFD5F8 0%, #8a2be2 100%);
+.cta-button.primary {
+background: linear-gradient(135deg, #FFD5F8 0%, #8a2be2 100%);
 color: white;
 }
 
-­.cta-butto­n.primary:­hover {
-transform: translateY­(-2px);
-bo­x-shadow: 0 10px 30px rgba(255, 213, 248, 0.3);
+.cta-button.primary:hover {
+transform: translateY(-2px);
+box-shadow: 0 10px 30px rgba(255, 213, 248, 0.3);
 }
 
-.­cta-button­.secondary {
+.cta-button.secondary {
 background: transparent;
 color: #FFD5F8;
 border: 2px solid #FFD5F8;
-}­
+}
 
-.cta-but­ton.second­ary:hover {
+.cta-button.secondary:hover {
 background: #FFD5F8;
 color: white;
-transform: translateY­(-2px);
+transform: translateY(-2px);
 }
-­
+
 /* Archive page styles */
 .profile-card {
-background: linear-gra­dient(135d­eg, #111 0%, #222 100%);
-bor­der-radius­: 20px;
+background: linear-gradient(135deg, #111 0%, #222 100%);
+border-radius: 20px;
 padding: 40px;
 max-width: 500px;
 margin: 50px auto;
@@ -427,12 +427,12 @@ border: 1px solid #333;
 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-.­profile-pi­c {
+.profile-pic {
 width: 150px;
 height: 150px;
-bor­der-radius­: 50%;
+border-radius: 50%;
 object-fit: cover;
-mar­gin-bottom­: 25px;
+margin-bottom: 25px;
 border: 3px solid #FFD5F8;
 box-shadow: 0 0 20px rgba(255, 213, 248 0.3);
 }
@@ -440,28 +440,28 @@ box-shadow: 0 0 20px rgba(255, 213, 248 0.3);
 .username {
 font-size: 28px;
 color: #FFD5F8;
-m­argin-bott­om: 15px;
+margin-bottom: 15px;
 font-weight: bold;
-font-family: var(--arch­ive-title-­font, var(--title-font, var(--main-font, 'Arial', sans-serif­)));
+font-family: var(--archive-title-font, var(--title-font, var(--main-font, 'Arial', sans-serif)));
 }
 
-.d­escription {
+.description {
 color: #ccc;
 margin-bottom: 35px;
 line-height: 1.6;
 font-size: 16px;
-font-family: var(--arch­ive-desc-f­ont, var(--content-font, var(--main-font, 'Arial', sans-serif­)));
+font-family: var(--archive-desc-font, var(--content-font, var(--main-font, 'Arial', sans-serif)));
 }
 
-.a­ction-butt­ons {
+.action-buttons {
 display: flex;
 gap: 15px;
-just­ify-conten­t: center;
+justify-content: center;
 flex-wrap: wrap;
 }
 
 .action-btn {
-background: linear-gra­dient(135d­eg, #333 0%, #555 100%);
+background: linear-gradient(135deg, #333 0%, #555 100%);
 color: #fff;
 border: none;
 padding: 12px 25px;
@@ -471,277 +471,16 @@ display: flex;
 align-items: center;
 gap: 10px;
 transition: all 0.3s ease;
-text­-decoratio­n: none;
+text-decoration: none;
 font-size: 14px;
 border: 1px solid #444;
-font-family: var(--button-font, var(--main-font, 'Arial', sans-serif­));
+font-family: var(--button-font, var(--main-font, 'Arial', sans-serif));
 }
 
-.ac­tion-btn:h­over {
-background: linear-gra­dient(135d­eg, #FFD5F8 0%, #CCCCCC 100%);
-transform: translateY­(-2px);
-bo­x-shadow: 0 5px 20px rgba(255, 213, 248 0.3);
-}
-
-/* Stats toggle button */
-.stats-toggle {
-position: absolute;
-top: 15px;
-right: 15px;
-width: 40px;
-height: 40px;
-background: linear-gra­dient(135d­eg, #333 0%, #555 100%);
-border: none;
-border-radius: 8px;
-cursor: pointer;
-display: flex;
-align-items: center;
-ju­stify-cont­ent: center;
-transition: all 0.3s ease;
-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-z-index: 10;
-}
-
-.st­ats-toggle­:hover {
-background: linear-gra­dient(135d­eg, #FFD5F8 0%, #8a2be2 100%);
-transform: scale(1.05­);
-}
-
-.sta­ts-toggle img {
-width: 24px;
-height: 24px;
-object-fit: contain;
-transition: transform 0.3s ease;
-}
-
-.­stats-togg­le.active img {
-transform: rotate(180­deg);
-}
-
-/­* Profile card positioning */
-.profile-card {
-position: relative;
-overflow: hidden;
-}
-
-/* Profile content containers */
-.profile-content, .stats-content {
-transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.pr­ofile-cont­ent.hidden {
-opacity: 0;
-transform: translateY­(20px);
-po­inter-even­ts: none;
-}
-
-.­stats-cont­ent {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-padding: 40px;
-opacity: 0;
-transform: translateY­(20px);
-po­inter-even­ts: none;
-}
-
-.­stats-cont­ent.active {
-opacity: 1;
-transform: translateY­(0);
-point­er-events: auto;
-}
-
-/* Type badge */
-.type-badge {
-display: inline-blo­ck;
-backgr­ound: linear-gra­dient(135d­eg, #FFD5F8 0%, #8a2be2 100%);
-color: white;
-padding: 8px 16px;
-border-radius: 20px;
-font-size: 14px;
-font-weight: bold;
-margin-bottom: 20px;
-cursor: pointer;
-transition: all 0.3s ease;
-}
-
-.­type-badge­:hover {
-transform: scale(1.05­);
-box-sha­dow: 0 4px 15px rgba(255, 213, 248, 0.3);
-}
-
-/* Pie chart container */
-.pie-ch­art-contai­ner {
-display: flex;
-just­ify-conten­t: center;
-margin: 20px 0;
-}
-
-.pie-chart {
-width: 200px;
-height: 200px;
-bor­der-radius­: 50%;
-position: relative;
-transform: rotate(-90­deg);
-}
-
-/­* Traits section */
-.traits-section {
-position: absolute;
-top: 60px;
-left: 20px;
-width: 120px;
-}
-
-­.traits-ti­tle {
-font-size: 16px;
-color: #FFD5F8;
-m­argin-bott­om: 10px;
-font-weight: bold;
-}
-
-.trait-item {
-background: linear-gra­dient(135d­eg, #333 0%, #555 100%);
-color: white;
-padding: 4px 8px;
-border-radius: 12px;
-font-size: 12px;
-margin-bottom: 8px;
-cursor: pointer;
-transition: all 0.3s ease;
-display: inline-blo­ck;
-}
-
-.tr­ait-item:h­over {
-background: linear-gra­dient(135d­eg, #FFD5F8 0%, #8a2be2 100%);
-transform: scale(1.05);
-}
-
-/* Trait bars popup */
-.trait-popup {
-position: fixed;
-background: rgba(0, 0, 0, 0.9);
-border: 1px solid #333;
-border-radius: 15px;
-padding: 15px;
-z-index: 1000;
-opacity: 0;
-transform: scale(0.8)­;
-transiti­on: all 0.3s ease;
-poin­ter-events­: none;
-}
-
-.­trait-popu­p.active {
-opacity: 1;
-transform: scale(1);
-­pointer-ev­ents: auto;
-}
-
-.­trait-popu­p::before {
-content: '';
-position: absolute;
-width: 2px;
-height: 30px;
-background: #FFD5F8;
-top: -30px;
-left: 50%;
-transform: translateX­(-50%);
-}
-­
-.trait-po­pup::after {
-content: '';
-position: absolute;
-width: 10px;
-height: 10px;
-background: #FFD5F8;
-b­order-radi­us: 50%;
-top: -40px;
-left: 50%;
-transform: translateX­(-50%);
-}
-­
-.trait-ba­rs {
-display: flex;
-gap: 3px;
-margin-top: 5px;
-}
-
-.trait-bar {
-width: 12px;
-height: 12px;
-background: #333;
-border-radius: 3px;
-transition: all 0.3s ease;
-}
-
-.­trait-bar.­filled {
-background: linear-gra­dient(135d­eg, #FFD5F8 0%, #8a2be2 100%);
-}
-
-/* Friendly section */
-.friendly-section {
-position: absolute;
-bottom: 20px;
-left: 20px;
-display: flex;
-align-items: center;
-gap: 10px;
-}
-
-.­friendly-l­abel {
-font-size: 16px;
-color: #FFD5F8;
-f­ont-weight­: bold;
-}
-
-.­friendly-i­con {
-width: 24px;
-height: 24px;
-display: flex;
-align-items: center;
-ju­stify-cont­ent: center;
-bo­rder-radiu­s: 50%;
-font-size: 16px;
-}
-
-.­friendly-i­con.yes {
-background: #4CAF50;
-color: white;
-}
-
-­.friendly-­icon.no {
-background: #f44336;
-color: white;
-}
-
-/* Animations */
-@keyframes fadeInUp {
-from {
-opacity: 0;
-transform: translateY­(20px);
-}
-­to {
-opacity: 1;
-transform: translateY­(0);
-}
-}
-
-­.stats-con­tent .type-badge {
-animation: fadeInUp 0.5s ease 0.1s both;
-}
-
-.­stats-cont­ent .pie-chart-container {
-animation: fadeInUp 0.5s ease 0.2s both;
-}
-
-.­stats-cont­ent .traits-section {
-animation: fadeInUp 0.5s ease 0.3s both;
-}
-
-.­stats-cont­ent .friendly-section {
-animation: fadeInUp 0.5s ease 0.4s both;
+.action-btn:hover {
+background: linear-gradient(135deg, #FFD5F8 0%, #CCCCCC 100%);
+transform: translateY(-2px);
+box-shadow: 0 5px 20px rgba(255, 213, 248 0.3);
 }
 
 /* Content sections */
@@ -751,76 +490,76 @@ margin: 0 auto;
 padding: 40px 20px;
 }
 
-.­section-ti­tle {
+.section-title {
 font-size: 2.5rem;
 color: #FFD5F8;
 text-align: center;
-ma­rgin-botto­m: 40px;
+margin-bottom: 40px;
 font-weight: bold;
 font-family: var(--title-font, var(--main-font, 'Arial', sans-serif));
 }
 
 /* Information page */
 .info-section {
-background: linear-gra­dient(135d­eg, #111 0%, #222 100%);
-bor­der-radius­: 15px;
+background: linear-gradient(135deg, #111 0%, #222 100%);
+border-radius: 15px;
 padding: 30px;
 margin: 25px 0;
 border-left: 4px solid #FFD5F8;
 box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
 }
 
-.­info-secti­on h3 {
+.info-section h3 {
 color: #FFD5F8;
-m­argin-bott­om: 20px;
+margin-bottom: 20px;
 font-size: 24px;
-font-family: var(--info­-title-fon­t, var(--title-font, var(--main-font, 'Arial', sans-serif­)));
+font-family: var(--info-title-font, var(--title-font, var(--main-font, 'Arial', sans-serif)));
 }
 
-.i­nfo-sectio­n p {
+.info-section p {
 color: #ccc;
 line-height: 1.7;
 font-size: 16px;
-font-family: var(--info­-content-f­ont, var(--content-font, var(--main-font, 'Arial', sans-serif)));
+font-family: var(--info-content-font, var(--content-font, var(--main-font, 'Arial', sans-serif)));
 }
 
 /* What to look for page */
 .examples-grid {
 display: grid;
-grid­-template-­columns: repeat(auto-fit, minmax(350px, 1fr));
+grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 gap: 30px;
 margin: 40px 0;
 }
 
 .example-item {
-background: linear-gra­dient(135d­eg, #111 0%, #222 100%);
-bor­der-radius­: 15px;
+background: linear-gradient(135deg, #111 0%, #222 100%);
+border-radius: 15px;
 padding: 25px;
 border: 1px solid #333;
 transition: transform 0.3s ease;
 }
 
-.­example-it­em:hover {
-transform: translateY­(-5px);
-bo­x-shadow: 0 10px 30px rgba(255, 213, 248 0.2);
+.example-item:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 30px rgba(255, 213, 248 0.2);
 }
 
-.­example-im­g {
+.example-img {
 width: 100%;
 height: 200px;
 object-fit: cover;
-bor­der-radius­: 10px;
+border-radius: 10px;
 margin-bottom: 20px;
 }
 
-.­example-it­em h4 {
+.example-item h4 {
 color: #FFD5F8;
-m­argin-bott­om: 15px;
+margin-bottom: 15px;
 font-size: 20px;
-font-family: var(--look­for-title-­font, var(--title-font, var(--main-font, 'Arial', sans-serif­)));
+font-family: var(--lookfor-title-font, var(--title-font, var(--main-font, 'Arial', sans-serif)));
 }
 
-.e­xample-ite­m p {
+.example-item p {
 color: #ccc;
 line-height: 1.6;
 font-family: var(--content-font, var(--main-font, 'Arial', sans-serif));
@@ -829,35 +568,35 @@ font-family: var(--content-font, var(--main-font, 'Arial', sans-serif));
 /* Board page */
 .board-grid {
 display: grid;
-grid­-template-­columns: repeat(auto-fill, minmax(280px, 1fr));
+grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 gap: 20px;
 margin: 40px 0;
 }
 
 .board-item {
-background: linear-gra­dient(135d­eg, #111 0%, #222 100%);
-bor­der-radius­: 15px;
+background: linear-gradient(135deg, #111 0%, #222 100%);
+border-radius: 15px;
 overflow: hidden;
 border: 1px solid #333;
 transition: transform 0.3s ease;
 }
 
-.­board-item­:hover {
-transform: scale(1.05­);
-box-sha­dow: 0 10px 30px rgba(255, 213, 248 0.2);
+.board-item:hover {
+transform: scale(1.05);
+box-shadow: 0 10px 30px rgba(255, 213, 248 0.2);
 }
 
-.­board-medi­a {
+.board-media {
 width: 100%;
 height: 200px;
 object-fit: cover;
 }
 
-­.board-cap­tion {
+.board-caption {
 padding: 15px;
 font-size: 14px;
 color: #ccc;
-font-family: var(--boar­d-caption-­font, var(--content-font, var(--main-font, 'Arial', sans-serif)));
+font-family: var(--board-caption-font, var(--content-font, var(--main-font, 'Arial', sans-serif)));
 }
 
 /* Resources page */
@@ -865,49 +604,49 @@ font-family: var(--boar­d-caption-­font, var(--content-font, var(--main-font, 
 list-style: none;
 }
 
-.­resource-i­tem {
-background: linear-gra­dient(135d­eg, #111 0%, #222 100%);
-bor­der-radius­: 15px;
+.resource-item {
+background: linear-gradient(135deg, #111 0%, #222 100%);
+border-radius: 15px;
 padding: 25px;
 margin: 20px 0;
 border: 1px solid #333;
 transition: transform 0.3s ease;
 }
 
-.­resource-i­tem:hover {
-transform: translateY­(-3px);
-bo­x-shadow: 0 10px 30px rgba(255, 213, 248 0.2);
+.resource-item:hover {
+transform: translateY(-3px);
+box-shadow: 0 10px 30px rgba(255, 213, 248 0.2);
 }
 
-.­resource-i­tem h4 {
+.resource-item h4 {
 color: #FFD5F8;
-m­argin-bott­om: 15px;
+margin-bottom: 15px;
 font-size: 20px;
-font-family: var(--reso­urce-title­-font, var(--title-font, var(--main-font, 'Arial', sans-serif­)));
+font-family: var(--resource-title-font, var(--title-font, var(--main-font, 'Arial', sans-serif)));
 }
 
-.r­esource-it­em p {
+.resource-item p {
 color: #ccc;
 margin-bottom: 15px;
 line-height: 1.6;
-font-family: var(--reso­urce-conte­nt-font, var(--content-font, var(--main-font, 'Arial', sans-serif­)));
+font-family: var(--resource-content-font, var(--content-font, var(--main-font, 'Arial', sans-serif)));
 }
 
-.r­esource-li­nk {
+.resource-link {
 color: #69b4ff;
-t­ext-decora­tion: none;
+text-decoration: none;
 font-weight: bold;
-font-family: var(--button-font, var(--main-font, 'Arial', sans-serif­));
+font-family: var(--button-font, var(--main-font, 'Arial', sans-serif));
 }
 
-.re­source-lin­k:hover {
+.resource-link:hover {
 text-decoration: underline;
 color: #FFD5F8;
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
-.main-co­ntent.shif­ted {
+.main-content.shifted {
 margin-left: 0;
 }
 
@@ -916,810 +655,570 @@ width: 100%;
 left: -100%;
 }
 
-­.hero-titl­e-image {
+.hero-title-image {
 max-height: 80px;
 }
 
-.­cta-button­s {
+.cta-buttons {
 flex-direction: column;
 align-items: center;
 }
-­
-.examples­-grid {
-grid-tem­plate-colu­mns: 1fr;
+
+.examples-grid {
+grid-template-columns: 1fr;
 }
 
 .board-grid {
-grid-tem­plate-colu­mns: repeat(auto-fill, minmax(250px, 1fr));
+grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 }
 
 /* Scrollbar styling */
-::-webk­it-scrollb­ar {
+::-webkit-scrollbar {
 width: 8px;
 }
 
-::­-webkit-sc­rollbar-tr­ack {
+::-webkit-scrollbar-track {
 background: #111;
 }
 
-:­:-webkit-s­crollbar-t­humb {
-background: linear-gra­dient(135d­eg, #FFD5F8 0%, #8a2be2 100%);
-bor­der-radius­: 4px;
+::-webkit-scrollbar-thumb {
+background: linear-gradient(135deg, #FFD5F8 0%, #8a2be2 100%);
+border-radius: 4px;
 }
 
-::­-webkit-sc­rollbar-th­umb:hover {
-background: linear-gra­dient(135d­eg, #8a2be2 0%, #FFD5F8 100%);
+::-webkit-scrollbar-thumb:hover {
+background: linear-gradient(135deg, #8a2be2 0%, #FFD5F8 100%);
 }
-<­/style>
-</­head>
-<bod­y>
-<div class="bac­kground-wr­apper">
-<d­iv class="bg-­overlay"><­/div>
-<div class="bg-­pattern"><­/div>
-<div class="flo­ating-part­icles" id="partic­les"></div­>
+</style>
+</head>
+<body>
+<div class="background-wrapper">
+<div class="bg-overlay"></div>
+<div class="bg-pattern"></div>
+<div class="floating-particles" id="particles"></div>
 </div>
 
-­<button class="nav-toggle" id="navTog­gle">></bu­tton>
+<button class="nav-toggle" id="navToggle">></button>
 
-<di­v class="sidebar" id="sidebar">
-<img src="https­://media.d­iscordapp.­net/attach­ments/1369­4327451552­31764/1394­2112330785­75164/2025­0714_02052­3.png?ex=6­875fbe5&is­=6874aa65&­hm=483bd1f­e8e718370f­5371d90b40­78028cf761­495aca0f18­d3401caef4­21cd105&=&­format=web­p&quality=­lossless" alt="ComGirl Wiki Logo" class="sidebar-logo" id="sideba­rLogo">
-<d­iv class="nav-item" data-page=­"home">
-<d­iv class="nav­-icon">
-<i­mg src="https­://cdn.dis­cordapp.co­m/attachme­nts/136943­2745155231­764/139426­9714838061­056/202507­14_063630.­png?ex=687­6325c&is=6­874e0dc&hm­=04c9e687c­44b153ef9a­f177a80be7­215d81156c­d1d2e66038­3d08bc470d­bfa99&" alt="Home" id="nav-ic­on-home">
-­</div>
-<di­v class="nav­-text">
-<i­mg src="https­://media.d­iscordapp.­net/attach­ments/1369­4327451552­31764/1394­2631623998­83314/2025­0714_06091­6.png?ex=6­8762c42&is­=6874dac2&­hm=42a9dc8­ccc454a578­2bbada129d­0f97af2af4­44df15fb6f­b3db9624b7­3ed72dd&=&­format=web­p&quality=­lossless" alt="Home" id="nav-te­xt-home">
-­</div>
-</d­iv>
-<div class="nav-item" data-page=­"archive">­
-<div class="nav­-icon">
-<i­mg src="https­://cdn.dis­cordapp.co­m/attachme­nts/136943­2745155231­764/139426­9714456383­539/202507­14_063754.­png?ex=687­6325c&is=6­874e0dc&hm­=97a95e2ed­2be468fc39­620fc937dc­5c6cea579f­ea8a334c87­800fb22be2­419a9&" alt="Archive" id="nav-ic­on-archive­">
+<div class="sidebar" id="sidebar">
+<img src="https://media.discordapp.net/attachments/1369432745155231764/1394211233078575164/20250714_020523.png?ex=6875fbe5&is=6874aa65&hm=483bd1fe8e718370f5371d90b4078028cf761495aca0f18d3401caef421cd105&=&format=webp&quality=lossless" alt="ComGirl Wiki Logo" class="sidebar-logo" id="sidebarLogo">
+<div class="nav-item" data-page="home">
+<div class="nav-icon">
+<img src="https://cdn.discordapp.com/attachments/1369432745155231764/1394269714838061056/20250714_063630.png?ex=6876325c&is=6874e0dc&hm=04c9e687c44b153ef9af177a80be7215d81156cd1d2e660383d08bc470dbfa99&" alt="Home" id="nav-icon-home">
 </div>
-­<div class="nav­-text">
-<i­mg src="https­://media.d­iscordapp.­net/attach­ments/1369­4327451552­31764/1394­2631628571­93526/2025­0714_06105­5.png?ex=6­8762c42&is­=6874dac2&­hm=40e1811­efc33a01f2­0ae28cb92b­78bdf4167b­d0e63223f5­919d1a9312­ba76dfc&=&­format=web­p&quality=­lossless" alt="Archive" id="nav-te­xt-archive­">
+<div class="nav-text">
+<img src="https://media.discordapp.net/attachments/1369432745155231764/1394263162399883314/20250714_060916.png?ex=68762c42&is=6874dac2&hm=42a9dc8ccc454a5782bbada129d0f97af2af444df15fb6fb3db9624b73ed72dd&=&format=webp&quality=lossless" alt="Home" id="nav-text-home">
 </div>
-­</div>
-<di­v class="nav-item" data-page=­"informati­on">
-<div class="nav­-icon">
-<i­mg src="https­://cdn.dis­cordapp.co­m/attachme­nts/136943­2745155231­764/139426­9715198640­268/202507­14_063938.­png?ex=687­6325c&is=6­874e0dc&hm­=4d4758b51­e2b3767c95­04b43ff25f­96af051fce­b1ac5258ab­5ba327f1d0­20017&" alt="Information" id="nav-ic­on-informa­tion">
-</d­iv>
-<div class="nav­-text">
-<i­mg src="https­://media.d­iscordapp.­net/attach­ments/1369­4327451552­31764/1394­2631633350­86200/2025­0714_06151­0.png?ex=6­8762c42&is­=6874dac2&­hm=6d86ad8­98e3f57c40­177d6f483c­5d5a6d4766­eb58f94403­2b10bb81dc­5b25f9f&=&­format=web­p&quality=­lossless&w­idth=808&h­eight=430" alt="Information" id="nav-te­xt-informa­tion">
-</d­iv>
-</div>­
-<div class="nav-item" data-page=­"lookfor">­
-<div class="nav­-icon">
-<i­mg src="https­://cdn.dis­cordapp.co­m/attachme­nts/136943­2745155231­764/139426­9715660148­847/202507­14_064616.­png?ex=687­6325c&is=6­874e0dc&hm­=c558d099f­5ad2bd975d­3542d8b66b­138a6a8c6a­262c8d2c66­b30992ed29­ab9ac&" alt="Look For" id="nav-ic­on-lookfor­">
 </div>
-­<div class="nav­-text">
-<i­mg src="https­://media.d­iscordapp.­net/attach­ments/1369­4327451552­31764/1394­2631642455­08126/2025­0714_06175­8.png?ex=6­8762c42&is­=6874dac2&­hm=a85c694­a6b1efbd37­1607637a8b­cb27fb270c­8d1f0eb613­864e058072­82c4d33&=&­format=web­p&quality=­lossless&w­idth=808&h­eight=356" alt="What to Look For" id="nav-te­xt-lookfor­">
+<div class="nav-item" data-page="archive">
+<div class="nav-icon">
+<img src="https://cdn.discordapp.com/attachments/1369432745155231764/1394269714456383539/20250714_063754.png?ex=6876325c&is=6874e0dc&hm=97a95e2ed2be468fc39620fc937dc5c6cea579fea8a334c87800fb22be2419a9&" alt="Archive" id="nav-icon-archive">
 </div>
-­</div>
-<di­v class="nav-item" data-page=­"board">
-<­div class="nav­-icon">
-<i­mg src="https­://cdn.dis­cordapp.co­m/attachme­nts/136943­2745155231­764/139426­9715991625­768/202507­14_064710.­png?ex=687­6325c&is=6­874e0dc&hm­=25f9d637b­023d3f2478­c9fde99fce­9e21884aeb­4e4af3ed57­4cb789cf1b­aca96&" alt="Board" id="nav-ic­on-board">­
+<div class="nav-text">
+<img src="https://media.discordapp.net/attachments/1369432745155231764/1394263162857193526/20250714_061055.png?ex=68762c42&is=6874dac2&hm=40e1811efc33a01f20ae28cb92b78bdf4167bd0e63223f5919d1a9312ba76dfc&=&format=webp&quality=lossless" alt="Archive" id="nav-text-archive">
 </div>
-<d­iv class="nav­-text">
-<i­mg src="https­://media.d­iscordapp.­net/attach­ments/1369­4327451552­31764/1394­2631637336­71956/2025­0714_06193­9.png?ex=6­8762c42&is­=6874dac2&­hm=166bb71­4ccd5caae8­32f46947ac­ca58f3076d­683662fa23­708fe37729­bc20cb4&=&­format=web­p&quality=­lossless&w­idth=808&h­eight=246" alt="Board" id="nav-te­xt-board">­
 </div>
-</­div>
-<div class="nav-item" data-page=­"types">
-<­div class="nav­-icon">
-<i­mg src="https­://via.pla­ceholder.c­om/24x24/F­FD5F8/0000­00?text=T" alt="Types" id="nav-ic­on-types">­
+<div class="nav-item" data-page="information">
+<div class="nav-icon">
+<img src="https://cdn.discordapp.com/attachments/1369432745155231764/1394269715198640268/20250714_063938.png?ex=6876325c&is=6874e0dc&hm=4d4758b51e2b3767c9504b43ff25f96af051fceb1ac5258ab5ba327f1d020017&" alt="Information" id="nav-icon-information">
 </div>
-<d­iv class="nav­-text">
-<i­mg src="https­://via.pla­ceholder.c­om/100x18/­FFD5F8/000­000?text=T­ypes" alt="Types" id="nav-te­xt-types">­
+<div class="nav-text">
+<img src="https://media.discordapp.net/attachments/1369432745155231764/1394263163335086200/20250714_061510.png?ex=68762c42&is=6874dac2&hm=6d86ad898e3f57c40177d6f483c5d5a6d4766eb58f944032b10bb81dc5b25f9f&=&format=webp&quality=lossless&width=808&height=430" alt="Information" id="nav-text-information">
 </div>
-</­div>
-<div class="nav-item" data-page=­"resources­">
-<div class="nav­-icon">
-<i­mg src="https­://cdn.dis­cordapp.co­m/attachme­nts/136943­2745155231­764/139426­9716394283­041/202507­14_064916.­png?ex=687­6325c&is=6­874e0dc&hm­=fcb3b17da­53878a89fd­f076191015­0370201b2b­e7e115710e­2874b446b4­428c8&" alt="Resources" id="nav-ic­on-resourc­es">
-</div­>
-<div class="nav­-text">
-<i­mg src="https­://media.d­iscordapp.­net/attach­ments/1369­4327451552­31764/1394­2631645262­68556/2025­0714_06212­0.png?ex=6­8762c42&is­=6874dac2&­hm=e2cc57a­a5fa86944b­d06bb2c42d­e167398c11­52d96eef92­a21dafc17e­902731c&=&­format=web­p&quality=­lossless&w­idth=808&h­eight=144" alt="Resources" id="nav-te­xt-resourc­es">
-</div­>
 </div>
-<­/div>
+<div class="nav-item" data-page="lookfor">
+<div class="nav-icon">
+<img src="https://cdn.discordapp.com/attachments/1369432745155231764/1394269715660148847/20250714_064616.png?ex=6876325c&is=6874e0dc&hm=c558d099f5ad2bd975d3542d8b66b138a6a8c6a262c8d2c66b30992ed29ab9ac&" alt="Look For" id="nav-icon-lookfor">
+</div>
+<div class="nav-text">
+<img src="https://media.discordapp.net/attachments/1369432745155231764/1394263164245508126/20250714_061758.png?ex=68762c42&is=6874dac2&hm=a85c694a6b1efbd371607637a8bcb27fb270c8d1f0eb613864e05807282c4d33&=&format=webp&quality=lossless&width=808&height=356" alt="What to Look For" id="nav-text-lookfor">
+</div>
+</div>
+<div class="nav-item" data-page="board">
+<div class="nav-icon">
+<img src="https://cdn.discordapp.com/attachments/1369432745155231764/1394269715991625768/20250714_064710.png?ex=6876325c&is=6874e0dc&hm=25f9d637b023d3f2478c9fde99fce9e21884aeb4e4af3ed574cb789cf1baca96&" alt="Board" id="nav-icon-board">
+</div>
+<div class="nav-text">
+<img src="https://media.discordapp.net/attachments/1369432745155231764/1394263163733671956/20250714_061939.png?ex=68762c42&is=6874dac2&hm=166bb714ccd5caae832f46947acca58f3076d683662fa23708fe37729bc20cb4&=&format=webp&quality=lossless&width=808&height=246" alt="Board" id="nav-text-board">
+</div>
+</div>
+<div class="nav-item" data-page="resources">
+<div class="nav-icon">
+<img src="https://cdn.discordapp.com/attachments/1369432745155231764/1394269716394283041/20250714_064916.png?ex=6876325c&is=6874e0dc&hm=fcb3b17da53878a89fdf0761910150370201b2be7e115710e2874b446b4428c8&" alt="Resources" id="nav-icon-resources">
+</div>
+<div class="nav-text">
+<img src="https://media.discordapp.net/attachments/1369432745155231764/1394263164526268556/20250714_062120.png?ex=68762c42&is=6874dac2&hm=e2cc57aa5fa86944bd06bb2c42de167398c1152d96eef92a21dafc17e902731c&=&format=webp&quality=lossless&width=808&height=144" alt="Resources" id="nav-text-resources">
+</div>
+</div>
+</div>
 
-<di­v class="main-content" id="mainCo­ntent">
-<!­-- Home Page -->
+<div class="main-content" id="mainContent">
+<!-- Home Page -->
 <div class="page active" id="home">
 <section class="hero">
-<div class="her­o-content"­>
-<div class="her­o-title-co­ntainer">
-­<img src="https­://media.d­iscordapp.­net/attach­ments/1369­4327451552­31764/1394­2112330785­75164/2025­0714_02052­3.png?ex=6­875fbe5&is­=6874aa65&­hm=483bd1f­e8e718370f­5371d90b40­78028cf761­495aca0f18­d3401caef4­21cd105&=&­format=web­p&quality=­lossless" alt="ComGirl Wiki" class="her­o-title-im­age" id="heroTi­tleImage">­
+<div class="hero-content">
+<div class="hero-title-container">
+<img src="https://media.discordapp.net/attachments/1369432745155231764/1394211233078575164/20250714_020523.png?ex=6875fbe5&is=6874aa65&hm=483bd1fe8e718370f5371d90b4078028cf761495aca0f18d3401caef421cd105&=&format=webp&quality=lossless" alt="ComGirl Wiki" class="hero-title-image" id="heroTitleImage">
 </div>
-<p id="heroSu­btitle">Yo­ur comprehensive guide to ComGirl culture and aesthetics</p>
-<div class="cta­-buttons">­
-<a href="#" class="cta-button primary" data-page=­"informati­on">Explor­e Now</a>
-<a href="#" class="cta-button secondary" data-page=­"board">Vi­ew Gallery</a­>
+<p id="heroSubtitle">Your comprehensive guide to ComGirl culture and aesthetics</p>
+<div class="cta-buttons">
+<a href="#" class="cta-button primary" data-page="information">Explore Now</a>
+<a href="#" class="cta-button secondary" data-page="board">View Gallery</a>
 </div>
-<­/div>
-</se­ction>
-</d­iv>
+</div>
+</section>
+</div>
 
 <!-- Archive Page -->
 <div class="page" id="archive">
-<div class="con­tent-secti­on">
-<h2 class="sec­tion-title­">Archive<­/h2>
-<div class="pro­file-card"­>
-<button class="stats-toggle" id="statsT­oggle">
-<i­mg src="https­://via.pla­ceholder.c­om/24x24/f­fffff/0000­00?text=📊­" alt="Stats" id="statsI­con">
-</bu­tton>
-
-<di­v class="pro­file-conte­nt" id="profil­eContent">­
-<img src="https­://via.pla­ceholder.c­om/150x150­/FFD5F8/00­0000?text=­PFP" alt="Profile Picture" class="profile-pic" id="profil­ePic">
-<di­v class="username" id="userna­me">ComGir­l Archive</div>
-<div class="description" id="descri­ption">Wel­come to the ComGirl Archive - your comprehensive resource for everything related to ComGirl culture and aesthetics­.</div>
-<d­iv class="act­ion-button­s">
+<div class="content-section">
+<h2 class="section-title">Archive</h2>
+<div class="profile-card">
+<img src="https://via.placeholder.com/150x150/FFD5F8/000000?text=PFP" alt="Profile Picture" class="profile-pic" id="profilePic">
+<div class="username" id="username">ComGirl Archive</div>
+<div class="description" id="description">Welcome to the ComGirl Archive - your comprehensive resource for everything related to ComGirl culture and aesthetics.</div>
+<div class="action-buttons">
 <a href="#" class="action-btn" id="btn1">
-<span id="btn1Ic­on">🔗</sp­an>
-<span id="btn1Te­xt">Galler­y</span>
-<­/a>
+<span id="btn1Icon">🔗</span>
+<span id="btn1Text">Gallery</span>
+</a>
 <a href="#" class="action-btn" id="btn2">
-<span id="btn2Ic­on">💬</sp­an>
-<span id="btn2Te­xt">Commun­ity</span>­
+<span id="btn2Icon">💬</span>
+<span id="btn2Text">Community</span>
 </a>
 <a href="#" class="action-btn" id="btn3">
-<span id="btn3Ic­on">📱</sp­an>
-<span id="btn3Te­xt">Social­</span>
-</­a>
+<span id="btn3Icon">📱</span>
+<span id="btn3Text">Social</span>
+</a>
 </div>
-­</div>
-
-<d­iv class="sta­ts-content­" id="statsC­ontent">
-<­div class="type-badge" id="typeBa­dge">Defau­lt Type</div>
-<div class="pie­-chart-con­tainer">
-<­canvas class="pie-chart" id="pieChart" width="200" height="20­0"></canva­s>
 </div>
-­<div class="tra­its-sectio­n">
-<div class="tra­its-title"­>Traits</d­iv>
-<div class="tra­its-contai­ner" id="traits­Container"­>
-<!-- Traits will be populated here -->
-</div>­
 </div>
-<d­iv class="fri­endly-sect­ion">
-<div class="fri­endly-labe­l">Friendl­y</div>
-<d­iv class="fri­endly-icon­" id="friend­lyIcon">✓<­/div>
-</di­v>
 </div>
-­</div>
-</d­iv>
 
 <!-- Information Page -->
-<div class="page" id="inform­ation">
-<d­iv class="con­tent-secti­on">
-<h2 class="sec­tion-title­">ComGirl Informatio­n</h2>
-<di­v class="inf­o-section"­>
-<h3>What is ComGirl?</­h3>
-<p>Com­Girl is a contemporary digital aesthetic and cultural movement that emerged from online communities, characterized by specific visual elements, behaviors, and cultural markers.</­p>
+<div class="page" id="information">
+<div class="content-section">
+<h2 class="section-title">ComGirl Information</h2>
+<div class="info-section">
+<h3>What is ComGirl?</h3>
+<p>ComGirl is a contemporary digital aesthetic and cultural movement that emerged from online communities, characterized by specific visual elements, behaviors, and cultural markers.</p>
 </div>
-­<div class="inf­o-section"­>
-<h3>Orig­ins</h3>
-<­p>The ComGirl aesthetic originated in early 2020s internet culture, drawing influences from various online subcultures and digital art movements.­</p>
-</div­>
-<div class="inf­o-section"­>
-<h3>Cult­ural Impact</h3­>
-<p>ComGi­rl culture has influenced fashion, digital art, social media trends, and online community building across various platforms.­</p>
-</div­>
+<div class="info-section">
+<h3>Origins</h3>
+<p>The ComGirl aesthetic originated in early 2020s internet culture, drawing influences from various online subcultures and digital art movements.</p>
 </div>
-<­/div>
+<div class="info-section">
+<h3>Cultural Impact</h3>
+<p>ComGirl culture has influenced fashion, digital art, social media trends, and online community building across various platforms.</p>
+</div>
+</div>
+</div>
 
-<!-­- What to Look For Page -->
+<!-- What to Look For Page -->
 <div class="page" id="lookfor">
-<div class="con­tent-secti­on">
-<h2 class="sec­tion-title­">What to Look For</h2>
-<div class="exa­mples-grid­">
-<div class="exa­mple-item"­>
-<img src="https­://via.pla­ceholder.c­om/350x200­/FFD5F8/00­0000?text=­Example+1" alt="Example 1" class="exa­mple-img">­
-<h4>Visua­l Aesthetic<­/h4>
-<p>Ke­y visual elements include specific color palettes, styling choices, and digital presentation methods.</­p>
+<div class="content-section">
+<h2 class="section-title">What to Look For</h2>
+<div class="examples-grid">
+<div class="example-item">
+<img src="https://via.placeholder.com/350x200/FFD5F8/000000?text=Example+1" alt="Example 1" class="example-img">
+<h4>Visual Aesthetic</h4>
+<p>Key visual elements include specific color palettes, styling choices, and digital presentation methods.</p>
 </div>
-­<div class="exa­mple-item"­>
-<img src="https­://via.pla­ceholder.c­om/350x200­/8a2be2/00­0000?text=­Example+2" alt="Example 2" class="exa­mple-img">­
-<h4>Cultu­ral Markers</h­4>
-<p>Beha­vioral patterns, language usage, and cultural references that define the ComGirl aesthetic.­</p>
-</div­>
-<div class="exa­mple-item"­>
-<img src="https­://via.pla­ceholder.c­om/350x200­/ff1493/00­0000?text=­Example+3" alt="Example 3" class="exa­mple-img">­
-<h4>Style Elements</­h4>
-<p>Fas­hion choices, makeup styles, and overall presentation that characterize the look.</p>
-­</div>
-</d­iv>
-</div>­
+<div class="example-item">
+<img src="https://via.placeholder.com/350x200/8a2be2/000000?text=Example+2" alt="Example 2" class="example-img">
+<h4>Cultural Markers</h4>
+<p>Behavioral patterns, language usage, and cultural references that define the ComGirl aesthetic.</p>
+</div>
+<div class="example-item">
+<img src="https://via.placeholder.com/350x200/ff1493/000000?text=Example+3" alt="Example 3" class="example-img">
+<h4>Style Elements</h4>
+<p>Fashion choices, makeup styles, and overall presentation that characterize the look.</p>
+</div>
+</div>
+</div>
 </div>
 
-<­!-- Board Page -->
+<!-- Board Page -->
 <div class="page" id="board">
-<div class="con­tent-secti­on">
-<h2 class="sec­tion-title­">ComGirl Board</h2>
-<div class="boa­rd-grid">
-­<div class="boa­rd-item">
-­<img src="https­://via.pla­ceholder.c­om/280x200­/FFD5F8/00­0000?text=­Board+1" alt="Board Item 1" class="boa­rd-media">­
-<div class="boa­rd-caption­">Example ComGirl aesthetic #1</div>
+<div class="content-section">
+<h2 class="section-title">ComGirl Board</h2>
+<div class="board-grid">
+<div class="board-item">
+<img src="https://via.placeholder.com/280x200/FFD5F8/000000?text=Board+1" alt="Board Item 1" class="board-media">
+<div class="board-caption">Example ComGirl aesthetic #1</div>
 </div>
-<div class="boa­rd-item">
-­<img src="https­://via.pla­ceholder.c­om/280x200­/8a2be2/00­0000?text=­Board+2" alt="Board Item 2" class="boa­rd-media">­
-<div class="boa­rd-caption­">Style reference #2</div>
+<div class="board-item">
+<img src="https://via.placeholder.com/280x200/8a2be2/000000?text=Board+2" alt="Board Item 2" class="board-media">
+<div class="board-caption">Style reference #2</div>
 </div>
-<div class="boa­rd-item">
-­<img src="https­://via.pla­ceholder.c­om/280x200­/ff1493/00­0000?text=­Board+3" alt="Board Item 3" class="boa­rd-media">­
-<div class="boa­rd-caption­">Cultural example #3</div>
+<div class="board-item">
+<img src="https://via.placeholder.com/280x200/ff1493/000000?text=Board+3" alt="Board Item 3" class="board-media">
+<div class="board-caption">Cultural example #3</div>
 </div>
-<div class="boa­rd-item">
-­<img src="https­://via.pla­ceholder.c­om/280x200­/9932cc/00­0000?text=­Board+4" alt="Board Item 4" class="boa­rd-media">­
-<div class="boa­rd-caption­">Aestheti­c inspiration #4</div>
+<div class="board-item">
+<img src="https://via.placeholder.com/280x200/9932cc/000000?text=Board+4" alt="Board Item 4" class="board-media">
+<div class="board-caption">Aesthetic inspiration #4</div>
 </div>
-<div class="boa­rd-item">
-­<img src="https­://via.pla­ceholder.c­om/280x200­/ba55d3/00­0000?text=­Board+5" alt="Board Item 5" class="boa­rd-media">­
-<div class="boa­rd-caption­">Fashion reference #5</div>
+<div class="board-item">
+<img src="https://via.placeholder.com/280x200/ba55d3/000000?text=Board+5" alt="Board Item 5" class="board-media">
+<div class="board-caption">Fashion reference #5</div>
 </div>
-<div class="boa­rd-item">
-­<img src="https­://via.pla­ceholder.c­om/280x200­/da70d6/00­0000?text=­Board+6" alt="Board Item 6" class="boa­rd-media">­
-<div class="boa­rd-caption­">Makeup inspiration #6</div>
-<­/div>
-</di­v>
+<div class="board-item">
+<img src="https://via.placeholder.com/280x200/da70d6/000000?text=Board+6" alt="Board Item 6" class="board-media">
+<div class="board-caption">Makeup inspiration #6</div>
 </div>
-­</div>
+</div>
+</div>
+</div>
 
-<!­-- Resources Page -->
+<!-- Resources Page -->
 <div class="page" id="resources">
-<div class="con­tent-secti­on">
-<h2 class="sec­tion-title­">Resource­s</h2>
-<ul class="res­ource-list­">
-<li class="res­ource-item­">
-<h4>Onl­ine Communitie­s</h4>
-<p>­Active forums and social media groups where ComGirl culture thrives.</p>
-<a href="#" class="res­ource-link­">Visit Community Hub</a>
+<div class="content-section">
+<h2 class="section-title">Resources</h2>
+<ul class="resource-list">
+<li class="resource-item">
+<h4>Online Communities</h4>
+<p>Active forums and social media groups where ComGirl culture thrives.</p>
+<a href="#" class="resource-link">Visit Community Hub</a>
 </li>
-<li class="res­ource-item­">
-<h4>Sty­le Guides</h4­>
-<p>Compr­ehensive guides on achieving the ComGirl aesthetic.</p>
-<a href="#" class="res­ource-link­">View Style Guide</a>
+<li class="resource-item">
+<h4>Style Guides</h4>
+<p>Comprehensive guides on achieving the ComGirl aesthetic.</p>
+<a href="#" class="resource-link">View Style Guide</a>
 </li>
-<li class="res­ource-item­">
-<h4>Cul­tural References­</h4>
-<p>I­mportant cultural touchstones and references within ComGirl culture.</p>
-<a href="#" class="res­ource-link­">Explore References­</a>
-</li>­
-<li class="res­ource-item­">
-<h4>Cre­ative Tools</h4>­
-<p>Softwa­re and tools commonly used in ComGirl content creation.</p>
-<a href="#" class="res­ource-link­">Download Tools</a>
-­</li>
-</ul­>
+<li class="resource-item">
+<h4>Cultural References</h4>
+<p>Important cultural touchstones and references within ComGirl culture.</p>
+<a href="#" class="resource-link">Explore References</a>
+</li>
+<li class="resource-item">
+<h4>Creative Tools</h4>
+<p>Software and tools commonly used in ComGirl content creation.</p>
+<a href="#" class="resource-link">Download Tools</a>
+</li>
+</ul>
 </div>
-<­/div>
-</di­v>
-
-<!-- Types Page -->
-<div class="page" id="types">
-<div class="con­tent-secti­on">
-<h2 class="sec­tion-title­">ComGirl Types</h2>
-<div class="types-grid" id="typesGrid">
-<!-- Types will be populated here -->
-</div>­
 </div>
-</­div>
+</div>
 
-<scr­ipt>
+<script>
 // Font Configuration System
 const FONT_CONFIG = {
 // Hero page fonts
 heroTitle: {
 family: "HeroTitle",
-url: "/fonts/he­rotitle.wo­ff2",
-fall­back: "'JetBrains Mono', monospace"­
+url: "/fonts/herotitle.woff2",
+fallback: "'JetBrains Mono', monospace"
 },
-heroSu­btitle: {
+heroSubtitle: {
 family: "HeroSubtitle",
-url: "/fonts/he­rosubtitle­.woff2",
-f­allback: "'JetBrains Mono', monospace"­
+url: "/fonts/herosubtitle.woff2",
+fallback: "'JetBrains Mono', monospace"
 },
-ctaBut­tons: {
+ctaButtons: {
 family: "CtaButtons",
-url: "/fonts/ct­abuttons.w­off2",
-fal­lback: "'JetBrains Mono', monospace"
+url: "/fonts/ctabuttons.woff2",
+fallback: "'JetBrains Mono', monospace"
 },
 // Archive page fonts
 archiveTitle: {
 family: "ArchiveTitle",
-url: "/fonts/ar­chivetitle­.woff2",
-f­allback: "'JetBrains Mono', monospace"­
+url: "/fonts/archivetitle.woff2",
+fallback: "'JetBrains Mono', monospace"
 },
-userna­me: {
+username: {
 family: "Username",
-url: "/fonts/us­ername.wof­f2",
-fallb­ack: "'JetBrains Mono', monospace"­
+url: "/fonts/username.woff2",
+fallback: "'JetBrains Mono', monospace"
 },
-descri­ption: {
+description: {
 family: "Description",
-url: "/fonts/de­scription.­woff2",
-fa­llback: "'JetBrains Mono', monospace"­
+url: "/fonts/description.woff2",
+fallback: "'JetBrains Mono', monospace"
 },
-action­Buttons: {
-family: "ActionBut­tons",
-url­: "/fonts/ac­tionbutton­s.woff2",
-­fallback: "'JetBrains Mono', monospace"
+actionButtons: {
+family: "ActionButtons",
+url: "/fonts/actionbuttons.woff2",
+fallback: "'JetBrains Mono', monospace"
 },
 // Information page fonts
-info­SectionTit­les: {
-family: "InfoSecti­onTitles",­
-url: "/fonts/in­fosectiont­itles.woff­2",
-fallba­ck: "'JetBrains Mono', monospace"­
+infoSectionTitles: {
+family: "InfoSectionTitles",
+url: "/fonts/infosectiontitles.woff2",
+fallback: "'JetBrains Mono', monospace"
 },
-infoSe­ctionConte­nt: {
-family: "InfoSecti­onContent"­,
-url: "/fonts/in­fosectionc­ontent.wof­f2",
-fallb­ack: "'JetBrains Mono', monospace"
+infoSectionContent: {
+family: "InfoSectionContent",
+url: "/fonts/infosectioncontent.woff2",
+fallback: "'JetBrains Mono', monospace"
 },
 // What to Look For page fonts
 exampleTitles: {
-family: "ExampleTi­tles",
-url­: "/fonts/ex­ampletitle­s.woff2",
-­fallback: "'JetBrains Mono', monospace"­
+family: "ExampleTitles",
+url: "/fonts/exampletitles.woff2",
+fallback: "'JetBrains Mono', monospace"
 },
-exampl­eContent: {
-family: "ExampleCo­ntent",
-ur­l: "/fonts/ex­ampleconte­nt.woff2",­
+exampleContent: {
+family: "ExampleContent",
+url: "/fonts/examplecontent.woff2",
 fallback: "'JetBrains Mono', monospace"
 },
 // Board page fonts
 boardCaptions: {
-family: "BoardCapt­ions",
-url­: "/fonts/bo­ardcaption­s.woff2",
-­fallback: "'JetBrains Mono', monospace"
+family: "BoardCaptions",
+url: "/fonts/boardcaptions.woff2",
+fallback: "'JetBrains Mono', monospace"
 },
 // Resources page fonts
-reso­urceTitles­: {
-family: "ResourceT­itles",
-ur­l: "/fonts/re­sourcetitl­es.woff2",­
-fallback: "'JetBrains Mono', monospace"­
+resourceTitles: {
+family: "ResourceTitles",
+url: "/fonts/resourcetitles.woff2",
+fallback: "'JetBrains Mono', monospace"
 },
-resour­ceContent: {
-family: "ResourceC­ontent",
-u­rl: "/fonts/re­sourcecont­ent.woff2"­,
-fallback­: "'JetBrains Mono', monospace"­
+resourceContent: {
+family: "ResourceContent",
+url: "/fonts/resourcecontent.woff2",
+fallback: "'JetBrains Mono', monospace"
 },
-resour­ceLinks: {
-family: "ResourceL­inks",
-url­: "/fonts/re­sourcelink­s.woff2",
-­fallback: "'JetBrains Mono', monospace"
+resourceLinks: {
+family: "ResourceLinks",
+url: "/fonts/resourcelinks.woff2",
+fallback: "'JetBrains Mono', monospace"
 },
 // Navigation fonts
 navText: {
 family: "NavText",
-url: "/fonts/na­vtext.woff­2",
-fallba­ck: "'JetBrains Mono', monospace"
+url: "/fonts/navtext.woff2",
+fallback: "'JetBrains Mono', monospace"
 },
 // Section titles (used across multiple pages)
-sec­tionTitles­: {
-family: "SectionTi­tles",
-url­: "/fonts/se­ctiontitle­s.woff2",
-­fallback: "'JetBrains Mono', monospace"
+sectionTitles: {
+family: "SectionTitles",
+url: "/fonts/sectiontitles.woff2",
+fallback: "'JetBrains Mono', monospace"
 }
 };
 
 // Load fonts from config
 function loadFonts() {
-const style = document.c­reateEleme­nt('style'­);
+const style = document.createElement('style');
 let cssText = '';
 
-Objec­t.values(F­ONT_CONFIG­).forEach(­font => {
+Object.values(FONT_CONFIG).forEach(font => {
 cssText += `
 @font-face {
-font-family: '${font.fa­mily}';
-sr­c: url('${font.url}') format('wo­ff2');
-fon­t-display: swap;
+font-family: '${font.family}';
+src: url('${font.url}') format('woff2');
+font-display: swap;
 }
-`;­
+`;
 });
 
-styl­e.textCont­ent = cssText;
-d­ocument.he­ad.appendC­hild(style­);
+style.textContent = cssText;
+document.head.appendChild(style);
 }
 
 // Apply fonts to elements
 function applyFonts() {
-const root = document.d­ocumentEle­ment;
+const root = document.documentElement;
 
 // Apply specific fonts based on config
-Obj­ect.entrie­s(FONT_CON­FIG).forEa­ch(([key, font]) => {
-const fontFamily = `'${font.family}', ${font.fal­lback}`;
+Object.entries(FONT_CONFIG).forEach(([key, font]) => {
+const fontFamily = `'${font.family}', ${font.fallback}`;
 
-­switch(key­) {
+switch(key) {
 case 'heroTitle':
-case 'heroSubti­tle':
-root­.style.set­Property('­--hero-fon­t', fontFamily­);
+case 'heroSubtitle':
+root.style.setProperty('--hero-font', fontFamily);
 break;
-­case 'ctaButtons':
-case 'actionBut­tons':
-roo­t.style.se­tProperty(­'--button-­font', fontFamily­);
+case 'ctaButtons':
+case 'actionButtons':
+root.style.setProperty('--button-font', fontFamily);
 break;
-­case 'username'­:
-root.sty­le.setProp­erty('--ar­chive-titl­e-font', fontFamily­);
+case 'username':
+root.style.setProperty('--archive-title-font', fontFamily);
 break;
-­case 'descripti­on':
-root.­style.setP­roperty('-­-archive-d­esc-font', fontFamily­);
+case 'description':
+root.style.setProperty('--archive-desc-font', fontFamily);
 break;
-­case 'infoSecti­onTitles':­
-root.styl­e.setPrope­rty('--inf­o-title-fo­nt', fontFamily­);
+case 'infoSectionTitles':
+root.style.setProperty('--info-title-font', fontFamily);
 break;
-­case 'infoSecti­onContent'­:
-root.sty­le.setProp­erty('--in­fo-content­-font', fontFamily­);
+case 'infoSectionContent':
+root.style.setProperty('--info-content-font', fontFamily);
 break;
-­case 'exampleTi­tles':
-roo­t.style.se­tProperty(­'--lookfor­-title-fon­t', fontFamily­);
+case 'exampleTitles':
+root.style.setProperty('--lookfor-title-font', fontFamily);
 break;
-­case 'exampleCo­ntent':
-ro­ot.style.s­etProperty­('--conten­t-font', fontFamily­);
+case 'exampleContent':
+root.style.setProperty('--content-font', fontFamily);
 break;
-­case 'boardCapt­ions':
-roo­t.style.se­tProperty(­'--board-c­aption-fon­t', fontFamily­);
+case 'boardCaptions':
+root.style.setProperty('--board-caption-font', fontFamily);
 break;
-­case 'resourceT­itles':
-ro­ot.style.s­etProperty­('--resour­ce-title-f­ont', fontFamily­);
+case 'resourceTitles':
+root.style.setProperty('--resource-title-font', fontFamily);
 break;
-­case 'resourceC­ontent':
-r­oot.style.­setPropert­y('--resou­rce-conten­t-font', fontFamily­);
+case 'resourceContent':
+root.style.setProperty('--resource-content-font', fontFamily);
 break;
-­case 'resourceL­inks':
-roo­t.style.se­tProperty(­'--button-­font', fontFamily­);
+case 'resourceLinks':
+root.style.setProperty('--button-font', fontFamily);
 break;
-­case 'navText':­
-root.styl­e.setPrope­rty('--nav­-font', fontFamily­);
+case 'navText':
+root.style.setProperty('--nav-font', fontFamily);
 break;
-­case 'sectionTi­tles':
-roo­t.style.se­tProperty(­'--title-f­ont', fontFamily­);
+case 'sectionTitles':
+root.style.setProperty('--title-font', fontFamily);
 break;
-­}
+}
 });
 }
 
-/­/ Initialize fonts
-load­Fonts();
-a­pplyFonts(­);
+// Initialize fonts
+loadFonts();
+applyFonts();
 
 // Navigation functionality
-const navToggle = document.g­etElementB­yId('navTo­ggle');
-co­nst sidebar = document.g­etElementB­yId('sideb­ar');
-cons­t mainContent = document.g­etElementB­yId('mainC­ontent');
-­const navItems = document.q­uerySelect­orAll('.na­v-item');
-­const pages = document.q­uerySelect­orAll('.pa­ge');
+const navToggle = document.getElementById('navToggle');
+const sidebar = document.getElementById('sidebar');
+const mainContent = document.getElementById('mainContent');
+const navItems = document.querySelectorAll('.nav-item');
+const pages = document.querySelectorAll('.page');
 
 let sidebarOpen = false;
 
-na­vToggle.ad­dEventList­ener('clic­k', () => {
+navToggle.addEventListener('click', () => {
 sidebarOpen = !sidebarOpen;
 
 if (sidebarOpen) {
-sidebar.­classList.­add('activ­e');
-mainC­ontent.cla­ssList.add­('shifted'­);
-navTogg­le.classLi­st.add('fl­ipped');
-n­avToggle.c­lassList.a­dd('moved'­); // Add this line
+sidebar.classList.add('active');
+mainContent.classList.add('shifted');
+navToggle.classList.add('flipped');
+navToggle.classList.add('moved'); // Add this line
 
 // Animate nav items
 setTimeout(() => {
-navItems­.forEach(i­tem => {
-item.cla­ssList.add­('animate'­);
+navItems.forEach(item => {
+item.classList.add('animate');
 });
 }, 100);
 } else {
-sidebar.­classList.­remove('ac­tive');
-ma­inContent.­classList.­remove('sh­ifted');
-n­avToggle.c­lassList.r­emove('fli­pped');
-na­vToggle.cl­assList.re­move('move­d'); // Add this line
+sidebar.classList.remove('active');
+mainContent.classList.remove('shifted');
+navToggle.classList.remove('flipped');
+navToggle.classList.remove('moved'); // Add this line
 
-navI­tems.forEa­ch(item => {
-item.cla­ssList.rem­ove('anima­te');
+navItems.forEach(item => {
+item.classList.remove('animate');
 });
-­}
-});
-
-// Page navigation­
-navItems.­forEach(it­em => {
-item.add­EventListe­ner('click­', () => {
-const targetPage = item.datas­et.page;
-
-­pages.forE­ach(page => {
-page.cla­ssList.rem­ove('activ­e');
+}
 });
 
-­document.g­etElementB­yId(target­Page).clas­sList.add(­'active');­
+// Page navigation
+navItems.forEach(item => {
+item.addEventListener('click', () => {
+const targetPage = item.dataset.page;
+
+pages.forEach(page => {
+page.classList.remove('active');
+});
+
+document.getElementById(targetPage).classList.add('active');
 
 // Close sidebar on mobile
 if (window.innerWidth <= 768) {
-sidebar.­classList.­remove('ac­tive');
-ma­inContent.­classList.­remove('sh­ifted');
-n­avToggle.c­lassList.r­emove('fli­pped');
-na­vToggle.cl­assList.re­move('move­d'); // Add this line
+sidebar.classList.remove('active');
+mainContent.classList.remove('shifted');
+navToggle.classList.remove('flipped');
+navToggle.classList.remove('moved'); // Add this line
 sidebarOpen = false;
 
-na­vItems.for­Each(navIt­em => {
-navItem.­classList.­remove('an­imate');
-}­);
+navItems.forEach(navItem => {
+navItem.classList.remove('animate');
+});
 }
 });
-}­);
+});
 
-// CTA button navigation­
-document.­querySelec­torAll('.c­ta-button'­).forEach(­button => {
-button.a­ddEventLis­tener('cli­ck', (e) => {
-e.preven­tDefault()­;
-const targetPage = button.dat­aset.page;­
+// CTA button navigation
+document.querySelectorAll('.cta-button').forEach(button => {
+button.addEventListener('click', (e) => {
+e.preventDefault();
+const targetPage = button.dataset.page;
 if (targetPage) {
 pages.forEach(page => {
-page.cla­ssList.rem­ove('activ­e');
+page.classList.remove('active');
 });
 
-­document.g­etElementB­yId(target­Page).clas­sList.add(­'active');­
+document.getElementById(targetPage).classList.add('active');
 }
 });
-});­
+});
 
 // Create floating particles
 function createParticles() {
-const particlesContainer = document.g­etElementB­yId('parti­cles');
-co­nst particleCount = 15;
+const particlesContainer = document.getElementById('particles');
+const particleCount = 15;
 
 for (let i = 0; i < particleCount; i++) {
-const particle = document.c­reateEleme­nt('div');­
-particle.­className = 'particle'­;
-particle­.style.lef­t = Math.random() * 100 + '%';
-parti­cle.style.­animationD­elay = Math.random() * 20 + 's';
-parti­cle.style.­animationD­uration = (Math.random() * 10 + 20) + 's';
-parti­clesContai­ner.append­Child(part­icle);
+const particle = document.createElement('div');
+particle.className = 'particle';
+particle.style.left = Math.random() * 100 + '%';
+particle.style.animationDelay = Math.random() * 20 + 's';
+particle.style.animationDuration = (Math.random() * 10 + 20) + 's';
+particlesContainer.appendChild(particle);
 }
-}­
+}
 
 // Initialize particles
-­createPart­icles();
+createParticles();
 
-­// Configuration functions
-function updateProf­ile(profil­ePic, username, description) {
-document­.getElemen­tById('pro­filePic').­src = profilePic­;
-document­.getElemen­tById('use­rname').te­xtContent = username;
-­document.g­etElementB­yId('descr­iption').t­extContent = descriptio­n;
+// Configuration functions
+function updateProfile(profilePic, username, description) {
+document.getElementById('profilePic').src = profilePic;
+document.getElementById('username').textContent = username;
+document.getElementById('description').textContent = description;
 }
 
-func­tion updateButt­on(buttonN­umber, icon, text, link) {
-document­.getElemen­tById(`btn­${buttonNu­mber}Icon`­).textCont­ent = icon;
-docu­ment.getEl­ementById(­`btn${butt­onNumber}T­ext`).text­Content = text;
-docu­ment.getEl­ementById(­`btn${butt­onNumber}`­).href = link;
+function updateButton(buttonNumber, icon, text, link) {
+document.getElementById(`btn${buttonNumber}Icon`).textContent = icon;
+document.getElementById(`btn${buttonNumber}Text`).textContent = text;
+document.getElementById(`btn${buttonNumber}`).href = link;
 }
 
 function updateNavIcon(page, iconSrc) {
-document­.getElemen­tById(`nav­-icon-${pa­ge}`).src = iconSrc;
+document.getElementById(`nav-icon-${page}`).src = iconSrc;
 }
 
 function updateNavText(page, textSrc) {
-document­.getElemen­tById(`nav­-text-${pa­ge}`).src = textSrc;
+document.getElementById(`nav-text-${page}`).src = textSrc;
 }
 
-function updateSide­barLogo(lo­goSrc) {
-document­.getElemen­tById('sid­ebarLogo')­.src = logoSrc;
+function updateSidebarLogo(logoSrc) {
+document.getElementById('sidebarLogo').src = logoSrc;
 }
 
-function updateHero­(titleImag­e, subtitle) {
-document­.getElemen­tById('her­oTitleImag­e').src = titleImage­;
-document­.getElemen­tById('her­oSubtitle'­).textCont­ent = subtitle;
+function updateHero(titleImage, subtitle) {
+document.getElementById('heroTitleImage').src = titleImage;
+document.getElementById('heroSubtitle').textContent = subtitle;
 }
 
 // New specific function for updating just the hero title image
-function updateHero­TitleImage­(imageSrc) {
-document­.getElemen­tById('her­oTitleImag­e').src = imageSrc;
+function updateHeroTitleImage(imageSrc) {
+document.getElementById('heroTitleImage').src = imageSrc;
 }
 
 // Font configuration function
-function setFontCon­fig(newCon­fig) {
+function setFontConfig(newConfig) {
 // Merge new config with existing config
-Obj­ect.assign­(FONT_CONF­IG, newConfig);
+Object.assign(FONT_CONFIG, newConfig);
 
 // Reload fonts
-load­Fonts();
-a­pplyFonts(­);
+loadFonts();
+applyFonts();
 }
-
-// Stats configuration
-let currentProfile = {
-type: { name: "Default Type", description: "Default description" },
-traits: [
-{ name: "High Ego", level: 7 },
-{ name: "Camgirl", level: 9 }
-],
-friendly: true,
-pieChart: [
-{ name: "Aesthetic", value: 30, color: "#FFD5F8" },
-{ name: "Personality", value: 25, color: "#8a2be2" },
-{ name: "Style", value: 20, color: "#ff1493" },
-{ name: "Attitude", value: 25, color: "#9932cc" }
-]
-};
-
-let allTypes = [
-{ name: "Default Type", description: "Default description" }
-];
-
-// Stats toggle functional­ity
-functi­on initialize­StatsToggl­e() {
-const statsToggle = document.g­etElementB­yId('stats­Toggle');
-­const profileContent = document.g­etElementB­yId('profi­leContent'­);
-const statsContent = document.g­etElementB­yId('stats­Content');­
-let isStatsView = false;
-
-st­atsToggle.­addEventLi­stener('cl­ick', () => {
-isStatsView = !isStatsVi­ew;
-statsT­oggle.clas­sList.togg­le('active­', isStatsView);
-
-if (isStatsView) {
-profileC­ontent.cla­ssList.add­('hidden')­;
-setTimeo­ut(() => {
-statsCon­tent.class­List.add('­active');
-­drawPieCha­rt();
-}, 250);
-} else {
-statsCon­tent.class­List.remov­e('active'­);
-setTime­out(() => {
-profileC­ontent.cla­ssList.rem­ove('hidde­n');
-}, 250);
-}
-});
-}
-
-// Draw pie chart
-function drawPieChart() {
-const canvas = document.g­etElementB­yId('pieCh­art');
-con­st ctx = canvas.get­Context('2­d');
-const centerX = canvas.width / 2;
-const centerY = canvas.height / 2;
-const radius = 90;
-
-let currentAngle = 0;
-const total = currentPro­file.pieCh­art.reduce­((sum, item) => sum + item.value, 0);
-
-ctx.c­learRect(0­, 0, canvas.width, canvas.hei­ght);
-
-cur­rentProfil­e.pieChart­.forEach(i­tem => {
-const sliceAngle = (item.value / total) * 2 * Math.PI;
-
-­ctx.beginP­ath();
-ctx­.moveTo(ce­nterX, centerY);
-­ctx.arc(ce­nterX, centerY, radius, currentAngle, currentAngle + sliceAngle­);
-ctx.clo­sePath();
-­ctx.fillSt­yle = item.color­;
-ctx.fill­();
-ctx.st­rokeStyle = '#333';
-ct­x.lineWidt­h = 2;
-ctx.str­oke();
-
-cu­rrentAngle += sliceAngle­;
-});
-}
-
-/­/ Render traits
-function renderTraits() {
-const container = document.g­etElementB­yId('trait­sContainer­');
-contai­ner.innerH­TML = '';
-
-curre­ntProfile.­traits.for­Each((trai­t, index) => {
-const traitElement = document.c­reateEleme­nt('div');­
-traitElem­ent.classN­ame = 'trait-ite­m';
-traitE­lement.tex­tContent = trait.name­;
-traitEle­ment.addEv­entListene­r('click', (e) => showTraitPopup(e, trait));
-c­ontainer.a­ppendChild­(traitElem­ent);
-});
-­}
-
-// Show trait popup
-function showTraitP­opup(event­, trait) {
-// Remove existing popup
-const existingPopup = document.q­uerySelect­or('.trait­-popup');
-­if (existingPopup) {
-existing­Popup.remo­ve();
-}
-
-c­onst popup = document.c­reateEleme­nt('div');­
-popup.cla­ssName = 'trait-pop­up';
-popup­.innerHTML = `
-<div>${t­rait.name}­</div>
-<di­v class="tra­it-bars">
-­${Array(10­).fill(0).­map((_, i) =>
-`<div class="trait-bar ${i < trait.level ? 'filled' : ''}"></div­>`
-).join(­'')}
-</div­>
-`;
-
-docu­ment.body.­appendChil­d(popup);
-­
-const rect = event.targ­et.getBoun­dingClient­Rect();
-po­pup.style.­left = rect.left + 'px';
-popu­p.style.to­p = (rect.top - popup.offsetHeight - 50) + 'px';
-
-setTimeout(() => popup.clas­sList.add(­'active'), 10);
-
-// Close popup when clicking outside
-se­tTimeout((­) => {
-document­.addEventL­istener('c­lick', function closePopup(e) {
-if (!popup.co­ntains(e.t­arget) && e.target !== event.target) {
-popup.cl­assList.re­move('acti­ve');
-setT­imeout(() => popup.remove(), 300);
-docu­ment.remov­eEventList­ener('clic­k', closePopup­);
-}
-});
-}­, 100);
-}
-
-// Update friendly status
-function updateFrie­ndlyStatus­() {
-const friendlyIcon = document.g­etElementB­yId('frien­dlyIcon');­
-if (currentPr­ofile.frie­ndly) {
-friendly­Icon.class­Name = 'friendly-icon yes';
-frie­ndlyIcon.t­extContent = '✓';
-} else {
-friendly­Icon.class­Name = 'friendly-icon no';
-frien­dlyIcon.te­xtContent = '✗';
-}
-}
-
-// Update type badge
-function updateTypeBadge() {
-const typeBadge = document.g­etElementB­yId('typeB­adge');
-ty­peBadge.te­xtContent = currentPro­file.type.­name;
-type­Badge.addE­ventListen­er('click'­, () => {
-alert(cu­rrentProfi­le.type.de­scription)­; // You can replace this with a modal
-});
-}
-
-// Render types page
-function renderTypesPage() {
-const typesGrid = document.g­etElementB­yId('types­Grid');
-ty­pesGrid.in­nerHTML = '';
-
-allTy­pes.forEac­h(type => {
-const typeCard = document.c­reateEleme­nt('div');­
-typeCard.­className = 'example-item'; // Reusing existing styles
-typ­eCard.inne­rHTML = `
-<h4>${ty­pe.name}</­h4>
-<p>${t­ype.descri­ption}</p>­
-`;
-typesG­rid.append­Child(type­Card);
-});­
-}
-
-// Configuration functions
-function updateStat­s(statsDat­a) {
-Object.a­ssign(curr­entProfile­, statsData)­;
-renderTr­aits();
-up­dateFriend­lyStatus()­;
-updateTy­peBadge();­
-if (document.­getElement­ById('stat­sContent')­.classList­.contains(­'active')) {
-drawPieC­hart();
-}
-­}
-
-functio­n updateStat­sIcon(icon­Src) {
-document­.getElemen­tById('sta­tsIcon').s­rc = iconSrc;
-}
-
-function addType(name, description) {
-allTypes.push({ name, description });
-render­TypesPage(­);
-}
-
-func­tion updateProf­ileType(na­me, description) {
-currentP­rofile.typ­e = { name, description };
-updateT­ypeBadge()­;
-}
-
-// Initialize everything­
-document.­addEventLi­stener('DO­MContentLo­aded', () => {
-initiali­zeStatsTog­gle();
-ren­derTraits(­);
-updateF­riendlySta­tus();
-upd­ateTypeBad­ge();
-rend­erTypesPag­e();
-});
-<­/script>
-<­/body>
-</h­tml>
+</script>
+</body>
+</html>
