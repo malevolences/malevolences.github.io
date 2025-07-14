@@ -335,68 +335,23 @@ max-width: 800px;
 z-index: 1;
 }
 
-.hero-logo-container {
-position: relative;
-margin-bottom: 30px;
-}
-
-.hero-logo {
-width: 120px;
-height: 120px;
-margin: 0 auto 20px;
-border-radius: 50%;
-box-shadow: 0 0 30px rgba(255, 105, 180, 0.4);
-animation: logoFloat 6s ease-in-out infinite;
-}
-
-@keyframes logoFloat {
-0%, 100% { transform: translateY(0px) rotate(0deg); }
-50% { transform: translateY(-10px) rotate(5deg); }
-}
-
-.logo-sparkles {
-position: absolute;
-top: 0;
-left: 50%;
-transform: translateX(-50%);
-width: 120px;
-height: 120px;
-}
-
-.sparkle {
-position: absolute;
-width: 4px;
-height: 4px;
-background: #ff69b4;
-border-radius: 50%;
-animation: sparkle 2s infinite;
-}
-
-.sparkle-1 { top: 20%; right: 20%; animation-delay: 0s; }
-.sparkle-2 { top: 30%; left: 10%; animation-delay: 0.5s; }
-.sparkle-3 { bottom: 20%; right: 30%; animation-delay: 1s; }
-.sparkle-4 { bottom: 30%; left: 20%; animation-delay: 1.5s; }
-
-@keyframes sparkle {
-0%, 100% { opacity: 0; transform: scale(0); }
-50% { opacity: 1; transform: scale(1); }
-}
-
-.hero h1 {
-font-size: 4rem;
-font-weight: bold;
+.hero-title-container {
 margin-bottom: 20px;
-background: linear-gradient(135deg, #ff69b4 0%, #8a2be2 100%);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-clip: text;
-text-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
-font-family: var(--hero-font, var(--main-font, 'Arial', sans-serif));
 }
 
-.hero .dot {
-color: #ff69b4;
-text-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
+.hero-title-image {
+max-width: 100%;
+height: auto;
+max-height: 120px;
+display: block;
+margin: 0 auto;
+filter: drop-shadow(0 0 30px rgba(255, 105, 180, 0.3));
+transition: all 0.3s ease;
+}
+
+.hero-title-image:hover {
+transform: scale(1.05);
+filter: drop-shadow(0 0 40px rgba(255, 105, 180, 0.5));
 }
 
 .hero p {
@@ -688,8 +643,8 @@ width: 100%;
 left: -100%;
 }
 
-.hero h1 {
-font-size: 2.5rem;
+.hero-title-image {
+max-height: 80px;
 }
 
 .cta-buttons {
@@ -791,16 +746,9 @@ background: linear-gradient(135deg, #8a2be2 0%, #ff69b4 100%);
 <div class="page active" id="home">
 <section class="hero">
 <div class="hero-content">
-<div class="hero-logo-container">
-<img src="https://via.placeholder.com/120x120/ff69b4/000000?text=CG" alt="ComGirl Logo" class="hero-logo" id="heroLogo">
-<div class="logo-sparkles">
-<div class="sparkle sparkle-1"></div>
-<div class="sparkle sparkle-2"></div>
-<div class="sparkle sparkle-3"></div>
-<div class="sparkle sparkle-4"></div>
+<div class="hero-title-container">
+<img src="https://via.placeholder.com/400x80/ff69b4/000000?text=ComGirl.Wiki" alt="ComGirl Wiki" class="hero-title-image" id="heroTitleImage">
 </div>
-</div>
-<h1 id="heroTitle">ComGirl<span class="dot">.</span>Wiki</h1>
 <p id="heroSubtitle">Your comprehensive guide to ComGirl culture and aesthetics</p>
 <div class="cta-buttons">
 <a href="#" class="cta-button primary" data-page="information">Explore Now</a>
@@ -1237,10 +1185,14 @@ function updateSidebarLogo(logoSrc) {
 document.getElementById('sidebarLogo').src = logoSrc;
 }
 
-function updateHero(logo, title, subtitle) {
-document.getElementById('heroLogo').src = logo;
-document.getElementById('heroTitle').innerHTML = title;
+function updateHero(titleImage, subtitle) {
+document.getElementById('heroTitleImage').src = titleImage;
 document.getElementById('heroSubtitle').textContent = subtitle;
+}
+
+// New specific function for updating just the hero title image
+function updateHeroTitleImage(imageSrc) {
+document.getElementById('heroTitleImage').src = imageSrc;
 }
 
 // Font configuration function
