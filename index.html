@@ -483,6 +483,267 @@ transform: translateY(-2px);
 box-shadow: 0 5px 20px rgba(255, 213, 248 0.3);
 }
 
+/* Stats toggle button */
+.stats-toggle {
+position: absolute;
+top: 15px;
+right: 15px;
+width: 40px;
+height: 40px;
+background: linear-gradient(135deg, #333 0%, #555 100%);
+border: none;
+border-radius: 8px;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: all 0.3s ease;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+z-index: 10;
+}
+
+.stats-toggle:hover {
+background: linear-gradient(135deg, #FFD5F8 0%, #8a2be2 100%);
+transform: scale(1.05);
+}
+
+.stats-toggle img {
+width: 24px;
+height: 24px;
+object-fit: contain;
+transition: transform 0.3s ease;
+}
+
+.stats-toggle.active img {
+transform: rotate(180deg);
+}
+
+/* Profile card positioning */
+.profile-card {
+position: relative;
+overflow: hidden;
+}
+
+/* Profile content containers */
+.profile-content, .stats-content {
+transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.profile-content.hidden {
+opacity: 0;
+transform: translateY(20px);
+pointer-events: none;
+}
+
+.stats-content {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+padding: 40px;
+opacity: 0;
+transform: translateY(20px);
+pointer-events: none;
+}
+
+.stats-content.active {
+opacity: 1;
+transform: translateY(0);
+pointer-events: auto;
+}
+
+/* Type badge */
+.type-badge {
+display: inline-block;
+background: linear-gradient(135deg, #FFD5F8 0%, #8a2be2 100%);
+color: white;
+padding: 8px 16px;
+border-radius: 20px;
+font-size: 14px;
+font-weight: bold;
+margin-bottom: 20px;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+.type-badge:hover {
+transform: scale(1.05);
+box-shadow: 0 4px 15px rgba(255, 213, 248, 0.3);
+}
+
+/* Pie chart container */
+.pie-chart-container {
+display: flex;
+justify-content: center;
+margin: 20px 0;
+}
+
+.pie-chart {
+width: 200px;
+height: 200px;
+border-radius: 50%;
+position: relative;
+transform: rotate(-90deg);
+}
+
+/* Traits section */
+.traits-section {
+position: absolute;
+top: 60px;
+left: 20px;
+width: 120px;
+}
+
+.traits-title {
+font-size: 16px;
+color: #FFD5F8;
+margin-bottom: 10px;
+font-weight: bold;
+}
+
+.trait-item {
+background: linear-gradient(135deg, #333 0%, #555 100%);
+color: white;
+padding: 4px 8px;
+border-radius: 12px;
+font-size: 12px;
+margin-bottom: 8px;
+cursor: pointer;
+transition: all 0.3s ease;
+display: inline-block;
+}
+
+.trait-item:hover {
+background: linear-gradient(135deg, #FFD5F8 0%, #8a2be2 100%);
+transform: scale(1.05);
+}
+
+/* Trait bars popup */
+.trait-popup {
+position: fixed;
+background: rgba(0, 0, 0, 0.9);
+border: 1px solid #333;
+border-radius: 15px;
+padding: 15px;
+z-index: 1000;
+opacity: 0;
+transform: scale(0.8);
+transition: all 0.3s ease;
+pointer-events: none;
+}
+
+.trait-popup.active {
+opacity: 1;
+transform: scale(1);
+pointer-events: auto;
+}
+
+.trait-popup::before {
+content: '';
+position: absolute;
+width: 2px;
+height: 30px;
+background: #FFD5F8;
+top: -30px;
+left: 50%;
+transform: translateX(-50%);
+}
+
+.trait-popup::after {
+content: '';
+position: absolute;
+width: 10px;
+height: 10px;
+background: #FFD5F8;
+border-radius: 50%;
+top: -40px;
+left: 50%;
+transform: translateX(-50%);
+}
+
+.trait-bars {
+display: flex;
+gap: 3px;
+margin-top: 5px;
+}
+
+.trait-bar {
+width: 12px;
+height: 12px;
+background: #333;
+border-radius: 3px;
+transition: all 0.3s ease;
+}
+
+.trait-bar.filled {
+background: linear-gradient(135deg, #FFD5F8 0%, #8a2be2 100%);
+}
+
+/* Friendly section */
+.friendly-section {
+position: absolute;
+bottom: 20px;
+left: 20px;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.friendly-label {
+font-size: 16px;
+color: #FFD5F8;
+font-weight: bold;
+}
+
+.friendly-icon {
+width: 24px;
+height: 24px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+font-size: 16px;
+}
+
+.friendly-icon.yes {
+background: #4CAF50;
+color: white;
+}
+
+.friendly-icon.no {
+background: #f44336;
+color: white;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+from {
+opacity: 0;
+transform: translateY(20px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+.stats-content .type-badge {
+animation: fadeInUp 0.5s ease 0.1s both;
+}
+
+.stats-content .pie-chart-container {
+animation: fadeInUp 0.5s ease 0.2s both;
+}
+
+.stats-content .traits-section {
+animation: fadeInUp 0.5s ease 0.3s both;
+}
+
+.stats-content .friendly-section {
+animation: fadeInUp 0.5s ease 0.4s both;
+}
+
 /* Content sections */
 .content-section {
 max-width: 1200px;
@@ -743,6 +1004,14 @@ background: linear-gradient(135deg, #8a2be2 0%, #FFD5F8 100%);
 <img src="https://media.discordapp.net/attachments/1369432745155231764/1394263163733671956/20250714_061939.png?ex=68762c42&is=6874dac2&hm=166bb714ccd5caae832f46947acca58f3076d683662fa23708fe37729bc20cb4&=&format=webp&quality=lossless&width=808&height=246" alt="Board" id="nav-text-board">
 </div>
 </div>
+<div class="nav-item" data-page="types">
+<div class="nav-icon">
+<img src="https://via.placeholder.com/24x24/FFD5F8/000000?text=T" alt="Types" id="nav-icon-types">
+</div>
+<div class="nav-text">
+<img src="https://via.placeholder.com/100x18/FFD5F8/000000?text=Types" alt="Types" id="nav-text-types">
+</div>
+</div>
 <div class="nav-item" data-page="resources">
 <div class="nav-icon">
 <img src="https://cdn.discordapp.com/attachments/1369432745155231764/1394269716394283041/20250714_064916.png?ex=6876325c&is=6874e0dc&hm=fcb3b17da53878a89fdf0761910150370201b2be7e115710e2874b446b4428c8&" alt="Resources" id="nav-icon-resources">
@@ -775,6 +1044,11 @@ background: linear-gradient(135deg, #8a2be2 0%, #FFD5F8 100%);
 <div class="content-section">
 <h2 class="section-title">Archive</h2>
 <div class="profile-card">
+<button class="stats-toggle" id="statsToggle">
+<img src="https://via.placeholder.com/24x24/ffffff/000000?text=📊" alt="Stats" id="statsIcon">
+</button>
+
+<div class="profile-content" id="profileContent">
 <img src="https://via.placeholder.com/150x150/FFD5F8/000000?text=PFP" alt="Profile Picture" class="profile-pic" id="profilePic">
 <div class="username" id="username">ComGirl Archive</div>
 <div class="description" id="description">Welcome to the ComGirl Archive - your comprehensive resource for everything related to ComGirl culture and aesthetics.</div>
@@ -791,6 +1065,23 @@ background: linear-gradient(135deg, #8a2be2 0%, #FFD5F8 100%);
 <span id="btn3Icon">📱</span>
 <span id="btn3Text">Social</span>
 </a>
+</div>
+</div>
+
+<div class="stats-content" id="statsContent">
+<div class="type-badge" id="typeBadge">Default Type</div>
+<div class="pie-chart-container">
+<canvas class="pie-chart" id="pieChart" width="200" height="200"></canvas>
+</div>
+<div class="traits-section">
+<div class="traits-title">Traits</div>
+<div class="traits-container" id="traitsContainer">
+<!-- Traits will be populated here -->
+</div>
+</div>
+<div class="friendly-section">
+<div class="friendly-label">Friendly</div>
+<div class="friendly-icon" id="friendlyIcon">✓</div>
 </div>
 </div>
 </div>
@@ -898,6 +1189,16 @@ background: linear-gradient(135deg, #8a2be2 0%, #FFD5F8 100%);
 <a href="#" class="resource-link">Download Tools</a>
 </li>
 </ul>
+</div>
+</div>
+</div>
+
+<!-- Types Page -->
+<div class="page" id="types">
+<div class="content-section">
+<h2 class="section-title">ComGirl Types</h2>
+<div class="types-grid" id="typesGrid">
+<!-- Types will be populated here -->
 </div>
 </div>
 </div>
@@ -1214,6 +1515,206 @@ document.getElementById('heroTitleImage').src = imageSrc;
 function setFontConfig(newConfig) {
 // Merge new config with existing config
 Object.assign(FONT_CONFIG, newConfig);
+
+// Stats configuration
+let currentProfile = {
+type: { name: "Default Type", description: "Default description" },
+traits: [
+{ name: "High Ego", level: 7 },
+{ name: "Camgirl", level: 9 }
+],
+friendly: true,
+pieChart: [
+{ name: "Aesthetic", value: 30, color: "#FFD5F8" },
+{ name: "Personality", value: 25, color: "#8a2be2" },
+{ name: "Style", value: 20, color: "#ff1493" },
+{ name: "Attitude", value: 25, color: "#9932cc" }
+]
+};
+
+let allTypes = [
+{ name: "Default Type", description: "Default description" }
+];
+
+// Stats toggle functionality
+function initializeStatsToggle() {
+const statsToggle = document.getElementById('statsToggle');
+const profileContent = document.getElementById('profileContent');
+const statsContent = document.getElementById('statsContent');
+let isStatsView = false;
+
+statsToggle.addEventListener('click', () => {
+isStatsView = !isStatsView;
+statsToggle.classList.toggle('active', isStatsView);
+
+if (isStatsView) {
+profileContent.classList.add('hidden');
+setTimeout(() => {
+statsContent.classList.add('active');
+drawPieChart();
+}, 250);
+} else {
+statsContent.classList.remove('active');
+setTimeout(() => {
+profileContent.classList.remove('hidden');
+}, 250);
+}
+});
+}
+
+// Draw pie chart
+function drawPieChart() {
+const canvas = document.getElementById('pieChart');
+const ctx = canvas.getContext('2d');
+const centerX = canvas.width / 2;
+const centerY = canvas.height / 2;
+const radius = 90;
+
+let currentAngle = 0;
+const total = currentProfile.pieChart.reduce((sum, item) => sum + item.value, 0);
+
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+currentProfile.pieChart.forEach(item => {
+const sliceAngle = (item.value / total) * 2 * Math.PI;
+
+ctx.beginPath();
+ctx.moveTo(centerX, centerY);
+ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
+ctx.closePath();
+ctx.fillStyle = item.color;
+ctx.fill();
+ctx.strokeStyle = '#333';
+ctx.lineWidth = 2;
+ctx.stroke();
+
+currentAngle += sliceAngle;
+});
+}
+
+// Render traits
+function renderTraits() {
+const container = document.getElementById('traitsContainer');
+container.innerHTML = '';
+
+currentProfile.traits.forEach((trait, index) => {
+const traitElement = document.createElement('div');
+traitElement.className = 'trait-item';
+traitElement.textContent = trait.name;
+traitElement.addEventListener('click', (e) => showTraitPopup(e, trait));
+container.appendChild(traitElement);
+});
+}
+
+// Show trait popup
+function showTraitPopup(event, trait) {
+// Remove existing popup
+const existingPopup = document.querySelector('.trait-popup');
+if (existingPopup) {
+existingPopup.remove();
+}
+
+const popup = document.createElement('div');
+popup.className = 'trait-popup';
+popup.innerHTML = `
+<div>${trait.name}</div>
+<div class="trait-bars">
+${Array(10).fill(0).map((_, i) => 
+`<div class="trait-bar ${i < trait.level ? 'filled' : ''}"></div>`
+).join('')}
+</div>
+`;
+
+document.body.appendChild(popup);
+
+const rect = event.target.getBoundingClientRect();
+popup.style.left = rect.left + 'px';
+popup.style.top = (rect.top - popup.offsetHeight - 50) + 'px';
+
+setTimeout(() => popup.classList.add('active'), 10);
+
+// Close popup when clicking outside
+setTimeout(() => {
+document.addEventListener('click', function closePopup(e) {
+if (!popup.contains(e.target) && e.target !== event.target) {
+popup.classList.remove('active');
+setTimeout(() => popup.remove(), 300);
+document.removeEventListener('click', closePopup);
+}
+});
+}, 100);
+}
+
+// Update friendly status
+function updateFriendlyStatus() {
+const friendlyIcon = document.getElementById('friendlyIcon');
+if (currentProfile.friendly) {
+friendlyIcon.className = 'friendly-icon yes';
+friendlyIcon.textContent = '✓';
+} else {
+friendlyIcon.className = 'friendly-icon no';
+friendlyIcon.textContent = '✗';
+}
+}
+
+// Update type badge
+function updateTypeBadge() {
+const typeBadge = document.getElementById('typeBadge');
+typeBadge.textContent = currentProfile.type.name;
+typeBadge.addEventListener('click', () => {
+alert(currentProfile.type.description); // You can replace this with a modal
+});
+}
+
+// Render types page
+function renderTypesPage() {
+const typesGrid = document.getElementById('typesGrid');
+typesGrid.innerHTML = '';
+
+allTypes.forEach(type => {
+const typeCard = document.createElement('div');
+typeCard.className = 'example-item'; // Reusing existing styles
+typeCard.innerHTML = `
+<h4>${type.name}</h4>
+<p>${type.description}</p>
+`;
+typesGrid.appendChild(typeCard);
+});
+}
+
+// Configuration functions
+function updateStats(statsData) {
+Object.assign(currentProfile, statsData);
+renderTraits();
+updateFriendlyStatus();
+updateTypeBadge();
+if (document.getElementById('statsContent').classList.contains('active')) {
+drawPieChart();
+}
+}
+
+function updateStatsIcon(iconSrc) {
+document.getElementById('statsIcon').src = iconSrc;
+}
+
+function addType(name, description) {
+allTypes.push({ name, description });
+renderTypesPage();
+}
+
+function updateProfileType(name, description) {
+currentProfile.type = { name, description };
+updateTypeBadge();
+}
+
+// Initialize everything
+document.addEventListener('DOMContentLoaded', () => {
+initializeStatsToggle();
+renderTraits();
+updateFriendlyStatus();
+updateTypeBadge();
+renderTypesPage();
+});
 
 // Reload fonts
 loadFonts();
