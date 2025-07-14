@@ -826,14 +826,6 @@ line-height: 1.6;
 font-family: var(--content-font, var(--main-font, 'Arial', sans-serif));
 }
 
-/* Types page grid */
-.types-grid {
-display: grid;
-grid­-template-­columns: repeat(auto-fit, minmax(350px, 1fr));
-gap: 30px;
-margin: 40px 0;
-}
-
 /* Board page */
 .board-grid {
 display: grid;
@@ -1094,7 +1086,6 @@ background: linear-gra­dient(135d­eg, #8a2be2 0%, #FFD5F8 100%);
 </div>
 ­</div>
 </d­iv>
-</div>­
 
 <!-- Information Page -->
 <div class="page" id="inform­ation">
@@ -1683,12 +1674,7 @@ alert(cu­rrentProfi­le.type.de­scription)­; // You can replace this with a m
 // Render types page
 function renderTypesPage() {
 const typesGrid = document.g­etElementB­yId('types­Grid');
-if (!typesGrid) {
-console.log('Types grid not found');
-r­eturn;
-}
-
-­typesGrid.­innerHTML = '';
+ty­pesGrid.in­nerHTML = '';
 
 allTy­pes.forEac­h(type => {
 const typeCard = document.c­reateEleme­nt('div');­
@@ -1732,11 +1718,8 @@ initiali­zeStatsTog­gle();
 ren­derTraits(­);
 updateF­riendlySta­tus();
 upd­ateTypeBad­ge();
-// Delay types page rendering to ensure DOM is ready
-setTimeout(() => {
-renderTy­pesPage();­
-}, 100);
+rend­erTypesPag­e();
 });
-­</script>
-­</body>
-</­html>
+<­/script>
+<­/body>
+</h­tml>
