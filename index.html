@@ -415,6 +415,40 @@ color: white;
 transform: translateY(-2px);
 }
 
+/* Types page styles */
+.types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.type-card {
+    background: linear-gradient(135deg, #111 0%, #222 100%);
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid #333;
+    transition: transform 0.3s ease;
+}
+
+.type-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 213, 248, 0.2);
+}
+
+.type-card h4 {
+    color: #FFD5F8;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-family: var(--lookfor-title-font, var(--title-font, var(--main-font, 'Arial', sans-serif)));
+}
+
+.type-card p {
+    color: #ccc;
+    line-height: 1.6;
+    font-family: var(--content-font, var(--main-font, 'Arial', sans-serif));
+}
+
 /* Archive page styles */
 .profile-card {
 background: linear-gradient(135deg, #111 0%, #222 100%);
@@ -1673,20 +1707,19 @@ alert(currentProfile.type.description); // You can replace this with a modal
 });
 }
 
-// Render types page
 function renderTypesPage() {
-const typesGrid = document.getElementById('typesGrid');
-typesGrid.innerHTML = '';
+    const typesGrid = document.getElementById('typesGrid');
+    typesGrid.innerHTML = '';
 
-allTypes.forEach(type => {
-const typeCard = document.createElement('div');
-typeCard.className = 'example-item'; // Reusing existing styles
-typeCard.innerHTML = `
-<h4>${type.name}</h4>
-<p>${type.description}</p>
-`;
-typesGrid.appendChild(typeCard);
-});
+    allTypes.forEach(type => {
+        const typeCard = document.createElement('div');
+        typeCard.className = 'type-card';
+        typeCard.innerHTML = `
+            <h4>${type.name}</h4>
+            <p>${type.description}</p>
+        `;
+        typesGrid.appendChild(typeCard);
+    });
 }
 
 // Configuration functions
