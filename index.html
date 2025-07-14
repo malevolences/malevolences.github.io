@@ -186,7 +186,7 @@ font-size: 20px;
 cursor: pointer;
 z-index: 10000;
 border-radius: 8px;
-transition: all 0.3s ease;
+transition: all 0.5s ease; /* Match sidebar transition duration */
 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 font-family: var(--main-font, 'Arial', sans-serif);
 }
@@ -197,6 +197,19 @@ transform: translateY(-50%) scale(1.05);
 }
 
 .nav-toggle.flipped {
+transform: translateY(-50%) rotateY(180deg);
+}
+
+/* Move toggle button when sidebar is active */
+.nav-toggle.moved {
+left: 320px; /* 300px sidebar width + 20px spacing */
+}
+
+.nav-toggle.moved:hover {
+transform: translateY(-50%) scale(1.05);
+}
+
+.nav-toggle.moved.flipped {
 transform: translateY(-50%) rotateY(180deg);
 }
 
@@ -1083,6 +1096,7 @@ if (sidebarOpen) {
 sidebar.classList.add('active');
 mainContent.classList.add('shifted');
 navToggle.classList.add('flipped');
+navToggle.classList.add('moved'); // Add this line
 
 // Animate nav items
 setTimeout(() => {
@@ -1094,6 +1108,7 @@ item.classList.add('animate');
 sidebar.classList.remove('active');
 mainContent.classList.remove('shifted');
 navToggle.classList.remove('flipped');
+navToggle.classList.remove('moved'); // Add this line
 
 navItems.forEach(item => {
 item.classList.remove('animate');
@@ -1117,6 +1132,7 @@ if (window.innerWidth <= 768) {
 sidebar.classList.remove('active');
 mainContent.classList.remove('shifted');
 navToggle.classList.remove('flipped');
+navToggle.classList.remove('moved'); // Add this line
 sidebarOpen = false;
 
 navItems.forEach(navItem => {
