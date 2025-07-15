@@ -453,6 +453,89 @@ font-family: var(--title-font, var(--main-font, 'Arial', sans-serif));
     box-shadow: 0 10px 30px rgba(255, 213, 248, 0.3);
 }
 
+/* Add this to your CSS section */
+.action-btn-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* Add this to your CSS section */
+.pie-chart-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.pie-chart {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    transform: rotate(-90deg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Pie chart percentage popup */
+.pie-percentage-popup {
+    position: fixed;
+    z-index: 10001;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.pie-percentage-popup.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.pie-percentage-popup .line-horizontal {
+    position: absolute;
+    height: 2px;
+    background: #FFD5F8;
+    width: 0;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 4px rgba(255, 213, 248, 0.5);
+}
+
+.pie-percentage-popup .popup-box {
+    position: absolute;
+    background: linear-gradient(135deg, #111 0%, #222 100%);
+    border: 2px solid #FFD5F8;
+    border-radius: 0; /* No rounded edges as requested */
+    padding: 10px 15px;
+    min-width: 80px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.8);
+    transform: scale(0);
+    transition: transform 0.3s ease;
+    color: #fff;
+    z-index: 10002;
+    text-align: center;
+}
+
+.pie-percentage-popup .popup-box.visible {
+    transform: scale(1);
+}
+
+.pie-percentage-popup .popup-box .percentage-text {
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFD5F8;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.pie-percentage-popup .popup-box .percentage-text.fade-in {
+    opacity: 1;
+}
+
 /* Profile content containers */
 .profile-content, .stats-content {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1673,7 +1756,7 @@ const defaultProfile = {
 // Initialize with default profile
 allProfiles.push(JSON.parse(JSON.stringify(defaultProfile)));
 
-// Create a single profile card
+// Update the createProfileCard function - replace the buttons section with this:
 function createProfileCard(profile, index) {
     const profileCard = document.createElement('div');
     profileCard.className = 'profile-card';
@@ -1691,7 +1774,10 @@ function createProfileCard(profile, index) {
             <div class="action-buttons">
                 ${profile.buttons.map((btn, btnIndex) => `
                     <a href="${btn.link}" class="action-btn">
-                        <span>${btn.icon}</span>
+                        ${btn.icon.startsWith('http') ? 
+                            `<img src="${btn.icon}" alt="${btn.text}" class="action-btn-icon">` : 
+                            `<span>${btn.icon}</span>`
+                        }
                         <span>${btn.text}</span>
                     </a>
                 `).join('')}
@@ -1796,6 +1882,7 @@ function toggleStats(profileIndex) {
 }
 
 // Draw pie chart for specific profile
+// Replace the drawPieChart function with this enhanced version
 function drawPieChart(profileIndex) {
     const profile = allProfiles[profileIndex];
     const canvas = document.querySelector(`[data-profile-index="${profileIndex}"].pie-chart`);
@@ -1809,8 +1896,22 @@ function drawPieChart(profileIndex) {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    profile.pieChart.forEach(item => {
+    // Store slice data for hover detection
+    const slices = [];
+
+    profile.pieChart.forEach((item, index) => {
         const sliceAngle = (item.value / total) * 2 * Math.PI;
+        const percentage = Math.round((item.value / total) * 100);
+
+        // Store slice information
+        slices.push({
+            startAngle: currentAngle,
+            endAngle: currentAngle + sliceAngle,
+            color: item.color,
+            name: item.name,
+            percentage: percentage,
+            centerAngle: currentAngle + sliceAngle / 2
+        });
 
         ctx.beginPath();
         ctx.moveTo(centerX, centerY);
@@ -1822,10 +1923,150 @@ function drawPieChart(profileIndex) {
         ctx.lineWidth = 2;
         ctx.stroke();
 
+        // Draw labels
+        const labelAngle = currentAngle + sliceAngle / 2;
+        const labelX = centerX + Math.cos(labelAngle) * (radius * 0.7);
+        const labelY = centerY + Math.sin(labelAngle) * (radius * 0.7);
+        
+        ctx.save();
+        ctx.translate(labelX, labelY);
+        ctx.rotate(labelAngle + Math.PI / 2);
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 12px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(item.name, 0, 0);
+        ctx.restore();
+
         currentAngle += sliceAngle;
     });
+
+    // Store slices data on canvas for hover detection
+    canvas.slicesData = slices;
+    canvas.profileIndex = profileIndex;
+
+    // Add hover event listeners
+    canvas.addEventListener('mousemove', handlePieChartHover);
+    canvas.addEventListener('mouseleave', handlePieChartLeave);
 }
 
+let currentHoveredSlice = null;
+let currentPiePopup = null;
+
+function handlePieChartHover(event) {
+    const canvas = event.target;
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    
+    // Convert to canvas coordinates
+    const canvasX = x * (canvas.width / rect.width);
+    const canvasY = y * (canvas.height / rect.height);
+    
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    
+    // Calculate angle and distance from center
+    const deltaX = canvasX - centerX;
+    const deltaY = canvasY - centerY;
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    
+    // Check if mouse is within pie chart
+    if (distance <= 90) {
+        let angle = Math.atan2(deltaY, deltaX);
+        if (angle < 0) angle += 2 * Math.PI;
+        
+        // Adjust for canvas rotation (-90 degrees)
+        angle = (angle + Math.PI / 2) % (2 * Math.PI);
+        
+        // Find which slice we're hovering over
+        const hoveredSlice = canvas.slicesData.find(slice => {
+            return angle >= slice.startAngle && angle <= slice.endAngle;
+        });
+        
+        if (hoveredSlice && hoveredSlice !== currentHoveredSlice) {
+            currentHoveredSlice = hoveredSlice;
+            
+            // Apply glow effect
+            canvas.style.filter = `drop-shadow(0 0 20px ${hoveredSlice.color})`;
+            canvas.style.transform = 'rotate(-90deg) scale(1.05)';
+            
+            // Show percentage popup
+            showPiePercentagePopup(event, hoveredSlice);
+        }
+    }
+}
+
+function handlePieChartLeave(event) {
+    const canvas = event.target;
+    canvas.style.filter = 'none';
+    canvas.style.transform = 'rotate(-90deg) scale(1)';
+    currentHoveredSlice = null;
+    
+    // Hide percentage popup
+    hidePiePercentagePopup();
+}
+
+function showPiePercentagePopup(event, slice) {
+    // Remove any existing popup
+    if (currentPiePopup) {
+        currentPiePopup.remove();
+    }
+    
+    const rect = event.target.getBoundingClientRect();
+    const popup = document.createElement('div');
+    popup.className = 'pie-percentage-popup';
+    
+    // Calculate positions
+    const startX = rect.left + rect.width / 2;
+    const startY = rect.top + rect.height / 2;
+    const lineLength = 50;
+    
+    // Position popup box
+    const boxX = startX + lineLength + 10;
+    const boxY = startY - 20;
+    
+    popup.innerHTML = `
+        <div class="line-horizontal" style="left: ${startX}px; top: ${startY}px;"></div>
+        <div class="popup-box" style="left: ${boxX}px; top: ${boxY}px;">
+            <div class="percentage-text">${slice.percentage}%</div>
+        </div>
+    `;
+    
+    document.body.appendChild(popup);
+    currentPiePopup = popup;
+    
+    // Animation sequence
+    setTimeout(() => {
+        popup.classList.add('active');
+        
+        // Draw line
+        const horizontalLine = popup.querySelector('.line-horizontal');
+        horizontalLine.style.width = lineLength + 'px';
+        
+        // Show box and fade in percentage
+        setTimeout(() => {
+            const box = popup.querySelector('.popup-box');
+            const percentageText = popup.querySelector('.percentage-text');
+            
+            box.classList.add('visible');
+            setTimeout(() => {
+                percentageText.classList.add('fade-in');
+            }, 100);
+        }, 300);
+    }, 10);
+}
+
+function hidePiePercentagePopup() {
+    if (currentPiePopup) {
+        currentPiePopup.classList.remove('active');
+        setTimeout(() => {
+            if (currentPiePopup) {
+                currentPiePopup.remove();
+                currentPiePopup = null;
+            }
+        }, 300);
+    }
+}
 // Add these variables at the top of your script section, after the FONT_CONFIG
 let typePopupActive = false;
 let currentTypePopup = null;
@@ -2005,9 +2246,9 @@ const PROFILES_CONFIG = [
         username: 'ray',
         description: 'Known for her racism, homophobia, and other awful things, ray is just overall an awful person, I strongly recommend not interacting with her, or anything she does.',
         buttons: [
-            { icon: '🔗', text: 'Gallery', link: '#' },
-            { icon: '💬', text: 'Community', link: '#' },
-            { icon: '📱', text: 'Social', link: '#' }
+            { icon: 'https://via.placeholder.com/24x24/FFD5F8/000000?text=G', text: 'Gallery', link: '#' },
+            { icon: 'https://via.placeholder.com/24x24/8a2be2/000000?text=C', text: 'Community', link: '#' },
+            { icon: 'https://via.placeholder.com/24x24/ff1493/000000?text=S', text: 'Social', link: '#' }
         ],
         type: { name: "Eslut", description: "These types either have an onlyfans/fansly/whatever, or do camshows. They can also just have a selling menu, or anything like that. Any of this usually also comes with an ego." },
         traits: [
