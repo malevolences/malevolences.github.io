@@ -588,13 +588,17 @@ transform: scale(1.05);
 box-shadow: 0 4px 15px rgba(255, 213, 248, 0.3);
 }
 
-/* Custom type popup */
+/* Custom type popup - IMPROVED */
 .type-popup {
     position: fixed;
-    z-index: 1001;
+    z-index: 10001; /* Higher z-index */
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.3s ease;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
 }
 
 .type-popup.active {
@@ -608,6 +612,7 @@ box-shadow: 0 4px 15px rgba(255, 213, 248, 0.3);
     background: #FFD5F8;
     width: 0;
     transition: width 0.5s ease;
+    box-shadow: 0 0 4px rgba(255, 213, 248, 0.5);
 }
 
 .type-popup .line-vertical {
@@ -616,20 +621,22 @@ box-shadow: 0 4px 15px rgba(255, 213, 248, 0.3);
     background: #FFD5F8;
     height: 0;
     transition: height 0.5s ease;
+    box-shadow: 0 0 4px rgba(255, 213, 248, 0.5);
 }
 
 .type-popup .popup-box {
     position: absolute;
     background: linear-gradient(135deg, #111 0%, #222 100%);
-    border: 1px solid #FFD5F8;
+    border: 2px solid #FFD5F8;
     border-radius: 10px;
-    padding: 15px;
+    padding: 20px;
     min-width: 200px;
     max-width: 300px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.8);
     transform: scale(0);
     transition: transform 0.3s ease;
     color: #fff;
+    z-index: 10002;
 }
 
 .type-popup .popup-box.visible {
@@ -639,36 +646,39 @@ box-shadow: 0 4px 15px rgba(255, 213, 248, 0.3);
 .type-popup .popup-box h4 {
     color: #FFD5F8;
     margin-bottom: 10px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
 }
 
 .type-popup .popup-box p {
     color: #ccc;
-    line-height: 1.4;
+    line-height: 1.5;
     font-size: 14px;
     margin: 0;
 }
 
 .type-popup .close-btn {
     position: absolute;
-    top: 5px;
-    right: 8px;
+    top: 8px;
+    right: 12px;
     background: none;
     border: none;
     color: #FFD5F8;
-    font-size: 16px;
+    font-size: 18px;
     cursor: pointer;
     padding: 0;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
 }
 
 .type-popup .close-btn:hover {
     color: #fff;
+    background: rgba(255, 213, 248, 0.2);
 }
 
 /* Pie chart container */
@@ -1746,6 +1756,9 @@ function updateTypeBadge() {
 }
 
 function handleTypeBadgeClick(event) {
+    event.stopPropagation();
+    console.log('Type badge clicked!'); // Debug log
+    
     if (typePopupActive) {
         closeTypePopup();
     } else {
@@ -1754,6 +1767,8 @@ function handleTypeBadgeClick(event) {
 }
 
 function showTypePopup(event) {
+    console.log('Showing type popup...'); // Debug log
+    
     // Remove any existing popup
     if (currentTypePopup) {
         currentTypePopup.remove();
@@ -1763,16 +1778,31 @@ function showTypePopup(event) {
     const popup = document.createElement('div');
     popup.className = 'type-popup';
     
-    // Calculate positions
+    // Calculate positions with better positioning
     const startX = rect.left + rect.width / 2;
-    const startY = rect.bottom;
-    const lineLength = 50;
-    const boxOffset = 20;
+    const startY = rect.bottom + 5; // Add small gap
+    const lineLength = 60;
+    const boxOffset = 30;
+    
+    // Ensure popup stays within viewport
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
+    let boxX = startX + lineLength + boxOffset;
+    let boxY = startY + boxOffset;
+    
+    // Adjust if popup would go off-screen
+    if (boxX + 300 > viewportWidth) {
+        boxX = startX - lineLength - boxOffset - 300;
+    }
+    if (boxY + 150 > viewportHeight) {
+        boxY = startY - boxOffset - 150;
+    }
     
     popup.innerHTML = `
         <div class="line-horizontal" style="left: ${startX}px; top: ${startY}px;"></div>
         <div class="line-vertical" style="left: ${startX + lineLength}px; top: ${startY}px;"></div>
-        <div class="popup-box" style="left: ${startX + lineLength + boxOffset}px; top: ${startY + boxOffset}px;">
+        <div class="popup-box" style="left: ${boxX}px; top: ${boxY}px;">
             <button class="close-btn">×</button>
             <h4>${currentProfile.type.name}</h4>
             <p>${currentProfile.type.description}</p>
@@ -1782,13 +1812,19 @@ function showTypePopup(event) {
     document.body.appendChild(popup);
     currentTypePopup = popup;
     
+    console.log('Popup created and added to DOM'); // Debug log
+    
     // Add close button functionality
     const closeBtn = popup.querySelector('.close-btn');
-    closeBtn.addEventListener('click', closeTypePopup);
+    closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeTypePopup();
+    });
     
     // Animation sequence
     setTimeout(() => {
         popup.classList.add('active');
+        console.log('Popup activated'); // Debug log
         
         // Step 1: Draw horizontal line
         const horizontalLine = popup.querySelector('.line-horizontal');
@@ -1804,6 +1840,7 @@ function showTypePopup(event) {
                 const box = popup.querySelector('.popup-box');
                 box.classList.add('visible');
                 typePopupActive = true;
+                console.log('Animation complete'); // Debug log
             }, 500);
         }, 500);
     }, 10);
@@ -1815,6 +1852,8 @@ function showTypePopup(event) {
 }
 
 function closeTypePopup() {
+    console.log('Closing type popup...'); // Debug log
+    
     if (!currentTypePopup) return;
     
     const popup = currentTypePopup;
@@ -1838,6 +1877,7 @@ function closeTypePopup() {
                     popup.remove();
                     currentTypePopup = null;
                     typePopupActive = false;
+                    console.log('Popup removed'); // Debug log
                 }, 300);
             }, 500);
         }, 500);
@@ -1852,7 +1892,6 @@ function handleOutsideClick(event) {
         closeTypePopup();
     }
 }
-
 // Configuration functions
 function updateStats(statsData) {
 Object.assign(currentProfile, statsData);
