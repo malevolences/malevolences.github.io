@@ -415,40 +415,6 @@ color: white;
 transform: translateY(-2px);
 }
 
-/* Types page styles */
-.types-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-    margin: 40px 0;
-}
-
-.type-card {
-    background: linear-gradient(135deg, #111 0%, #222 100%);
-    border-radius: 15px;
-    padding: 25px;
-    border: 1px solid #333;
-    transition: transform 0.3s ease;
-}
-
-.type-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(255, 213, 248, 0.2);
-}
-
-.type-card h4 {
-    color: #FFD5F8;
-    margin-bottom: 15px;
-    font-size: 20px;
-    font-family: var(--lookfor-title-font, var(--title-font, var(--main-font, 'Arial', sans-serif)));
-}
-
-.type-card p {
-    color: #ccc;
-    line-height: 1.6;
-    font-family: var(--content-font, var(--main-font, 'Arial', sans-serif));
-}
-
 /* Archive page styles */
 .profile-card {
 background: linear-gradient(135deg, #111 0%, #222 100%);
@@ -1038,14 +1004,6 @@ background: linear-gradient(135deg, #8a2be2 0%, #FFD5F8 100%);
 <img src="https://media.discordapp.net/attachments/1369432745155231764/1394263163733671956/20250714_061939.png?ex=68762c42&is=6874dac2&hm=166bb714ccd5caae832f46947acca58f3076d683662fa23708fe37729bc20cb4&=&format=webp&quality=lossless&width=808&height=246" alt="Board" id="nav-text-board">
 </div>
 </div>
-<div class="nav-item" data-page="types">
-<div class="nav-icon">
-<img src="https://via.placeholder.com/24x24/FFD5F8/000000?text=T" alt="Types" id="nav-icon-types">
-</div>
-<div class="nav-text">
-<img src="https://via.placeholder.com/100x18/FFD5F8/000000?text=Types" alt="Types" id="nav-text-types">
-</div>
-</div>
 <div class="nav-item" data-page="resources">
 <div class="nav-icon">
 <img src="https://cdn.discordapp.com/attachments/1369432745155231764/1394269716394283041/20250714_064916.png?ex=6876325c&is=6874e0dc&hm=fcb3b17da53878a89fdf0761910150370201b2be7e115710e2874b446b4428c8&" alt="Resources" id="nav-icon-resources">
@@ -1226,16 +1184,6 @@ background: linear-gradient(135deg, #8a2be2 0%, #FFD5F8 100%);
 </ul>
 </div>
 </div>
-</div>
-
-<!-- Types Page -->
-<div class="page" id="types">
-    <div class="content-section">
-        <h2 class="section-title">ComGirl Types</h2>
-        <div class="types-grid" id="typesGrid">
-            <!-- Types will be populated here -->
-        </div>
-    </div>
 </div>
 
 <script>
@@ -1711,21 +1659,6 @@ alert(currentProfile.type.description); // You can replace this with a modal
 });
 }
 
-function renderTypesPage() {
-    const typesGrid = document.getElementById('typesGrid');
-    typesGrid.innerHTML = '';
-
-    allTypes.forEach(type => {
-        const typeCard = document.createElement('div');
-        typeCard.className = 'type-card';
-        typeCard.innerHTML = `
-            <h4>${type.name}</h4>
-            <p>${type.description}</p>
-        `;
-        typesGrid.appendChild(typeCard);
-    });
-}
-
 // Configuration functions
 function updateStats(statsData) {
 Object.assign(currentProfile, statsData);
@@ -1753,11 +1686,10 @@ updateTypeBadge();
 
 // Initialize everything
 document.addEventListener('DOMContentLoaded', () => {
-initializeStatsToggle();
-renderTraits();
-updateFriendlyStatus();
-updateTypeBadge();
-renderTypesPage();
+    initializeStatsToggle();
+    renderTraits();
+    updateFriendlyStatus();
+    updateTypeBadge();
 });
 </script>
 </body>
