@@ -798,22 +798,22 @@ transform: scale(1.05);
 
 /* Trait bars popup */
 .trait-popup {
-position: fixed;
-background: rgba(0, 0, 0, 0.9);
-border: 1px solid #333;
-border-radius: 15px;
-padding: 15px;
-z-index: 1000;
-opacity: 0;
-transform: scale(0.8);
-transition: all 0.3s ease;
-pointer-events: none;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid #333;
+    border-radius: 15px;
+    padding: 15px;
+    z-index: 1000;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+    pointer-events: none;
 }
 
 .trait-popup.active {
-opacity: 1;
-transform: scale(1);
-pointer-events: auto;
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
 }
 
 .trait-popup::before {
@@ -840,21 +840,21 @@ transform: translateX(-50%);
 }
 
 .trait-bars {
-display: flex;
-gap: 3px;
-margin-top: 5px;
+    display: flex;
+    gap: 3px;
+    margin-top: 5px;
 }
 
 .trait-bar {
-width: 12px;
-height: 12px;
-background: #333;
-border-radius: 3px;
-transition: all 0.3s ease;
+    width: 12px;
+    height: 12px;
+    background: #333;
+    border-radius: 3px;
+    transition: all 0.3s ease;
 }
 
 .trait-bar.filled {
-background: linear-gradient(135deg, #FFD5F8 0%, #8a2be2 100%);
+    background: linear-gradient(135deg, #FFD5F8 0%, #CCCCCC 100%);
 }
 
 /* Friendly section */
