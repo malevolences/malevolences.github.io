@@ -652,7 +652,7 @@ pointer-events: auto;
 /* Type badge */
 .type-badge {
 display: inline-block;
-background: linear-gradient(135deg, #FFD5F8 0%, #8a2be2 100%);
+background: linear-gradient(135deg, #FFD5F8 0%, #CCCCCC 100%);
 color: white;
 padding: 8px 16px;
 border-radius: 20px;
@@ -804,7 +804,7 @@ display: inline-block;
 }
 
 .trait-item:hover {
-background: linear-gradient(135deg, #FFD5F8 0%, #8a2be2 100%);
+background: linear-gradient(135deg, #FFD5F8 0%, #CCCCCC 100%);
 transform: scale(1.05);
 }
 
@@ -892,12 +892,12 @@ font-size: 16px;
 }
 
 .friendly-icon.yes {
-background: #4CAF50;
+background: #FFD5F8;
 color: white;
 }
 
 .friendly-icon.no {
-background: #f44336;
+background: #FFD5F8;
 color: white;
 }
 
@@ -1760,7 +1760,7 @@ function createProfileCard(profile, index) {
     
     profileCard.innerHTML = `
         <button class="stats-toggle" data-profile-index="${index}">
-            <img src="https://via.placeholder.com/24x24/ffffff/000000?text=📊" alt="Stats">
+            <img src="https://media.discordapp.net/attachments/1369432745155231764/1394650550523527248/20250715_080314.png?ex=6877950a&is=6876438a&hm=cbbc081b498272cf2a89527bd1d2d970266ae1d7b7ebe4f5668417389a9f300a&=&format=webp&quality=lossless&width=960&height=960" alt="Stats">
         </button>
 
         <div class="profile-content">
@@ -2172,27 +2172,26 @@ const PROFILES_CONFIG = [
     
     // Profile 2 - Just copy the block above and change everything!
     {
-        id: 'eva',
-        profilePic: 'https://via.placeholder.com/150x150/8a2be2/000000?text=EVA',
-        username: 'ComGirl Eva',
-        description: 'Fashion-forward ComGirl with a passion for aesthetic perfection and trendsetting style.',
+        id: 'ami',
+        profilePic: 'https://media.discordapp.net/attachments/1369432745155231764/1394655007093162156/Screenshot_20250715_082056_Instagram.jpg?ex=68779931&is=687647b1&hm=e015d950fcbb3f6d755ed8b856f6ba488e1d33a44f3c83a6ccc041985a9cc27c&=&format=webp&width=934&height=960',
+        username: 'ami',
+        description: 'Sort of known for dating older men, liking ageplay, being involved with extorters, and dating the artist wintr/winterdoll.',
         buttons: [
-            { icon: '📸', text: 'Photos', link: '#' },
-            { icon: '💄', text: 'Makeup', link: '#' },
-            { icon: '👗', text: 'Style', link: '#' }
+            { icon: 'https://media.discordapp.net/attachments/1369432745155231764/1394648362816639026/20250715_073901.png?ex=68779301&is=68764181&hm=ef0f9e7358f902fd6e1b2aa2970f85ffcdbfc1c7428ac4e6849ddd49ab4f2422&=&format=webp&quality=lossless&width=856&height=856', text: 'Instagram', link: 'https://instagram.com/femetarys' }
         ],
-        type: { name: "Aesthetic Queen", description: "Focused on visual aesthetics and style perfection" },
+        type: { name: "Semi-Common", description: "The Semi-Common type involves liking ageplay, thats not their main focus. It also involves extortion, age gaps, racism, and also not being the best person." },
         traits: [
-            { name: "High Fashion", level: 9 },
-            { name: "Creative", level: 8 },
-            { name: "Trendsetter", level: 7 }
+            { name: "Ageplayer", level: 5 },
+            { name: "High Ego", level: 6 },
+            { name: "Racist", level: 7 },
+            { name: "Pick Me", level: 6 }
         ],
         friendly: true,
         pieChart: [
-            { name: "Style", value: 40, color: "#FFD5F8" },
-            { name: "Creativity", value: 30, color: "#8a2be2" },
-            { name: "Social", value: 20, color: "#ff1493" },
-            { name: "Attitude", value: 10, color: "#9932cc" }
+            { name: "Ageplayer", value: 40, color: "#FFD5F8" },
+            { name: "High Ego", value: 30, color: "#8a2be2" },
+            { name: "Pick Me", value: 20, color: "#ff1493" },
+            { name: "Racist", value: 10, color: "#9932cc" }
         ]
     }
     
