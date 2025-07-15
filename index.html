@@ -1994,37 +1994,66 @@ function showTypePopup(event, profileIndex) {
         document.addEventListener('click', handleOutsideClick);
     }, 100);
 }
-// Configuration functions for multiple profiles
-function addProfile(profileData) {
-    const newProfile = {
-        id: profileData.id || `profile_${Date.now()}`,
-        profilePic: profileData.profilePic || 'https://via.placeholder.com/150x150/FFD5F8/000000?text=PFP',
-        username: profileData.username || 'New Profile',
-        description: profileData.description || 'New profile description',
-        buttons: profileData.buttons || [
-            { icon: '🔗', text: 'Link', link: '#' },
-            { icon: '💬', text: 'Chat', link: '#' },
+// ===== PROFILE CONFIGURATION =====
+// Just copy and paste profile objects here to add new profiles!
+
+const PROFILES_CONFIG = [
+    // Profile 1 - Default
+    {
+        id: 'default',
+        profilePic: 'https://via.placeholder.com/150x150/FFD5F8/000000?text=PFP',
+        username: 'ComGirl Archive',
+        description: 'Welcome to the ComGirl Archive - your comprehensive resource for everything related to ComGirl culture and aesthetics.',
+        buttons: [
+            { icon: '🔗', text: 'Gallery', link: '#' },
+            { icon: '💬', text: 'Community', link: '#' },
             { icon: '📱', text: 'Social', link: '#' }
         ],
-        type: profileData.type || { name: "Default Type", description: "Default description" },
-        traits: profileData.traits || [
-            { name: "Trait 1", level: 5 },
-            { name: "Trait 2", level: 7 }
+        type: { name: "Default Type", description: "Default description" },
+        traits: [
+            { name: "High Ego", level: 7 },
+            { name: "Camgirl", level: 9 }
         ],
-        friendly: profileData.friendly !== undefined ? profileData.friendly : true,
-        pieChart: profileData.pieChart || [
+        friendly: true,
+        pieChart: [
             { name: "Aesthetic", value: 30, color: "#FFD5F8" },
             { name: "Personality", value: 25, color: "#8a2be2" },
             { name: "Style", value: 20, color: "#ff1493" },
             { name: "Attitude", value: 25, color: "#9932cc" }
         ]
-    };
+    },
     
-    allProfiles.push(newProfile);
-    renderProfiles();
-    return newProfile.id;
-}
+    // Profile 2 - Just copy the block above and change everything!
+    {
+        id: 'eva',
+        profilePic: 'https://via.placeholder.com/150x150/8a2be2/000000?text=EVA',
+        username: 'ComGirl Eva',
+        description: 'Fashion-forward ComGirl with a passion for aesthetic perfection and trendsetting style.',
+        buttons: [
+            { icon: '📸', text: 'Photos', link: '#' },
+            { icon: '💄', text: 'Makeup', link: '#' },
+            { icon: '👗', text: 'Style', link: '#' }
+        ],
+        type: { name: "Aesthetic Queen", description: "Focused on visual aesthetics and style perfection" },
+        traits: [
+            { name: "High Fashion", level: 9 },
+            { name: "Creative", level: 8 },
+            { name: "Trendsetter", level: 7 }
+        ],
+        friendly: true,
+        pieChart: [
+            { name: "Style", value: 40, color: "#FFD5F8" },
+            { name: "Creativity", value: 30, color: "#8a2be2" },
+            { name: "Social", value: 20, color: "#ff1493" },
+            { name: "Attitude", value: 10, color: "#9932cc" }
+        ]
+    }
+    
+    // Add more profiles by copying the block above and changing the data!
+    
+];
 
+// ===== END PROFILE CONFIGURATION =====
 function updateProfile(profileId, updates) {
     const profileIndex = allProfiles.findIndex(p => p.id === profileId);
     if (profileIndex !== -1) {
@@ -2058,9 +2087,23 @@ function updateProfileType(name, description) {
     updateProfile('default', { type: { name, description } });
 }
 
+// Initialize profiles from configuration
+function initializeProfiles() {
+    allProfiles = []; // Clear any existing profiles
+    
+    // Add each profile from the configuration
+    PROFILES_CONFIG.forEach(profileData => {
+        allProfiles.push(JSON.parse(JSON.stringify(profileData)));
+    });
+    
+    renderProfiles();
+}
+
 // Initialize everything
 document.addEventListener('DOMContentLoaded', () => {
-    renderProfiles();
+    loadCustomFonts();
+    applyCustomFonts();
+    initializeProfiles(); // Load profiles from configuration
 });
 </script>
 </body>
