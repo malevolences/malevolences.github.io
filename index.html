@@ -467,6 +467,23 @@ font-family: var(--title-font, var(--main-font, 'Arial', sans-serif));
     font-family: var(--type-description-font, var(--content-font, var(--main-font, 'Arial', sans-serif)));
 }
 
+/* Fix types page positioning */
+#types {
+    padding: 20px;
+    min-height: auto; /* Don't force full height */
+}
+
+#types .content-section {
+    padding: 40px 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+/* Ensure types container starts at top */
+#types .types-container {
+    margin: 40px 0;
+}
+
 @media (max-width: 768px) {
     .types-container {
         grid-template-columns: 1fr;
