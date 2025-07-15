@@ -1863,26 +1863,21 @@ function closeTypePopup() {
     const popup = currentTypePopup;
     const box = popup.querySelector('.popup-box');
     const horizontalLine = popup.querySelector('.line-horizontal');
-    const verticalLine = popup.querySelector('.line-vertical');
     
     // Reverse animation sequence
     box.classList.remove('visible');
     
     setTimeout(() => {
-        verticalLine.style.height = '0';
+        horizontalLine.style.width = '0';
         
         setTimeout(() => {
-            horizontalLine.style.width = '0';
+            popup.classList.remove('active');
             
             setTimeout(() => {
-                popup.classList.remove('active');
-                
-                setTimeout(() => {
-                    popup.remove();
-                    currentTypePopup = null;
-                    typePopupActive = false;
-                }, 300);
-            }, 500);
+                popup.remove();
+                currentTypePopup = null;
+                typePopupActive = false;
+            }, 300);
         }, 500);
     }, 300);
     
@@ -1919,31 +1914,35 @@ function showTypePopup(event, profileIndex) {
     const popup = document.createElement('div');
     popup.className = 'type-popup';
     
-    // Calculate positions
-    const startX = rect.left + rect.width / 2;
-    const startY = rect.bottom + 5;
+    // Calculate positions - line starts from right side of button
+    const startX = rect.right; // Right edge of button
+    const startY = rect.top + rect.height / 2; // Middle of button vertically
     const lineLength = 60;
-    const boxOffset = 30;
+    const boxOffset = 20;
+    
+    // Box appears below the end of the horizontal line
+    const boxX = startX + lineLength + 10; // Small gap after line
+    const boxY = startY + boxOffset; // Below the line
     
     // Ensure popup stays within viewport
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
     
-    let boxX = startX + lineLength + boxOffset;
-    let boxY = startY + boxOffset;
-    
-    // Adjust if popup would go off-screen
+    // Adjust if popup would go off-screen horizontally
+    let finalBoxX = boxX;
     if (boxX + 300 > viewportWidth) {
-        boxX = startX - lineLength - boxOffset - 300;
+        finalBoxX = startX - lineLength - 310; // Flip to left side
     }
+    
+    // Adjust if popup would go off-screen vertically
+    let finalBoxY = boxY;
     if (boxY + 150 > viewportHeight) {
-        boxY = startY - boxOffset - 150;
+        finalBoxY = startY - 150; // Move up
     }
     
     popup.innerHTML = `
         <div class="line-horizontal" style="left: ${startX}px; top: ${startY}px;"></div>
-        <div class="line-vertical" style="left: ${startX + lineLength}px; top: ${startY}px;"></div>
-        <div class="popup-box" style="left: ${boxX}px; top: ${boxY}px;">
+        <div class="popup-box" style="left: ${finalBoxX}px; top: ${finalBoxY}px;">
             <button class="close-btn">×</button>
             <h4>${profile.type.name}</h4>
             <p>${profile.type.description}</p>
@@ -1964,18 +1963,15 @@ function showTypePopup(event, profileIndex) {
     setTimeout(() => {
         popup.classList.add('active');
         
+        // Step 1: Draw horizontal line from right side of button
         const horizontalLine = popup.querySelector('.line-horizontal');
         horizontalLine.style.width = lineLength + 'px';
         
+        // Step 2: Show box after horizontal line completes
         setTimeout(() => {
-            const verticalLine = popup.querySelector('.line-vertical');
-            verticalLine.style.height = boxOffset + 'px';
-            
-            setTimeout(() => {
-                const box = popup.querySelector('.popup-box');
-                box.classList.add('visible');
-                typePopupActive = true;
-            }, 500);
+            const box = popup.querySelector('.popup-box');
+            box.classList.add('visible');
+            typePopupActive = true;
         }, 500);
     }, 10);
     
@@ -1984,7 +1980,6 @@ function showTypePopup(event, profileIndex) {
         document.addEventListener('click', handleOutsideClick);
     }, 100);
 }
-
 // Configuration functions for multiple profiles
 function addProfile(profileData) {
     const newProfile = {
