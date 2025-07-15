@@ -428,6 +428,54 @@ font-weight: bold;
 font-family: var(--title-font, var(--main-font, 'Arial', sans-serif));
 }
 
+/* Types page styles */
+.types-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.type-card {
+    background: linear-gradient(135deg, #111 0%, #222 100%);
+    border-radius: 15px;
+    padding: 30px;
+    border: 1px solid #333;
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 30px rgba(255, 213, 248, 0.3); /* Always-on glow */
+}
+
+.type-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(255, 213, 248, 0.5);
+}
+
+.type-title {
+    color: #FFD5F8;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    font-family: var(--type-title-font, var(--title-font, var(--main-font, 'Arial', sans-serif)));
+}
+
+.type-description {
+    color: #ccc;
+    line-height: 1.6;
+    font-size: 16px;
+    font-family: var(--type-description-font, var(--content-font, var(--main-font, 'Arial', sans-serif)));
+}
+
+@media (max-width: 768px) {
+    .types-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .type-card {
+        padding: 20px;
+    }
+}
+
 /* Multiple profiles styling */
 .profiles-container {
     display: grid;
@@ -1181,6 +1229,14 @@ background: linear-gradient(135deg, #CCCCCC 0%, #FFD5F8 100%);
 <img src="https://media.discordapp.net/attachments/1369432745155231764/1394263164526268556/20250714_062120.png?ex=68762c42&is=6874dac2&hm=e2cc57aa5fa86944bd06bb2c42de167398c1152d96eef92a21dafc17e902731c&=&format=webp&quality=lossless&width=808&height=144" alt="Resources" id="nav-text-resources">
 </div>
 </div>
+<div class="nav-item" data-page="types">
+<div class="nav-icon">
+<img src="YOUR_ICON_URL_HERE" alt="Types" id="nav-icon-types">
+</div>
+<div class="nav-text">
+<img src="YOUR_TEXT_IMAGE_URL_HERE" alt="Types" id="nav-text-types">
+</div>
+</div>
 </div>
 
 <div class="main-content" id="mainContent">
@@ -1317,6 +1373,16 @@ background: linear-gradient(135deg, #CCCCCC 0%, #FFD5F8 100%);
 </div>
 </div>
 
+<!-- Types Page -->
+<div class="page" id="types">
+<div class="content-section">
+<h2 class="section-title">Types</h2>
+<div class="types-container" id="typesContainer">
+<!-- Types will be populated here -->
+</div>
+</div>
+</div>
+
 <script>
 // Custom Font Configuration
 const FONT_CONFIG = {
@@ -1419,7 +1485,18 @@ const FONT_CONFIG = {
         family: "SectionTitles",
         url: "/fonts/sectiontitles.woff2",
         fallback: "'JetBrains Mono', monospace"
-    }
+    },
+// Types page fonts
+typeTitle: {
+    family: "TypeTitle",
+    url: "/fonts/typetitle.woff2",
+    fallback: "'JetBrains Mono', monospace"
+},
+typeDescription: {
+    family: "TypeDescription", 
+    url: "/fonts/typedescription.woff2",
+    fallback: "'JetBrains Mono', monospace"
+}
 };
 
 // Load custom fonts from files
@@ -1571,6 +1648,20 @@ function applyCustomFonts() {
             text.style.fontFamily = FONT_CONFIG.navText.family + ', ' + FONT_CONFIG.navText.fallback;
         });
     }
+// Types page elements
+if (FONT_CONFIG.typeTitle) {
+    const typeTitles = document.querySelectorAll('.type-title');
+    typeTitles.forEach(title => {
+        title.style.fontFamily = FONT_CONFIG.typeTitle.family + ', ' + FONT_CONFIG.typeTitle.fallback;
+    });
+}
+
+if (FONT_CONFIG.typeDescription) {
+    const typeDescriptions = document.querySelectorAll('.type-description');
+    typeDescriptions.forEach(desc => {
+        desc.style.fontFamily = FONT_CONFIG.typeDescription.family + ', ' + FONT_CONFIG.typeDescription.fallback;
+    });
+}
 }
 
 // Initialize everything
@@ -2199,6 +2290,49 @@ const PROFILES_CONFIG = [
     
 ];
 
+// ===== TYPES CONFIGURATION =====
+const TYPES_CONFIG = [
+    {
+        id: 'eslut',
+        name: 'Eslut',
+        description: 'These types either have an onlyfans/fansly/whatever, or do camshows. They can also just have a selling menu, or anything like that. Any of this usually also comes with an ego.'
+    },
+    {
+        id: 'semicommon',
+        name: 'Semi-Common',
+        description: 'The Semi-Common type involves liking ageplay, thats not their main focus. It also involves extortion, age gaps, racism, and also not being the best person.'
+    }
+    // Add more types here
+];
+
+// Types rendering functions
+function createTypeCard(type) {
+    const typeCard = document.createElement('div');
+    typeCard.className = 'type-card';
+    typeCard.setAttribute('data-type-id', type.id);
+    
+    typeCard.innerHTML = `
+        <div class="type-title">${type.name}</div>
+        <div class="type-description">${type.description}</div>
+    `;
+    
+    return typeCard;
+}
+
+function renderTypes() {
+    const container = document.getElementById('typesContainer');
+    container.innerHTML = '';
+    
+    TYPES_CONFIG.forEach(type => {
+        const typeCard = createTypeCard(type);
+        container.appendChild(typeCard);
+    });
+}
+
+function initializeTypes() {
+    renderTypes();
+}
+
 // ===== END PROFILE CONFIGURATION =====
 function updateProfile(profileId, updates) {
     const profileIndex = allProfiles.findIndex(p => p.id === profileId);
@@ -2249,7 +2383,8 @@ function initializeProfiles() {
 document.addEventListener('DOMContentLoaded', () => {
     loadCustomFonts();
     applyCustomFonts();
-    initializeProfiles(); // Load profiles from configuration
+    initializeProfiles(); 
+    initializeTypes();// Load profiles from configuration
 });
 </script>
 </body>
