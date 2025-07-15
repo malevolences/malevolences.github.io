@@ -6,77 +6,6 @@
 <title>ComGirl Wiki</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
-/* Font face definitions for custom fonts */
-@font-face {
-font-family: 'CustomMainFont';
-src: url('') format('woff2');
-}
-
-@font-face {
-font-family: 'CustomHeroFont';
-src: url('') format('woff2');
-}
-
-@font-face {
-font-family: 'CustomTitleFont';
-src: url('') format('woff2');
-}
-
-@font-face {
-font-family: 'CustomContentFont';
-src: url('') format('woff2');
-}
-
-@font-face {
-font-family: 'CustomButtonFont';
-src: url('') format('woff2');
-}
-
-@font-face {
-font-family: 'CustomNavFont';
-src: url('') format('woff2');
-}
-
-/* Page-specific font faces */
-@font-face {
-font-family: 'CustomArchiveTitleFont';
-src: url('/fonts/spotify.woff2') format('woff2');
-}
-
-@font-face {
-font-family: 'CustomArchiveDescFont';
-src: url('') format('woff2');
-}
-
-@font-face {
-font-family: 'CustomInfoTitleFont';
-src: url('') format('woff2');
-}
-
-@font-face {
-font-family: 'CustomInfoContentFont';
-src: url('') format('woff2');
-}
-
-@font-face {
-font-family: 'CustomLookforTitleFont';
-src: url('') format('woff2');
-}
-
-@font-face {
-font-family: 'CustomBoardCaptionFont';
-src: url('') format('woff2');
-}
-
-@font-face {
-font-family: 'CustomResourceTitleFont';
-src: url('') format('woff2');
-}
-
-@font-face {
-font-family: 'CustomResourceContentFont';
-src: url('') format('woff2');
-}
 
 * {
 margin: 0;
@@ -1328,164 +1257,267 @@ family: "CtaButtons",
 url: "/fonts/ctabuttons.woff2",
 fallback: "'JetBrains Mono', monospace"
 },
-// Archive page fonts
-archiveTitle: {
-family: "ArchiveTitle",
-url: "/fonts/spotify.woff2",
-fallback: "'JetBrains Mono', monospace"
-},
-username: {
-family: "Username",
-url: "/fonts/username.woff2",
-fallback: "'JetBrains Mono', monospace"
-},
-description: {
-family: "Description",
-url: "/fonts/description.woff2",
-fallback: "'JetBrains Mono', monospace"
-},
-actionButtons: {
-family: "ActionButtons",
-url: "/fonts/actionbuttons.woff2",
-fallback: "'JetBrains Mono', monospace"
-},
-// Information page fonts
-infoSectionTitles: {
-family: "InfoSectionTitles",
-url: "/fonts/infosectiontitles.woff2",
-fallback: "'JetBrains Mono', monospace"
-},
-infoSectionContent: {
-family: "InfoSectionContent",
-url: "/fonts/infosectioncontent.woff2",
-fallback: "'JetBrains Mono', monospace"
-},
-// What to Look For page fonts
-exampleTitles: {
-family: "ExampleTitles",
-url: "/fonts/exampletitles.woff2",
-fallback: "'JetBrains Mono', monospace"
-},
-exampleContent: {
-family: "ExampleContent",
-url: "/fonts/examplecontent.woff2",
-fallback: "'JetBrains Mono', monospace"
-},
-// Board page fonts
-boardCaptions: {
-family: "BoardCaptions",
-url: "/fonts/boardcaptions.woff2",
-fallback: "'JetBrains Mono', monospace"
-},
-// Resources page fonts
-resourceTitles: {
-family: "ResourceTitles",
-url: "/fonts/resourcetitles.woff2",
-fallback: "'JetBrains Mono', monospace"
-},
-resourceContent: {
-family: "ResourceContent",
-url: "/fonts/resourcecontent.woff2",
-fallback: "'JetBrains Mono', monospace"
-},
-resourceLinks: {
-family: "ResourceLinks",
-url: "/fonts/resourcelinks.woff2",
-fallback: "'JetBrains Mono', monospace"
-},
-// Navigation fonts
-navText: {
-family: "NavText",
-url: "/fonts/navtext.woff2",
-fallback: "'JetBrains Mono', monospace"
-},
-// Section titles (used across multiple pages)
-sectionTitles: {
-family: "SectionTitles",
-url: "/fonts/sectiontitles.woff2",
-fallback: "'JetBrains Mono', monospace"
-}
+// Custom Font Configuration
+const FONT_CONFIG = {
+    // Hero page fonts
+    heroTitle: {
+        family: "HeroTitle",
+        url: "/fonts/herotitle.woff2",
+        fallback: "'JetBrains Mono', monospace"
+    },
+    heroSubtitle: {
+        family: "HeroSubtitle",
+        url: "/fonts/herosubtitle.woff2",
+        fallback: "'JetBrains Mono', monospace"
+    },
+    ctaButtons: {
+        family: "CtaButtons",
+        url: "/fonts/ctabuttons.woff2",
+        fallback: "'JetBrains Mono', monospace"
+    },
+    
+    // Archive page fonts
+    archiveTitle: {
+        family: "ArchiveTitle",
+        url: "/fonts/spotify.woff2",
+        fallback: "'JetBrains Mono', monospace"
+    },
+    username: {
+        family: "Username",
+        url: "/fonts/username.woff2",
+        fallback: "'JetBrains Mono', monospace"
+    },
+    description: {
+        family: "Description",
+        url: "/fonts/description.woff2",
+        fallback: "'JetBrains Mono', monospace"
+    },
+    actionButtons: {
+        family: "ActionButtons",
+        url: "/fonts/actionbuttons.woff2",
+        fallback: "'JetBrains Mono', monospace"
+    },
+    
+    // Information page fonts
+    infoSectionTitles: {
+        family: "InfoSectionTitles",
+        url: "/fonts/infosectiontitles.woff2",
+        fallback: "'JetBrains Mono', monospace"
+    },
+    infoSectionContent: {
+        family: "InfoSectionContent",
+        url: "/fonts/infosectioncontent.woff2",
+        fallback: "'JetBrains Mono', monospace"
+    },
+    
+    // What to Look For page fonts
+    exampleTitles: {
+        family: "ExampleTitles",
+        url: "/fonts/exampletitles.woff2",
+        fallback: "'JetBrains Mono', monospace"
+    },
+    exampleContent: {
+        family: "ExampleContent",
+        url: "/fonts/examplecontent.woff2",
+        fallback: "'JetBrains Mono', monospace"
+    },
+    
+    // Board page fonts
+    boardCaptions: {
+        family: "BoardCaptions",
+        url: "/fonts/boardcaptions.woff2",
+        fallback: "'JetBrains Mono', monospace"
+    },
+    
+    // Resources page fonts
+    resourceTitles: {
+        family: "ResourceTitles",
+        url: "/fonts/resourcetitles.woff2",
+        fallback: "'JetBrains Mono', monospace"
+    },
+    resourceContent: {
+        family: "ResourceContent",
+        url: "/fonts/resourcecontent.woff2",
+        fallback: "'JetBrains Mono', monospace"
+    },
+    resourceLinks: {
+        family: "ResourceLinks",
+        url: "/fonts/resourcelinks.woff2",
+        fallback: "'JetBrains Mono', monospace"
+    },
+    
+    // Navigation fonts
+    navText: {
+        family: "NavText",
+        url: "/fonts/navtext.woff2",
+        fallback: "'JetBrains Mono', monospace"
+    },
+    
+    // Section titles (used across multiple pages)
+    sectionTitles: {
+        family: "SectionTitles",
+        url: "/fonts/sectiontitles.woff2",
+        fallback: "'JetBrains Mono', monospace"
+    }
 };
 
-// Load fonts from config
-function loadFonts() {
-const style = document.createElement('style');
-let cssText = '';
-
-Object.values(FONT_CONFIG).forEach(font => {
-cssText += `
-@font-face {
-font-family: '${font.family}';
-src: url('${font.url}') format('woff2');
-font-display: swap;
+// Load custom fonts from files
+function loadCustomFonts() {
+    // Create style element for font faces
+    const fontStyle = document.createElement('style');
+    fontStyle.id = 'custom-font-faces';
+    
+    // Build CSS for all configured fonts
+    let fontFacesCSS = '';
+    
+    // Process each font in the configuration
+    Object.entries(FONT_CONFIG).forEach(([key, font]) => {
+        if (font.url && font.family) {
+            fontFacesCSS += `
+                @font-face {
+                    font-family: '${font.family}';
+                    src: url('${font.url}') format('woff2');
+                    font-weight: normal;
+                    font-style: normal;
+                    font-display: swap;
+                }
+            `;
+        }
+    });
+    
+    // Add the font faces to the style element
+    fontStyle.textContent = fontFacesCSS;
+    document.head.appendChild(fontStyle);
 }
-`;
+
+// Apply custom fonts to elements
+function applyCustomFonts() {
+    // Hero page elements
+    if (FONT_CONFIG.heroTitle) {
+        const heroTitle = document.getElementById('heroTitleImage');
+        if (heroTitle) {
+            heroTitle.style.fontFamily = FONT_CONFIG.heroTitle.family + ', ' + FONT_CONFIG.heroTitle.fallback;
+        }
+    }
+    
+    if (FONT_CONFIG.heroSubtitle) {
+        const heroSubtitle = document.getElementById('heroSubtitle');
+        if (heroSubtitle) {
+            heroSubtitle.style.fontFamily = FONT_CONFIG.heroSubtitle.family + ', ' + FONT_CONFIG.heroSubtitle.fallback;
+        }
+    }
+    
+    if (FONT_CONFIG.ctaButtons) {
+        const ctaButtons = document.querySelectorAll('.cta-button');
+        ctaButtons.forEach(button => {
+            button.style.fontFamily = FONT_CONFIG.ctaButtons.family + ', ' + FONT_CONFIG.ctaButtons.fallback;
+        });
+    }
+    
+    // Archive page elements
+    if (FONT_CONFIG.archiveTitle) {
+        const sectionTitles = document.querySelectorAll('.section-title');
+        sectionTitles.forEach(title => {
+            title.style.fontFamily = FONT_CONFIG.archiveTitle.family + ', ' + FONT_CONFIG.archiveTitle.fallback;
+        });
+    }
+    
+    if (FONT_CONFIG.username) {
+        const usernames = document.querySelectorAll('.username');
+        usernames.forEach(username => {
+            username.style.fontFamily = FONT_CONFIG.username.family + ', ' + FONT_CONFIG.username.fallback;
+        });
+    }
+    
+    if (FONT_CONFIG.description) {
+        const descriptions = document.querySelectorAll('.description');
+        descriptions.forEach(desc => {
+            desc.style.fontFamily = FONT_CONFIG.description.family + ', ' + FONT_CONFIG.description.fallback;
+        });
+    }
+    
+    if (FONT_CONFIG.actionButtons) {
+        const actionButtons = document.querySelectorAll('.action-btn');
+        actionButtons.forEach(button => {
+            button.style.fontFamily = FONT_CONFIG.actionButtons.family + ', ' + FONT_CONFIG.actionButtons.fallback;
+        });
+    }
+    
+    // Information page elements
+    if (FONT_CONFIG.infoSectionTitles) {
+        const infoTitles = document.querySelectorAll('.info-section h3');
+        infoTitles.forEach(title => {
+            title.style.fontFamily = FONT_CONFIG.infoSectionTitles.family + ', ' + FONT_CONFIG.infoSectionTitles.fallback;
+        });
+    }
+    
+    if (FONT_CONFIG.infoSectionContent) {
+        const infoContent = document.querySelectorAll('.info-section p');
+        infoContent.forEach(content => {
+            content.style.fontFamily = FONT_CONFIG.infoSectionContent.family + ', ' + FONT_CONFIG.infoSectionContent.fallback;
+        });
+    }
+    
+    // What to Look For page elements
+    if (FONT_CONFIG.exampleTitles) {
+        const exampleTitles = document.querySelectorAll('.example-item h4');
+        exampleTitles.forEach(title => {
+            title.style.fontFamily = FONT_CONFIG.exampleTitles.family + ', ' + FONT_CONFIG.exampleTitles.fallback;
+        });
+    }
+    
+    if (FONT_CONFIG.exampleContent) {
+        const exampleContent = document.querySelectorAll('.example-item p');
+        exampleContent.forEach(content => {
+            content.style.fontFamily = FONT_CONFIG.exampleContent.family + ', ' + FONT_CONFIG.exampleContent.fallback;
+        });
+    }
+    
+    // Board page elements
+    if (FONT_CONFIG.boardCaptions) {
+        const boardCaptions = document.querySelectorAll('.board-caption');
+        boardCaptions.forEach(caption => {
+            caption.style.fontFamily = FONT_CONFIG.boardCaptions.family + ', ' + FONT_CONFIG.boardCaptions.fallback;
+        });
+    }
+    
+    // Resources page elements
+    if (FONT_CONFIG.resourceTitles) {
+        const resourceTitles = document.querySelectorAll('.resource-item h4');
+        resourceTitles.forEach(title => {
+            title.style.fontFamily = FONT_CONFIG.resourceTitles.family + ', ' + FONT_CONFIG.resourceTitles.fallback;
+        });
+    }
+    
+    if (FONT_CONFIG.resourceContent) {
+        const resourceContent = document.querySelectorAll('.resource-item p');
+        resourceContent.forEach(content => {
+            content.style.fontFamily = FONT_CONFIG.resourceContent.family + ', ' + FONT_CONFIG.resourceContent.fallback;
+        });
+    }
+    
+    if (FONT_CONFIG.resourceLinks) {
+        const resourceLinks = document.querySelectorAll('.resource-link');
+        resourceLinks.forEach(link => {
+            link.style.fontFamily = FONT_CONFIG.resourceLinks.family + ', ' + FONT_CONFIG.resourceLinks.fallback;
+        });
+    }
+    
+    // Navigation elements
+    if (FONT_CONFIG.navText) {
+        const navText = document.querySelectorAll('.nav-text');
+        navText.forEach(text => {
+            text.style.fontFamily = FONT_CONFIG.navText.family + ', ' + FONT_CONFIG.navText.fallback;
+        });
+    }
+}
+
+// Initialize everything
+window.addEventListener('DOMContentLoaded', () => {
+    loadCustomFonts(); // New function name
+    // ... other initializations ...
+    applyCustomFonts(); // New function name
 });
-
-style.textContent = cssText;
-document.head.appendChild(style);
-}
-
-// Apply fonts to elements
-function applyFonts() {
-const root = document.documentElement;
-
-// Apply specific fonts based on config
-Object.entries(FONT_CONFIG).forEach(([key, font]) => {
-const fontFamily = `'${font.family}', ${font.fallback}`;
-
-switch(key) {
-case 'heroTitle':
-case 'heroSubtitle':
-root.style.setProperty('--hero-font', fontFamily);
-break;
-case 'ctaButtons':
-case 'actionButtons':
-root.style.setProperty('--button-font', fontFamily);
-break;
-case 'username':
-root.style.setProperty('--archive-title-font', fontFamily);
-break;
-case 'description':
-root.style.setProperty('--archive-desc-font', fontFamily);
-break;
-case 'infoSectionTitles':
-root.style.setProperty('--info-title-font', fontFamily);
-break;
-case 'infoSectionContent':
-root.style.setProperty('--info-content-font', fontFamily);
-break;
-case 'exampleTitles':
-root.style.setProperty('--lookfor-title-font', fontFamily);
-break;
-case 'exampleContent':
-root.style.setProperty('--content-font', fontFamily);
-break;
-case 'boardCaptions':
-root.style.setProperty('--board-caption-font', fontFamily);
-break;
-case 'resourceTitles':
-root.style.setProperty('--resource-title-font', fontFamily);
-break;
-case 'resourceContent':
-root.style.setProperty('--resource-content-font', fontFamily);
-break;
-case 'resourceLinks':
-root.style.setProperty('--button-font', fontFamily);
-break;
-case 'navText':
-root.style.setProperty('--nav-font', fontFamily);
-break;
-case 'sectionTitles':
-root.style.setProperty('--title-font', fontFamily);
-break;
-}
-});
-}
-
-// Initialize fonts
-loadFonts();
-applyFonts();
 
 // Navigation functionality
 const navToggle = document.getElementById('navToggle');
