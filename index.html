@@ -828,27 +828,9 @@ transform: scale(1.05);
     pointer-events: auto;
 }
 
-.trait-popup::before {
-content: '';
-position: absolute;
-width: 2px;
-height: 30px;
-background: #FFD5F8;
-top: -30px;
-left: 50%;
-transform: translateX(-50%);
-}
-
+.trait-popup::before,
 .trait-popup::after {
-content: '';
-position: absolute;
-width: 10px;
-height: 10px;
-background: #FFD5F8;
-border-radius: 50%;
-top: -40px;
-left: 50%;
-transform: translateX(-50%);
+    display: none;
 }
 
 .trait-bars {
@@ -863,11 +845,25 @@ transform: translateX(-50%);
     background: #333;
     border-radius: 3px;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.trait-bar.filled {
+.trait-bar::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(135deg, #FFD5F8 0%, #CCCCCC 100%);
+    transition: top 0.3s ease;
 }
+
+.trait-bar.filled::after {
+    top: 0;
+}
+
 
 /* Friendly section */
 .friendly-section {
@@ -1881,8 +1877,7 @@ function toggleStats(profileIndex) {
     }
 }
 
-// Draw pie chart for specific profile
-// Replace the drawPieChart function with this fixed version
+// Simplified drawPieChart function
 function drawPieChart(profileIndex) {
     const profile = allProfiles[profileIndex];
     const canvas = document.querySelector(`[data-profile-index="${profileIndex}"].pie-chart`);
@@ -1898,28 +1893,12 @@ function drawPieChart(profileIndex) {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Store slice data for hover detection
-    const slices = [];
-
     profile.pieChart.forEach((item, index) => {
         const sliceAngle = (item.value / total) * 2 * Math.PI;
         const percentage = Math.round((item.value / total) * 100);
         const centerAngle = currentAngle + sliceAngle / 2;
 
-        // Store slice information
-        slices.push({
-            startAngle: currentAngle,
-            endAngle: currentAngle + sliceAngle,
-            color: item.color,
-            name: item.name,
-            percentage: percentage,
-            centerAngle: centerAngle,
-            // Calculate the edge point of the slice for line connection
-            edgeX: centerX + Math.cos(centerAngle) * radius,
-            edgeY: centerY + Math.sin(centerAngle) * radius,
-            originalData: item
-        });
-
+        // Draw slice
         ctx.beginPath();
         ctx.moveTo(centerX, centerY);
         ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
@@ -1930,160 +1909,9 @@ function drawPieChart(profileIndex) {
         ctx.lineWidth = 2;
         ctx.stroke();
 
-        // Draw labels
-        const labelAngle = centerAngle;
-        const labelX = centerX + Math.cos(labelAngle) * (radius * 0.7);
-        const labelY = centerY + Math.sin(labelAngle) * (radius * 0.7);
-        
-        ctx.save();
-        ctx.translate(labelX, labelY);
-        ctx.rotate(labelAngle + Math.PI / 2);
-        ctx.fillStyle = '#fff';
-        ctx.font = 'bold 12px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText(item.name, 0, 0);
-        ctx.restore();
-
-        currentAngle += sliceAngle;
-    });
-
-    // Store data directly on canvas
-    canvas.pieSlicesData = slices;
-    canvas.pieProfileIndex = profileIndex;
-    canvas.pieCenterX = centerX;
-    canvas.pieCenterY = centerY;
-    canvas.pieRadius = radius;
-
-    // Remove existing listeners to prevent duplicates
-    canvas.removeEventListener('mousemove', handlePieChartHover);
-    canvas.removeEventListener('mouseleave', handlePieChartLeave);
-    
-    // Add new event listeners
-    canvas.addEventListener('mousemove', handlePieChartHover);
-    canvas.addEventListener('mouseleave', handlePieChartLeave);
-}
-
-let currentHoveredSlice = null;
-let currentPiePopup = null;
-let currentHoveredCanvas = null;
-
-function handlePieChartHover(event) {
-    const canvas = event.target;
-    const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    
-    // Convert to canvas coordinates
-    const canvasX = x * (canvas.width / rect.width);
-    const canvasY = y * (canvas.height / rect.height);
-    
-    const centerX = canvas.pieCenterX;
-    const centerY = canvas.pieCenterY;
-    const radius = canvas.pieRadius;
-    
-    if (!canvas.pieSlicesData || !centerX || !centerY || !radius) return;
-    
-    // Calculate angle and distance from center
-    const deltaX = canvasX - centerX;
-    const deltaY = canvasY - centerY;
-    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-    
-    // Check if mouse is within pie chart
-    if (distance <= radius) {
-        let angle = Math.atan2(deltaY, deltaX);
-        if (angle < 0) angle += 2 * Math.PI;
-        
-        // Adjust for canvas rotation (-90 degrees)
-        angle = (angle + Math.PI / 2) % (2 * Math.PI);
-        
-        // Find which slice we're hovering over
-        const hoveredSlice = canvas.pieSlicesData.find(slice => {
-            return angle >= slice.startAngle && angle <= slice.endAngle;
-        });
-        
-        if (hoveredSlice && hoveredSlice !== currentHoveredSlice) {
-            currentHoveredSlice = hoveredSlice;
-            currentHoveredCanvas = canvas;
-            
-            // Redraw the pie chart with the hovered slice popped out
-            redrawPieChartWithHover(canvas, hoveredSlice);
-            
-            // Show percentage popup
-            showPiePercentagePopup(event, hoveredSlice, canvas);
-        }
-    } else {
-        // Mouse is outside the pie chart
-        if (currentHoveredSlice) {
-            resetPieChart(canvas);
-            hidePiePercentagePopup();
-            currentHoveredSlice = null;
-            currentHoveredCanvas = null;
-        }
-    }
-}
-
-function handlePieChartLeave(event) {
-    const canvas = event.target;
-    resetPieChart(canvas);
-    hidePiePercentagePopup();
-    currentHoveredSlice = null;
-    currentHoveredCanvas = null;
-}
-
-function redrawPieChartWithHover(canvas, hoveredSlice) {
-    const ctx = canvas.getContext('2d');
-    const centerX = canvas.pieCenterX;
-    const centerY = canvas.pieCenterY;
-    const radius = canvas.pieRadius;
-    const profile = allProfiles[canvas.pieProfileIndex];
-    
-    if (!profile || !centerX || !centerY || !radius) return;
-    
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    let currentAngle = 0;
-    const total = profile.pieChart.reduce((sum, item) => sum + item.value, 0);
-
-    profile.pieChart.forEach((item, index) => {
-        const sliceAngle = (item.value / total) * 2 * Math.PI;
-        const centerAngle = currentAngle + sliceAngle / 2;
-        
-        // Check if this is the hovered slice
-        const isHovered = Math.abs(centerAngle - hoveredSlice.centerAngle) < 0.1;
-        
-        // Calculate pop-out offset for hovered slice
-        const popOutDistance = isHovered ? 15 : 0;
-        const sliceCenterX = centerX + Math.cos(centerAngle) * popOutDistance;
-        const sliceCenterY = centerY + Math.sin(centerAngle) * popOutDistance;
-        
-        ctx.beginPath();
-        ctx.moveTo(sliceCenterX, sliceCenterY);
-        ctx.arc(sliceCenterX, sliceCenterY, radius, currentAngle, currentAngle + sliceAngle);
-        ctx.closePath();
-        
-        // Apply glow effect for hovered slice
-        if (isHovered) {
-            ctx.shadowColor = item.color;
-            ctx.shadowBlur = 20;
-            ctx.fillStyle = item.color;
-        } else {
-            ctx.shadowColor = 'transparent';
-            ctx.shadowBlur = 0;
-            ctx.fillStyle = item.color;
-        }
-        
-        ctx.fill();
-        ctx.strokeStyle = '#333';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        
-        // Reset shadow for labels
-        ctx.shadowColor = 'transparent';
-        ctx.shadowBlur = 0;
-
-        // Draw labels
-        const labelX = sliceCenterX + Math.cos(centerAngle) * (radius * 0.7);
-        const labelY = sliceCenterY + Math.sin(centerAngle) * (radius * 0.7);
+        // Draw slice name
+        const labelX = centerX + Math.cos(centerAngle) * (radius * 0.7);
+        const labelY = centerY + Math.sin(centerAngle) * (radius * 0.7);
         
         ctx.save();
         ctx.translate(labelX, labelY);
@@ -2091,129 +1919,44 @@ function redrawPieChartWithHover(canvas, hoveredSlice) {
         ctx.fillStyle = '#fff';
         ctx.font = 'bold 12px Arial';
         ctx.textAlign = 'center';
-        ctx.fillText(item.name, 0, 0);
+        ctx.fillText(item.name, 0, -5); // Move text up a bit
+        ctx.restore();
+
+        // Draw percentage below the name
+        ctx.save();
+        ctx.translate(labelX, labelY);
+        ctx.rotate(centerAngle + Math.PI / 2);
+        ctx.fillStyle = '#ccc';
+        ctx.font = '10px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(percentage + '%', 0, 8); // Position below the name
         ctx.restore();
 
         currentAngle += sliceAngle;
     });
+
+    // Remove existing event listeners to prevent duplicates
+    canvas.removeEventListener('mouseenter', handlePieChartEnter);
+    canvas.removeEventListener('mouseleave', handlePieChartLeave);
+    
+    // Add simple hover effects
+    canvas.addEventListener('mouseenter', handlePieChartEnter);
+    canvas.addEventListener('mouseleave', handlePieChartLeave);
 }
 
-function resetPieChart(canvas) {
-    if (canvas.pieProfileIndex !== undefined) {
-        const ctx = canvas.getContext('2d');
-        const centerX = canvas.pieCenterX;
-        const centerY = canvas.pieCenterY;
-        const radius = canvas.pieRadius;
-        const profile = allProfiles[canvas.pieProfileIndex];
-        
-        if (!profile || !centerX || !centerY || !radius) return;
-        
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        let currentAngle = 0;
-        const total = profile.pieChart.reduce((sum, item) => sum + item.value, 0);
-
-        profile.pieChart.forEach((item, index) => {
-            const sliceAngle = (item.value / total) * 2 * Math.PI;
-            const centerAngle = currentAngle + sliceAngle / 2;
-            
-            ctx.beginPath();
-            ctx.moveTo(centerX, centerY);
-            ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
-            ctx.closePath();
-            ctx.fillStyle = item.color;
-            ctx.fill();
-            ctx.strokeStyle = '#333';
-            ctx.lineWidth = 2;
-            ctx.stroke();
-
-            // Draw labels
-            const labelX = centerX + Math.cos(centerAngle) * (radius * 0.7);
-            const labelY = centerY + Math.sin(centerAngle) * (radius * 0.7);
-            
-            ctx.save();
-            ctx.translate(labelX, labelY);
-            ctx.rotate(centerAngle + Math.PI / 2);
-            ctx.fillStyle = '#fff';
-            ctx.font = 'bold 12px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText(item.name, 0, 0);
-            ctx.restore();
-
-            currentAngle += sliceAngle;
-        });
-    }
+// Simple pie chart hover effects
+function handlePieChartEnter(event) {
+    const canvas = event.target;
+    // Add glow effect
+    canvas.style.filter = 'drop-shadow(0 0 20px rgba(255, 213, 248, 0.5))';
+    canvas.style.transform = 'rotate(-90deg) scale(1.05)';
 }
 
-function showPiePercentagePopup(event, slice, canvas) {
-    // Remove any existing popup
-    if (currentPiePopup) {
-        currentPiePopup.remove();
-    }
-    
-    const rect = canvas.getBoundingClientRect();
-    const popup = document.createElement('div');
-    popup.className = 'pie-percentage-popup';
-    
-    // Calculate the edge point of the slice (accounting for rotation)
-    const canvasCenterX = rect.left + rect.width / 2;
-    const canvasCenterY = rect.top + rect.height / 2;
-    
-    // Get the angle of the slice center
-    const sliceAngle = slice.centerAngle;
-    
-    // Calculate the edge point accounting for canvas rotation (-90 degrees)
-    const adjustedAngle = sliceAngle - Math.PI / 2; // Adjust for canvas rotation
-    const edgeX = canvasCenterX + Math.cos(adjustedAngle) * (canvas.pieRadius * (rect.width / canvas.width));
-    const edgeY = canvasCenterY + Math.sin(adjustedAngle) * (canvas.pieRadius * (rect.height / canvas.height));
-    
-    const lineLength = 50;
-    
-    // Position popup box
-    const boxX = edgeX + lineLength + 10;
-    const boxY = edgeY - 20;
-    
-    popup.innerHTML = `
-        <div class="line-horizontal" style="left: ${edgeX}px; top: ${edgeY}px;"></div>
-        <div class="popup-box" style="left: ${boxX}px; top: ${boxY}px;">
-            <div class="percentage-text">${slice.percentage}%</div>
-        </div>
-    `;
-    
-    document.body.appendChild(popup);
-    currentPiePopup = popup;
-    
-    // Animation sequence
-    setTimeout(() => {
-        popup.classList.add('active');
-        
-        // Draw line
-        const horizontalLine = popup.querySelector('.line-horizontal');
-        horizontalLine.style.width = lineLength + 'px';
-        
-        // Show box and fade in percentage
-        setTimeout(() => {
-            const box = popup.querySelector('.popup-box');
-            const percentageText = popup.querySelector('.percentage-text');
-            
-            box.classList.add('visible');
-            setTimeout(() => {
-                percentageText.classList.add('fade-in');
-            }, 100);
-        }, 300);
-    }, 10);
-}
-
-function hidePiePercentagePopup() {
-    if (currentPiePopup) {
-        currentPiePopup.classList.remove('active');
-        setTimeout(() => {
-            if (currentPiePopup) {
-                currentPiePopup.remove();
-                currentPiePopup = null;
-            }
-        }, 300);
-    }
+function handlePieChartLeave(event) {
+    const canvas = event.target;
+    // Remove glow effect
+    canvas.style.filter = 'none';
+    canvas.style.transform = 'rotate(-90deg) scale(1)';
 }
 // Add these variables at the top of your script section, after the FONT_CONFIG
 let typePopupActive = false;
@@ -2221,7 +1964,7 @@ let currentTypePopup = null;
 
 // Then add these functions after the drawPieChart function:
 
-// Show trait popup
+// Updated trait popup function with upward fill animation
 function showTraitPopup(event, trait) {
     // Remove existing popup
     const existingPopup = document.querySelector('.trait-popup');
@@ -2235,7 +1978,7 @@ function showTraitPopup(event, trait) {
         <div>${trait.name}</div>
         <div class="trait-bars">
             ${Array(10).fill(0).map((_, i) => 
-                `<div class="trait-bar ${i < trait.level ? 'filled' : ''}"></div>`
+                `<div class="trait-bar" data-bar-index="${i}"></div>`
             ).join('')}
         </div>
     `;
@@ -2244,9 +1987,22 @@ function showTraitPopup(event, trait) {
 
     const rect = event.target.getBoundingClientRect();
     popup.style.left = rect.left + 'px';
-    popup.style.top = (rect.top - popup.offsetHeight - 50) + 'px';
+    popup.style.top = (rect.top - popup.offsetHeight - 10) + 'px'; // Closer to trait item
 
-    setTimeout(() => popup.classList.add('active'), 10);
+    // Show popup first
+    setTimeout(() => {
+        popup.classList.add('active');
+        
+        // Then animate bars filling up one by one
+        const bars = popup.querySelectorAll('.trait-bar');
+        bars.forEach((bar, index) => {
+            if (index < trait.level) {
+                setTimeout(() => {
+                    bar.classList.add('filled');
+                }, index * 100); // 100ms delay between each bar
+            }
+        });
+    }, 10);
 
     // Close popup when clicking outside
     setTimeout(() => {
