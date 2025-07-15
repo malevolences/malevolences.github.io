@@ -499,6 +499,74 @@ font-weight: bold;
 font-family: var(--title-font, var(--main-font, 'Arial', sans-serif));
 }
 
+/* Multiple profiles styling */
+.profiles-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 40px;
+    margin: 40px 0;
+}
+
+.profile-card {
+    background: linear-gradient(135deg, #111 0%, #222 100%);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    border: 1px solid #333;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+}
+
+.profile-card.highlighted {
+    border-color: #FFD5F8;
+    box-shadow: 0 10px 30px rgba(255, 213, 248, 0.3);
+}
+
+/* Profile content containers */
+.profile-content, .stats-content {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.profile-content.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+
+.stats-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+
+.stats-content.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 1200px) {
+    .profiles-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-card {
+        min-height: 400px;
+        padding: 30px;
+    }
+}
+
 /* Stats toggle button */
 .stats-toggle {
 position: absolute;
@@ -1126,31 +1194,12 @@ background: linear-gradient(135deg, #8a2be2 0%, #FFD5F8 100%);
 
 <!-- Archive Page -->
 <div class="page" id="archive">
-<div class="content-section">
-<h2 class="section-title">Archive</h2>
-<div class="profile-card">
-<button class="stats-toggle" id="statsToggle">
-<img src="https://via.placeholder.com/24x24/ffffff/000000?text=📊" alt="Stats" id="statsIcon">
-</button>
-
-<div class="profile-content" id="profileContent">
-<img src="https://via.placeholder.com/150x150/FFD5F8/000000?text=PFP" alt="Profile Picture" class="profile-pic" id="profilePic">
-<div class="username" id="username">ComGirl Archive</div>
-<div class="description" id="description">Welcome to the ComGirl Archive - your comprehensive resource for everything related to ComGirl culture and aesthetics.</div>
-<div class="action-buttons">
-<a href="#" class="action-btn" id="btn1">
-<span id="btn1Icon">🔗</span>
-<span id="btn1Text">Gallery</span>
-</a>
-<a href="#" class="action-btn" id="btn2">
-<span id="btn2Icon">💬</span>
-<span id="btn2Text">Community</span>
-</a>
-<a href="#" class="action-btn" id="btn3">
-<span id="btn3Icon">📱</span>
-<span id="btn3Text">Social</span>
-</a>
-</div>
+    <div class="content-section">
+        <h2 class="section-title">Archive</h2>
+        <div class="profiles-container" id="profilesContainer">
+            <!-- Profiles will be populated here -->
+        </div>
+    </div>
 </div>
 
 <div class="stats-content" id="statsContent">
@@ -1597,177 +1646,204 @@ loadFonts();
 applyFonts();
 }
 
-// Stats configuration
-let currentProfile = {
-type: { name: "Default Type", description: "Default description" },
-traits: [
-{ name: "High Ego", level: 7 },
-{ name: "Camgirl", level: 9 }
-],
-friendly: true,
-pieChart: [
-{ name: "Aesthetic", value: 30, color: "#FFD5F8" },
-{ name: "Personality", value: 25, color: "#8a2be2" },
-{ name: "Style", value: 20, color: "#ff1493" },
-{ name: "Attitude", value: 25, color: "#9932cc" }
-]
+// Multi-profile system
+let allProfiles = [];
+let currentProfileIndex = 0;
+
+// Default profile template
+const defaultProfile = {
+    id: 'default',
+    profilePic: 'https://via.placeholder.com/150x150/FFD5F8/000000?text=PFP',
+    username: 'ComGirl Archive',
+    description: 'Welcome to the ComGirl Archive - your comprehensive resource for everything related to ComGirl culture and aesthetics.',
+    buttons: [
+        { icon: '🔗', text: 'Gallery', link: '#' },
+        { icon: '💬', text: 'Community', link: '#' },
+        { icon: '📱', text: 'Social', link: '#' }
+    ],
+    type: { name: "Default Type", description: "Default description" },
+    traits: [
+        { name: "High Ego", level: 7 },
+        { name: "Camgirl", level: 9 }
+    ],
+    friendly: true,
+    pieChart: [
+        { name: "Aesthetic", value: 30, color: "#FFD5F8" },
+        { name: "Personality", value: 25, color: "#8a2be2" },
+        { name: "Style", value: 20, color: "#ff1493" },
+        { name: "Attitude", value: 25, color: "#9932cc" }
+    ]
 };
 
-let allTypes = [
-    { name: "Classic ComGirl", description: "The original ComGirl aesthetic with traditional elements and styling." },
-    { name: "Cyber ComGirl", description: "A futuristic take on ComGirl with digital and cyberpunk influences." },
-    { name: "Soft ComGirl", description: "A gentler, more pastel-focused version of the ComGirl aesthetic." },
-    { name: "Dark ComGirl", description: "A gothic or darker interpretation of ComGirl culture." },
-    { name: "Retro ComGirl", description: "ComGirl aesthetic with vintage and nostalgic elements." },
-    { name: "Minimal ComGirl", description: "A clean, minimalist approach to ComGirl styling." }
-];
+// Initialize with default profile
+allProfiles.push(JSON.parse(JSON.stringify(defaultProfile)));
 
-// Stats toggle functionality
-function initializeStatsToggle() {
-const statsToggle = document.getElementById('statsToggle');
-const profileContent = document.getElementById('profileContent');
-const statsContent = document.getElementById('statsContent');
-let isStatsView = false;
-
-statsToggle.addEventListener('click', () => {
-isStatsView = !isStatsView;
-statsToggle.classList.toggle('active', isStatsView);
-
-if (isStatsView) {
-profileContent.classList.add('hidden');
-setTimeout(() => {
-statsContent.classList.add('active');
-drawPieChart();
-}, 250);
-} else {
-statsContent.classList.remove('active');
-setTimeout(() => {
-profileContent.classList.remove('hidden');
-}, 250);
-}
-});
-}
-
-// Draw pie chart
-function drawPieChart() {
-const canvas = document.getElementById('pieChart');
-const ctx = canvas.getContext('2d');
-const centerX = canvas.width / 2;
-const centerY = canvas.height / 2;
-const radius = 90;
-
-let currentAngle = 0;
-const total = currentProfile.pieChart.reduce((sum, item) => sum + item.value, 0);
-
-ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-currentProfile.pieChart.forEach(item => {
-const sliceAngle = (item.value / total) * 2 * Math.PI;
-
-ctx.beginPath();
-ctx.moveTo(centerX, centerY);
-ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
-ctx.closePath();
-ctx.fillStyle = item.color;
-ctx.fill();
-ctx.strokeStyle = '#333';
-ctx.lineWidth = 2;
-ctx.stroke();
-
-currentAngle += sliceAngle;
-});
-}
-
-// Render traits
-function renderTraits() {
-const container = document.getElementById('traitsContainer');
-container.innerHTML = '';
-
-currentProfile.traits.forEach((trait, index) => {
-const traitElement = document.createElement('div');
-traitElement.className = 'trait-item';
-traitElement.textContent = trait.name;
-traitElement.addEventListener('click', (e) => showTraitPopup(e, trait));
-container.appendChild(traitElement);
-});
-}
-
-// Show trait popup
-function showTraitPopup(event, trait) {
-// Remove existing popup
-const existingPopup = document.querySelector('.trait-popup');
-if (existingPopup) {
-existingPopup.remove();
-}
-
-const popup = document.createElement('div');
-popup.className = 'trait-popup';
-popup.innerHTML = `
-<div>${trait.name}</div>
-<div class="trait-bars">
-${Array(10).fill(0).map((_, i) => 
-`<div class="trait-bar ${i < trait.level ? 'filled' : ''}"></div>`
-).join('')}
-</div>
-`;
-
-document.body.appendChild(popup);
-
-const rect = event.target.getBoundingClientRect();
-popup.style.left = rect.left + 'px';
-popup.style.top = (rect.top - popup.offsetHeight - 50) + 'px';
-
-setTimeout(() => popup.classList.add('active'), 10);
-
-// Close popup when clicking outside
-setTimeout(() => {
-document.addEventListener('click', function closePopup(e) {
-if (!popup.contains(e.target) && e.target !== event.target) {
-popup.classList.remove('active');
-setTimeout(() => popup.remove(), 300);
-document.removeEventListener('click', closePopup);
-}
-});
-}, 100);
-}
-
-// Update friendly status
-function updateFriendlyStatus() {
-const friendlyIcon = document.getElementById('friendlyIcon');
-if (currentProfile.friendly) {
-friendlyIcon.className = 'friendly-icon yes';
-friendlyIcon.textContent = '✓';
-} else {
-friendlyIcon.className = 'friendly-icon no';
-friendlyIcon.textContent = '✗';
-}
-}
-
-let typePopupActive = false;
-let currentTypePopup = null;
-
-function updateTypeBadge() {
-    const typeBadge = document.getElementById('typeBadge');
-    typeBadge.textContent = currentProfile.type.name;
+// Create a single profile card
+function createProfileCard(profile, index) {
+    const profileCard = document.createElement('div');
+    profileCard.className = 'profile-card';
+    profileCard.setAttribute('data-profile-id', profile.id);
     
-    // Remove any existing event listeners
-    typeBadge.removeEventListener('click', handleTypeBadgeClick);
-    typeBadge.addEventListener('click', handleTypeBadgeClick);
+    profileCard.innerHTML = `
+        <button class="stats-toggle" data-profile-index="${index}">
+            <img src="https://via.placeholder.com/24x24/ffffff/000000?text=📊" alt="Stats">
+        </button>
+
+        <div class="profile-content">
+            <img src="${profile.profilePic}" alt="Profile Picture" class="profile-pic">
+            <div class="username">${profile.username}</div>
+            <div class="description">${profile.description}</div>
+            <div class="action-buttons">
+                ${profile.buttons.map((btn, btnIndex) => `
+                    <a href="${btn.link}" class="action-btn">
+                        <span>${btn.icon}</span>
+                        <span>${btn.text}</span>
+                    </a>
+                `).join('')}
+            </div>
+        </div>
+
+        <div class="stats-content">
+            <div class="type-badge" data-profile-index="${index}">${profile.type.name}</div>
+            <div class="pie-chart-container">
+                <canvas class="pie-chart" width="200" height="200" data-profile-index="${index}"></canvas>
+            </div>
+            <div class="traits-section">
+                <div class="traits-title">Traits</div>
+                <div class="traits-container">
+                    ${profile.traits.map(trait => `
+                        <div class="trait-item" data-trait-name="${trait.name}" data-trait-level="${trait.level}" data-profile-index="${index}">
+                            ${trait.name}
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            <div class="friendly-section">
+                <div class="friendly-label">Friendly</div>
+                <div class="friendly-icon ${profile.friendly ? 'yes' : 'no'}">
+                    ${profile.friendly ? '✓' : '✗'}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    return profileCard;
 }
 
-function handleTypeBadgeClick(event) {
+// Render all profiles
+function renderProfiles() {
+    const container = document.getElementById('profilesContainer');
+    container.innerHTML = '';
+    
+    allProfiles.forEach((profile, index) => {
+        const profileCard = createProfileCard(profile, index);
+        container.appendChild(profileCard);
+    });
+    
+    // Initialize event listeners
+    initializeProfileEventListeners();
+}
+
+// Initialize event listeners for all profiles
+function initializeProfileEventListeners() {
+    // Stats toggle buttons
+    document.querySelectorAll('.stats-toggle').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const profileIndex = parseInt(e.target.closest('.stats-toggle').dataset.profileIndex);
+            toggleStats(profileIndex);
+        });
+    });
+    
+    // Type badges
+    document.querySelectorAll('.type-badge').forEach(badge => {
+        badge.addEventListener('click', (e) => {
+            const profileIndex = parseInt(e.target.dataset.profileIndex);
+            handleTypeBadgeClick(e, profileIndex);
+        });
+    });
+    
+    // Trait items
+    document.querySelectorAll('.trait-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+            const profileIndex = parseInt(e.target.dataset.profileIndex);
+            const traitName = e.target.dataset.traitName;
+            const traitLevel = parseInt(e.target.dataset.traitLevel);
+            showTraitPopup(e, { name: traitName, level: traitLevel });
+        });
+    });
+}
+
+// Toggle stats for a specific profile
+function toggleStats(profileIndex) {
+    const profileCard = document.querySelector(`[data-profile-id="${allProfiles[profileIndex].id}"]`);
+    const statsToggle = profileCard.querySelector('.stats-toggle');
+    const profileContent = profileCard.querySelector('.profile-content');
+    const statsContent = profileCard.querySelector('.stats-content');
+    
+    const isStatsView = statsContent.classList.contains('active');
+    
+    if (isStatsView) {
+        // Hide stats
+        statsContent.classList.remove('active');
+        statsToggle.classList.remove('active');
+        setTimeout(() => {
+            profileContent.classList.remove('hidden');
+        }, 250);
+    } else {
+        // Show stats
+        profileContent.classList.add('hidden');
+        statsToggle.classList.add('active');
+        setTimeout(() => {
+            statsContent.classList.add('active');
+            drawPieChart(profileIndex);
+        }, 250);
+    }
+}
+
+// Draw pie chart for specific profile
+function drawPieChart(profileIndex) {
+    const profile = allProfiles[profileIndex];
+    const canvas = document.querySelector(`[data-profile-index="${profileIndex}"].pie-chart`);
+    const ctx = canvas.getContext('2d');
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = 90;
+
+    let currentAngle = 0;
+    const total = profile.pieChart.reduce((sum, item) => sum + item.value, 0);
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    profile.pieChart.forEach(item => {
+        const sliceAngle = (item.value / total) * 2 * Math.PI;
+
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
+        ctx.closePath();
+        ctx.fillStyle = item.color;
+        ctx.fill();
+        ctx.strokeStyle = '#333';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        currentAngle += sliceAngle;
+    });
+}
+
+// Updated type popup functions
+function handleTypeBadgeClick(event, profileIndex) {
     event.stopPropagation();
-    console.log('Type badge clicked!'); // Debug log
     
     if (typePopupActive) {
         closeTypePopup();
     } else {
-        showTypePopup(event);
+        showTypePopup(event, profileIndex);
     }
 }
 
-function showTypePopup(event) {
-    console.log('Showing type popup...'); // Debug log
+function showTypePopup(event, profileIndex) {
+    const profile = allProfiles[profileIndex];
     
     // Remove any existing popup
     if (currentTypePopup) {
@@ -1778,9 +1854,9 @@ function showTypePopup(event) {
     const popup = document.createElement('div');
     popup.className = 'type-popup';
     
-    // Calculate positions with better positioning
+    // Calculate positions
     const startX = rect.left + rect.width / 2;
-    const startY = rect.bottom + 5; // Add small gap
+    const startY = rect.bottom + 5;
     const lineLength = 60;
     const boxOffset = 30;
     
@@ -1804,15 +1880,13 @@ function showTypePopup(event) {
         <div class="line-vertical" style="left: ${startX + lineLength}px; top: ${startY}px;"></div>
         <div class="popup-box" style="left: ${boxX}px; top: ${boxY}px;">
             <button class="close-btn">×</button>
-            <h4>${currentProfile.type.name}</h4>
-            <p>${currentProfile.type.description}</p>
+            <h4>${profile.type.name}</h4>
+            <p>${profile.type.description}</p>
         </div>
     `;
     
     document.body.appendChild(popup);
     currentTypePopup = popup;
-    
-    console.log('Popup created and added to DOM'); // Debug log
     
     // Add close button functionality
     const closeBtn = popup.querySelector('.close-btn');
@@ -1824,23 +1898,18 @@ function showTypePopup(event) {
     // Animation sequence
     setTimeout(() => {
         popup.classList.add('active');
-        console.log('Popup activated'); // Debug log
         
-        // Step 1: Draw horizontal line
         const horizontalLine = popup.querySelector('.line-horizontal');
         horizontalLine.style.width = lineLength + 'px';
         
-        // Step 2: Draw vertical line after horizontal completes
         setTimeout(() => {
             const verticalLine = popup.querySelector('.line-vertical');
             verticalLine.style.height = boxOffset + 'px';
             
-            // Step 3: Show box after vertical line completes
             setTimeout(() => {
                 const box = popup.querySelector('.popup-box');
                 box.classList.add('visible');
                 typePopupActive = true;
-                console.log('Animation complete'); // Debug log
             }, 500);
         }, 500);
     }, 10);
@@ -1851,78 +1920,73 @@ function showTypePopup(event) {
     }, 100);
 }
 
-function closeTypePopup() {
-    console.log('Closing type popup...'); // Debug log
+// Configuration functions for multiple profiles
+function addProfile(profileData) {
+    const newProfile = {
+        id: profileData.id || `profile_${Date.now()}`,
+        profilePic: profileData.profilePic || 'https://via.placeholder.com/150x150/FFD5F8/000000?text=PFP',
+        username: profileData.username || 'New Profile',
+        description: profileData.description || 'New profile description',
+        buttons: profileData.buttons || [
+            { icon: '🔗', text: 'Link', link: '#' },
+            { icon: '💬', text: 'Chat', link: '#' },
+            { icon: '📱', text: 'Social', link: '#' }
+        ],
+        type: profileData.type || { name: "Default Type", description: "Default description" },
+        traits: profileData.traits || [
+            { name: "Trait 1", level: 5 },
+            { name: "Trait 2", level: 7 }
+        ],
+        friendly: profileData.friendly !== undefined ? profileData.friendly : true,
+        pieChart: profileData.pieChart || [
+            { name: "Aesthetic", value: 30, color: "#FFD5F8" },
+            { name: "Personality", value: 25, color: "#8a2be2" },
+            { name: "Style", value: 20, color: "#ff1493" },
+            { name: "Attitude", value: 25, color: "#9932cc" }
+        ]
+    };
     
-    if (!currentTypePopup) return;
-    
-    const popup = currentTypePopup;
-    const box = popup.querySelector('.popup-box');
-    const horizontalLine = popup.querySelector('.line-horizontal');
-    const verticalLine = popup.querySelector('.line-vertical');
-    
-    // Reverse animation sequence
-    box.classList.remove('visible');
-    
-    setTimeout(() => {
-        verticalLine.style.height = '0';
-        
-        setTimeout(() => {
-            horizontalLine.style.width = '0';
-            
-            setTimeout(() => {
-                popup.classList.remove('active');
-                
-                setTimeout(() => {
-                    popup.remove();
-                    currentTypePopup = null;
-                    typePopupActive = false;
-                    console.log('Popup removed'); // Debug log
-                }, 300);
-            }, 500);
-        }, 500);
-    }, 300);
-    
-    document.removeEventListener('click', handleOutsideClick);
+    allProfiles.push(newProfile);
+    renderProfiles();
+    return newProfile.id;
 }
 
-function handleOutsideClick(event) {
-    if (currentTypePopup && !currentTypePopup.contains(event.target) && 
-        !event.target.closest('#typeBadge')) {
-        closeTypePopup();
+function updateProfile(profileId, updates) {
+    const profileIndex = allProfiles.findIndex(p => p.id === profileId);
+    if (profileIndex !== -1) {
+        allProfiles[profileIndex] = { ...allProfiles[profileIndex], ...updates };
+        renderProfiles();
     }
 }
-// Configuration functions
+
+function removeProfile(profileId) {
+    const profileIndex = allProfiles.findIndex(p => p.id === profileId);
+    if (profileIndex !== -1) {
+        allProfiles.splice(profileIndex, 1);
+        renderProfiles();
+    }
+}
+
+function getProfile(profileId) {
+    return allProfiles.find(p => p.id === profileId);
+}
+
+function getAllProfiles() {
+    return [...allProfiles];
+}
+
+// Legacy function support (for backward compatibility)
 function updateStats(statsData) {
-Object.assign(currentProfile, statsData);
-renderTraits();
-updateFriendlyStatus();
-updateTypeBadge();
-if (document.getElementById('statsContent').classList.contains('active')) {
-drawPieChart();
-}
-}
-
-function updateStatsIcon(iconSrc) {
-document.getElementById('statsIcon').src = iconSrc;
-}
-
-function addType(name, description) {
-allTypes.push({ name, description });
-renderTypesPage();
+    updateProfile('default', statsData);
 }
 
 function updateProfileType(name, description) {
-currentProfile.type = { name, description };
-updateTypeBadge();
+    updateProfile('default', { type: { name, description } });
 }
 
 // Initialize everything
 document.addEventListener('DOMContentLoaded', () => {
-    initializeStatsToggle();
-    renderTraits();
-    updateFriendlyStatus();
-    updateTypeBadge();
+    renderProfiles();
 });
 </script>
 </body>
