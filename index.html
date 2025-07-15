@@ -588,6 +588,89 @@ transform: scale(1.05);
 box-shadow: 0 4px 15px rgba(255, 213, 248, 0.3);
 }
 
+/* Custom type popup */
+.type-popup {
+    position: fixed;
+    z-index: 1001;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.type-popup.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.type-popup .line-horizontal {
+    position: absolute;
+    height: 2px;
+    background: #FFD5F8;
+    width: 0;
+    transition: width 0.5s ease;
+}
+
+.type-popup .line-vertical {
+    position: absolute;
+    width: 2px;
+    background: #FFD5F8;
+    height: 0;
+    transition: height 0.5s ease;
+}
+
+.type-popup .popup-box {
+    position: absolute;
+    background: linear-gradient(135deg, #111 0%, #222 100%);
+    border: 1px solid #FFD5F8;
+    border-radius: 10px;
+    padding: 15px;
+    min-width: 200px;
+    max-width: 300px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    transform: scale(0);
+    transition: transform 0.3s ease;
+    color: #fff;
+}
+
+.type-popup .popup-box.visible {
+    transform: scale(1);
+}
+
+.type-popup .popup-box h4 {
+    color: #FFD5F8;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.type-popup .popup-box p {
+    color: #ccc;
+    line-height: 1.4;
+    font-size: 14px;
+    margin: 0;
+}
+
+.type-popup .close-btn {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    background: none;
+    border: none;
+    color: #FFD5F8;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.type-popup .close-btn:hover {
+    color: #fff;
+}
+
 /* Pie chart container */
 .pie-chart-container {
 display: flex;
@@ -1650,13 +1733,124 @@ friendlyIcon.textContent = '✗';
 }
 }
 
-// Update type badge
+let typePopupActive = false;
+let currentTypePopup = null;
+
 function updateTypeBadge() {
-const typeBadge = document.getElementById('typeBadge');
-typeBadge.textContent = currentProfile.type.name;
-typeBadge.addEventListener('click', () => {
-alert(currentProfile.type.description); // You can replace this with a modal
-});
+    const typeBadge = document.getElementById('typeBadge');
+    typeBadge.textContent = currentProfile.type.name;
+    
+    // Remove any existing event listeners
+    typeBadge.removeEventListener('click', handleTypeBadgeClick);
+    typeBadge.addEventListener('click', handleTypeBadgeClick);
+}
+
+function handleTypeBadgeClick(event) {
+    if (typePopupActive) {
+        closeTypePopup();
+    } else {
+        showTypePopup(event);
+    }
+}
+
+function showTypePopup(event) {
+    // Remove any existing popup
+    if (currentTypePopup) {
+        currentTypePopup.remove();
+    }
+    
+    const rect = event.target.getBoundingClientRect();
+    const popup = document.createElement('div');
+    popup.className = 'type-popup';
+    
+    // Calculate positions
+    const startX = rect.left + rect.width / 2;
+    const startY = rect.bottom;
+    const lineLength = 50;
+    const boxOffset = 20;
+    
+    popup.innerHTML = `
+        <div class="line-horizontal" style="left: ${startX}px; top: ${startY}px;"></div>
+        <div class="line-vertical" style="left: ${startX + lineLength}px; top: ${startY}px;"></div>
+        <div class="popup-box" style="left: ${startX + lineLength + boxOffset}px; top: ${startY + boxOffset}px;">
+            <button class="close-btn">×</button>
+            <h4>${currentProfile.type.name}</h4>
+            <p>${currentProfile.type.description}</p>
+        </div>
+    `;
+    
+    document.body.appendChild(popup);
+    currentTypePopup = popup;
+    
+    // Add close button functionality
+    const closeBtn = popup.querySelector('.close-btn');
+    closeBtn.addEventListener('click', closeTypePopup);
+    
+    // Animation sequence
+    setTimeout(() => {
+        popup.classList.add('active');
+        
+        // Step 1: Draw horizontal line
+        const horizontalLine = popup.querySelector('.line-horizontal');
+        horizontalLine.style.width = lineLength + 'px';
+        
+        // Step 2: Draw vertical line after horizontal completes
+        setTimeout(() => {
+            const verticalLine = popup.querySelector('.line-vertical');
+            verticalLine.style.height = boxOffset + 'px';
+            
+            // Step 3: Show box after vertical line completes
+            setTimeout(() => {
+                const box = popup.querySelector('.popup-box');
+                box.classList.add('visible');
+                typePopupActive = true;
+            }, 500);
+        }, 500);
+    }, 10);
+    
+    // Close popup when clicking outside
+    setTimeout(() => {
+        document.addEventListener('click', handleOutsideClick);
+    }, 100);
+}
+
+function closeTypePopup() {
+    if (!currentTypePopup) return;
+    
+    const popup = currentTypePopup;
+    const box = popup.querySelector('.popup-box');
+    const horizontalLine = popup.querySelector('.line-horizontal');
+    const verticalLine = popup.querySelector('.line-vertical');
+    
+    // Reverse animation sequence
+    box.classList.remove('visible');
+    
+    setTimeout(() => {
+        verticalLine.style.height = '0';
+        
+        setTimeout(() => {
+            horizontalLine.style.width = '0';
+            
+            setTimeout(() => {
+                popup.classList.remove('active');
+                
+                setTimeout(() => {
+                    popup.remove();
+                    currentTypePopup = null;
+                    typePopupActive = false;
+                }, 300);
+            }, 500);
+        }, 500);
+    }, 300);
+    
+    document.removeEventListener('click', handleOutsideClick);
+}
+
+function handleOutsideClick(event) {
+    if (currentTypePopup && !currentTypePopup.contains(event.target) && 
+        !event.target.closest('#typeBadge')) {
+        closeTypePopup();
+    }
 }
 
 // Configuration functions
